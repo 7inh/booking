@@ -1,9 +1,14 @@
-import { InputAdornment, TextField } from "@mui/material";
+import { InputAdornment, TextField, TextFieldProps } from "@mui/material";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
-const InputText = () => {
+export interface InputTextProps {
+    sx?: TextFieldProps["sx"];
+}
+
+const InputText = ({ sx, ...props }: InputTextProps) => {
     return (
         <TextField
+            {...props}
             size="small"
             sx={{
                 width: "300px",
@@ -22,6 +27,7 @@ const InputText = () => {
                 "& .MuiInputBase-root": {
                     pr: 0.5,
                 },
+                ...sx,
             }}
             InputProps={{
                 endAdornment: (

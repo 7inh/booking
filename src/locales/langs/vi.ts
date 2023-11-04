@@ -8,6 +8,9 @@ export const vi: LangType = {
         about: "Giới thiệu",
         contact: "Liên hệ",
     },
+    common: {
+        cart: "Giỏ hàng",
+    },
     pages: {
         home: {
             branding: {

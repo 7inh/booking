@@ -6,6 +6,9 @@ export type LangType = {
         about: string;
         contact: string;
     };
+    common: {
+        cart: string;
+    };
     pages: {
         home: {
             branding: {

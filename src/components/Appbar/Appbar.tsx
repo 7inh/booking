@@ -3,9 +3,14 @@ import { Typography, AppBar as _AppBar } from "@mui/material";
 import { PAGE_MAX_WIDTH } from "src/common/const";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
+import BoxVertical from "src/components/Boxs/BoxVertical";
 import InputText from "src/components/Inputs/InputText";
+import LinkBase from "src/components/Links/LinkBase";
 import Logo from "src/components/Logo/Logo";
+import TypographyBase from "src/components/Typographys/TypographyBase";
+import { useResponsive } from "src/hooks/utils/useResponsive";
 import useTranslation from "src/hooks/utils/useTranslation";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 
 export interface AppBarProps {
     toggle?: () => void;
@@ -13,6 +18,8 @@ export interface AppBarProps {
 
 const AppBar = () => {
     const t = useTranslation();
+
+    const mdDown = useResponsive("down", "md");
 
     const navData = [
         {
@@ -53,24 +60,52 @@ const AppBar = () => {
                     maxWidth: PAGE_MAX_WIDTH,
                     width: "100%",
                     mx: "auto",
+                    px: 1,
+                    boxSizing: "border-box",
                     color: "primary.dark",
                 }}
             >
+                <BoxBase
+                    sx={{
+                        display: mdDown ? "flex" : "none",
+                    }}
+                >
+                    <MenuRoundedIcon fontSize="large" />
+                </BoxBase>
                 <Logo />
                 <BoxHorizon
                     sx={{
                         gap: "24px",
+                        display: mdDown ? "none" : "flex",
                     }}
                 >
                     {navData.map((item) => (
-                        <Typography key={item.id} variant="body1">
-                            {item.title}
-                        </Typography>
+                        <LinkBase key={item.id} to={""}>
+                            <Typography variant="body1">{item.title}</Typography>
+                        </LinkBase>
                     ))}
                 </BoxHorizon>
                 <BoxHorizon gap={1}>
-                    <InputText />
-                    <ShoppingBagOutlinedIcon />
+                    <InputText
+                        sx={{
+                            display: mdDown ? "none" : "",
+                        }}
+                    />
+                    <BoxHorizon
+                        color="primary.dark"
+                        sx={{
+                            cursor: "pointer",
+                            color: "primary.main",
+                        }}
+                    >
+                        <ShoppingBagOutlinedIcon fontSize="large" />
+                        <BoxVertical mt={0.5}>
+                            <TypographyBase variant="caption">
+                                {t("common.cart")} (0)
+                            </TypographyBase>
+                            <TypographyBase variant="caption">0.0₫</TypographyBase>
+                        </BoxVertical>
+                    </BoxHorizon>
                 </BoxHorizon>
             </BoxBase>
         </_AppBar>

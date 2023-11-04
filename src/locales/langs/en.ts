@@ -8,6 +8,9 @@ export const en: LangType = {
         about: "About",
         contact: "Contact",
     },
+    common: {
+        cart: "Cart",
+    },
     pages: {
         home: {
             branding: {

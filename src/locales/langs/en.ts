@@ -10,6 +10,7 @@ export const en: LangType = {
     },
     common: {
         cart: "Cart",
+        send: "Send",
     },
     pages: {
         home: {
@@ -20,5 +21,11 @@ export const en: LangType = {
                 button: "Shop now",
             },
         },
+    },
+    footer: {
+        thanks: "Thanks for visiting",
+        subscribe: "Subscribe to our newsletter, you will get the latest news and promotion.",
+        copyRight: "© 2023, All rights reserved ",
+        terms: "Terms of use",
     },
 };

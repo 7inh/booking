@@ -17,6 +17,7 @@ const Branding = () => {
             sx={{
                 height: "100vh",
                 maxHeight: mdDown ? "600px" : "800px",
+                position: "relative",
             }}
         >
             <Particles />
@@ -32,14 +33,13 @@ const Branding = () => {
                     gap: "24px",
                     textAlign: mdDown ? "center" : "left",
                     boxSizing: "border-box",
-                    position: "relative",
+                    userSelect: "none",
+                    pointerEvents: "none",
                 }}
             >
                 <BoxBase
                     maxWidth={mdDown ? "100%" : "500px"}
                     sx={{
-                        userSelect: "none",
-                        pointerEvents: "none",
                         zIndex: 1,
                     }}
                 >

@@ -8,6 +8,7 @@ export type LangType = {
     };
     common: {
         cart: string;
+        send: string;
     };
     pages: {
         home: {
@@ -17,6 +18,12 @@ export type LangType = {
                 button: string;
             };
         };
+    };
+    footer: {
+        thanks: string;
+        subscribe: string;
+        copyRight: string;
+        terms: string;
     };
 };
 

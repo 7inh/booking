@@ -1,0 +1,7 @@
+.github
+public
+build
+dangerfile.ts
+setupTests.ts
+.vscode
+*.json

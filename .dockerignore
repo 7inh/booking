@@ -1,0 +1,9 @@
+# Exclude specific files
+# example.txt
+
+# Exclude directories
+# dir_to_exclude/
+
+# Include specific files and directories
+!node_modules/
+!dist/

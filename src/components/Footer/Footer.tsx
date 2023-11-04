@@ -19,7 +19,6 @@ const Footer = () => {
     return (
         <BoxBase
             sx={{
-                height: "200px",
                 overflow: "hidden",
                 position: "relative",
                 bgcolor: "primary.dark",
@@ -36,6 +35,8 @@ const Footer = () => {
                     boxSizing: "border-box",
                     maxWidth: PAGE_MAX_WIDTH,
                     mx: "auto",
+                    height: "100%",
+                    minHeight: "220px",
                 }}
             >
                 <BoxBase>

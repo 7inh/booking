@@ -15,76 +15,82 @@ const Branding = () => {
     return (
         <BoxBase
             sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
                 height: "100vh",
                 maxHeight: mdDown ? "600px" : "800px",
-                maxWidth: PAGE_MAX_WIDTH,
-                mx: "auto",
-                px: 1,
-                boxSizing: "border-box",
-                position: "relative",
-                gap: "24px",
-                textAlign: mdDown ? "center" : "left",
             }}
         >
             <Particles />
             <BoxBase
-                maxWidth={mdDown ? "100%" : "500px"}
                 sx={{
-                    zIndex: 2,
-                    userSelect: "none",
-                    pointerEvents: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    height: "100%",
+                    maxWidth: PAGE_MAX_WIDTH,
+                    mx: "auto",
+                    px: 1,
+                    gap: "24px",
+                    textAlign: mdDown ? "center" : "left",
+                    boxSizing: "border-box",
+                    position: "relative",
                 }}
             >
-                <TypographyBase
-                    fontWeight={600}
-                    color="white"
-                    variant="h2"
+                <BoxBase
+                    maxWidth={mdDown ? "100%" : "500px"}
                     sx={{
-                        fontSize: mdDown ? "3rem" : "4rem",
+                        userSelect: "none",
+                        pointerEvents: "none",
+                        zIndex: 1,
                     }}
                 >
-                    {t("pages.home.branding.title")}
-                </TypographyBase>
-                <BoxBase
+                    <TypographyBase
+                        fontWeight={600}
+                        color="white"
+                        variant="h2"
+                        sx={{
+                            fontSize: mdDown ? "3rem" : "4rem",
+                        }}
+                    >
+                        {t("pages.home.branding.title")}
+                    </TypographyBase>
+                    <BoxBase
+                        sx={{
+                            height: "5px",
+                            width: "100%",
+                            maxWidth: "200px",
+                            bgcolor: "primary.main",
+                            my: "24px",
+                            mx: mdDown ? "auto" : "",
+                        }}
+                    />
+                    <TypographyBase variant="body1" fontWeight={200} color="white">
+                        {t("pages.home.branding.subTitle")}
+                    </TypographyBase>
+                    <br />
+                    <ButtonBase
+                        label={t("pages.home.branding.button")}
+                        rounded
+                        sx={{
+                            fontSize: "1.2rem",
+                            height: "48px",
+                            width: "200px",
+                            pointerEvents: "all",
+                        }}
+                    />
+                </BoxBase>
+
+                <CardMedia
+                    component="img"
                     sx={{
-                        height: "5px",
-                        width: "100%",
-                        maxWidth: "200px",
-                        bgcolor: "primary.main",
-                        my: "24px",
-                        mx: mdDown ? "auto" : "",
+                        height: "60vh",
+                        maxHeight: "600px",
+                        width: "auto",
+                        zIndex: 1,
+                        display: mdDown ? "none" : "block",
                     }}
-                />
-                <TypographyBase variant="body1" fontWeight={200} color="white">
-                    {t("pages.home.branding.subTitle")}
-                </TypographyBase>
-                <br />
-                <ButtonBase
-                    label={t("pages.home.branding.button")}
-                    rounded
-                    sx={{
-                        fontSize: "1.2rem",
-                        height: "48px",
-                        width: "200px",
-                        pointerEvents: "all",
-                    }}
+                    image={"/images/branding.jpeg"}
                 />
             </BoxBase>
-
-            <CardMedia
-                component="img"
-                sx={{
-                    height: "60vh",
-                    maxHeight: "600px",
-                    width: "auto",
-                    zIndex: 1,
-                    display: mdDown ? "none" : "block",
-                }}
-                image={"/images/branding.jpeg"}
-            />
         </BoxBase>
     );
 };

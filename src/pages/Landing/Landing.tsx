@@ -9,9 +9,7 @@ const Landing = () => {
         <BoxBase>
             <AppBar />
             <Branding />
-            <br />
             <PopularCollection />
-            <br />
             <Footer />
         </BoxBase>
     );

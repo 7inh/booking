@@ -15,11 +15,11 @@ const Logo = () => {
             <CardMedia
                 component="img"
                 style={{
-                    height: "100%",
+                    height: "50%",
                     objectFit: "scale-down",
                     width: "auto",
                 }}
-                src="/images/temp_logo.jpeg"
+                src="/svgs/logo.svg"
             />
             <CardMedia
                 component="img"

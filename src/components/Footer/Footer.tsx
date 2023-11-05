@@ -13,6 +13,7 @@ import PhoneIphoneRoundedIcon from "@mui/icons-material/PhoneIphoneRounded";
 import AlternateEmailRoundedIcon from "@mui/icons-material/AlternateEmailRounded";
 import { PAGE_MAX_WIDTH } from "src/common/const";
 import { useResponsive } from "src/hooks/utils/useResponsive";
+import Logo from "src/components/Logo/Logo";
 
 const Footer = () => {
     const t = useTranslation();
@@ -42,11 +43,10 @@ const Footer = () => {
                 }}
             >
                 <BoxBase>
-                    <TypographyBase variant="h4" color="white">
-                        XUAO.vn
-                    </TypographyBase>
+                    <BoxBase height="120px">
+                        <Logo />
+                    </BoxBase>
 
-                    <br />
                     <BoxBase
                         sx={{
                             display: "grid",

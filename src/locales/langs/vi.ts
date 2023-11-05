@@ -8,6 +8,12 @@ export const vi: LangType = {
         about: "Giới thiệu",
         contact: "Liên hệ",
     },
+    broadcast: {
+        popularCollection: {
+            title: "Phổ biến",
+            subTitle: "Danh sách các đầu sách phổ biến nhất",
+        },
+    },
     common: {
         cart: "Giỏ hàng",
         send: "Gửi",

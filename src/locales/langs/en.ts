@@ -8,6 +8,13 @@ export const en: LangType = {
         about: "About",
         contact: "Contact",
     },
+    broadcast: {
+        popularCollection: {
+            title: "Popular Collection",
+            subTitle:
+                "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.",
+        },
+    },
     common: {
         cart: "Cart",
         send: "Send",

@@ -6,6 +6,12 @@ export type LangType = {
         about: string;
         contact: string;
     };
+    broadcast: {
+        popularCollection: {
+            title: string;
+            subTitle: string;
+        };
+    };
     common: {
         cart: string;
         send: string;

@@ -167,3 +167,10 @@ export interface GiftType {
     numLimitToken: number;
     bought: boolean;
 }
+
+export interface Book {
+    id: string;
+    name: string;
+    thumbnail: string;
+    price: number;
+}

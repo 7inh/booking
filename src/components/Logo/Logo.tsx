@@ -8,6 +8,8 @@ const Logo = () => {
                 height: "100%",
                 py: 1,
                 boxSizing: "border-box",
+                display: "flex",
+                alignItems: "center",
             }}
         >
             <CardMedia
@@ -18,6 +20,16 @@ const Logo = () => {
                     width: "auto",
                 }}
                 src="/images/temp_logo.jpeg"
+            />
+            <CardMedia
+                component="img"
+                style={{
+                    marginTop: "5px",
+                    height: "100%",
+                    objectFit: "scale-down",
+                    width: "auto",
+                }}
+                src="/images/logo_temp2.png"
             />
         </BoxBase>
     );

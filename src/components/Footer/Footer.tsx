@@ -12,9 +12,12 @@ import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded";
 import PhoneIphoneRoundedIcon from "@mui/icons-material/PhoneIphoneRounded";
 import AlternateEmailRoundedIcon from "@mui/icons-material/AlternateEmailRounded";
 import { PAGE_MAX_WIDTH } from "src/common/const";
+import { useResponsive } from "src/hooks/utils/useResponsive";
 
 const Footer = () => {
     const t = useTranslation();
+
+    const mdDown = useResponsive("down", "md");
 
     return (
         <BoxBase
@@ -36,7 +39,6 @@ const Footer = () => {
                     maxWidth: PAGE_MAX_WIDTH,
                     mx: "auto",
                     height: "100%",
-                    minHeight: "220px",
                 }}
             >
                 <BoxBase>
@@ -48,14 +50,16 @@ const Footer = () => {
                     <BoxBase
                         sx={{
                             display: "grid",
-                            gridTemplateColumns: "1fr 1fr 300px",
-                            gap: "100px",
+                            gridTemplateColumns: mdDown ? "" : "1fr 1fr 300px",
+                            gap: mdDown ? 2 : "100px",
+                            textAlign: mdDown ? "center" : "left",
                         }}
                     >
                         <TypographyBase variant="caption">{t("footer.thanks")}</TypographyBase>
                         <BoxVertical
                             sx={{
                                 gap: 0.5,
+                                alignItems: mdDown ? "center" : "flex-start",
                             }}
                         >
                             <BoxHorizon gap={1}>
@@ -77,6 +81,7 @@ const Footer = () => {
                             <TypographyBase variant="caption">
                                 {t("footer.subscribe")}
                             </TypographyBase>
+                            <br />
                             <TextField
                                 size="small"
                                 placeholder="example@email.com"
@@ -121,7 +126,7 @@ const Footer = () => {
                         </BoxBase>
                     </BoxBase>
                 </BoxBase>
-                <BoxBase>
+                <BoxBase mt={3}>
                     <Divider
                         sx={{
                             bgcolor: "white",

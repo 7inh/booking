@@ -5,12 +5,14 @@ import PopularCollection from "src/components/Boardcasts.tsx/PopularCollection";
 import UpcomingCollection from "src/components/Boardcasts.tsx/UpcomingCollection";
 import BoxBase from "src/components/Boxs/BoxBase";
 import Footer from "src/components/Footer/Footer";
+import Navbar from "src/components/Navbar/Navbar";
 import Branding from "src/pages/Landing/Branding";
 
 const Landing = () => {
     return (
         <BoxBase>
             <AppBar />
+            <Navbar />
             <Branding />
             <PopularCollection />
             <NewestCollection />

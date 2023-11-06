@@ -1,17 +1,16 @@
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
-import { Typography, AppBar as _AppBar } from "@mui/material";
+import { AppBar as _AppBar } from "@mui/material";
 import { PAGE_MAX_WIDTH } from "src/common/const";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import BoxVertical from "src/components/Boxs/BoxVertical";
 import InputText from "src/components/Inputs/InputText";
-import LinkBase from "src/components/Links/LinkBase";
 import Logo from "src/components/Logo/Logo";
+import SelectLanguage from "src/components/Selects/SelectLanguage";
 import TypographyBase from "src/components/Typographys/TypographyBase";
 import { useResponsive } from "src/hooks/utils/useResponsive";
 import useTranslation from "src/hooks/utils/useTranslation";
-import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-import SelectLanguage from "src/components/Selects/SelectLanguage";
 
 export interface AppBarProps {
     toggle?: () => void;
@@ -21,25 +20,6 @@ const AppBar = () => {
     const t = useTranslation();
 
     const mdDown = useResponsive("down", "md");
-
-    const navData = [
-        {
-            id: 1,
-            title: t("nav.home"),
-        },
-        {
-            id: 2,
-            title: t("nav.shop"),
-        },
-        {
-            id: 3,
-            title: t("nav.about"),
-        },
-        {
-            id: 4,
-            title: t("nav.contact"),
-        },
-    ];
 
     return (
         <_AppBar
@@ -74,24 +54,14 @@ const AppBar = () => {
                     <MenuRoundedIcon fontSize="large" />
                 </BoxBase>
                 <Logo />
-                <BoxHorizon
+                <InputText
                     sx={{
-                        gap: "24px",
-                        display: mdDown ? "none" : "flex",
+                        display: mdDown ? "none" : "",
+                        width: "100%",
+                        mx: 10,
                     }}
-                >
-                    {navData.map((item) => (
-                        <LinkBase key={item.id} to={""}>
-                            <Typography variant="body1">{item.title}</Typography>
-                        </LinkBase>
-                    ))}
-                </BoxHorizon>
-                <BoxHorizon gap={1}>
-                    <InputText
-                        sx={{
-                            display: mdDown ? "none" : "",
-                        }}
-                    />
+                />
+                <BoxHorizon gap={1} flexShrink={0}>
                     <BoxHorizon
                         color="primary.dark"
                         sx={{

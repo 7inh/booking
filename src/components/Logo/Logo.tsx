@@ -1,7 +1,10 @@
 import { CardMedia } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import BoxBase from "src/components/Boxs/BoxBase";
 
 const Logo = () => {
+    const navigate = useNavigate();
+
     return (
         <BoxBase
             sx={{
@@ -10,7 +13,9 @@ const Logo = () => {
                 boxSizing: "border-box",
                 display: "flex",
                 alignItems: "center",
+                cursor: "pointer",
             }}
+            onClick={() => navigate("/")}
         >
             <CardMedia
                 component="img"

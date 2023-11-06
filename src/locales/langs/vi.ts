@@ -22,6 +22,20 @@ export const vi: LangType = {
             subTitle: "Danh sách các đầu sách sắp ra mắt",
         },
     },
+    feature: {
+        delivery: {
+            title: "Giao hàng tận tay",
+            subTitle: "Chúng tôi có dịch vụ giao hàng trên toàn quốc.",
+        },
+        quality: {
+            title: "Chất lượng",
+            subTitle: "Cam kết cung cấp sản phẩm chất lượng tốt nhất",
+        },
+        service: {
+            title: "Tận tâm",
+            subTitle: "Vui lòng khách đến, vừa lòng khách đi.",
+        },
+    },
     common: {
         cart: "Giỏ hàng",
         send: "Gửi",

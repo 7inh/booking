@@ -12,7 +12,6 @@ const SelectLanguage = () => {
 
     return (
         <Select
-            fullWidth
             value={locale}
             size="small"
             onChange={handleChange}
@@ -20,6 +19,10 @@ const SelectLanguage = () => {
                 bgcolor: "background.paper",
                 "& fieldset": {
                     border: "1px solid rgba(145, 158, 171, 0.20)",
+                },
+                "& .MuiSelect-select": {
+                    py: 0,
+                    px: 1,
                 },
             }}
             renderValue={(selected) => (
@@ -30,8 +33,9 @@ const SelectLanguage = () => {
                         alignItems: "center",
                     }}
                 >
-                    <Typography>{extendTranslation(selected, "currentLanguage")}</Typography>
-                    <Typography>{flagIcon(selected)}</Typography>
+                    <Typography fontSize="40px" lineHeight={1}>
+                        {flagIcon(selected)}
+                    </Typography>
                 </Box>
             )}
         >
@@ -43,6 +47,7 @@ const SelectLanguage = () => {
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
+                        gap: "8px",
                     }}
                 >
                     <Typography>{extendTranslation(locale, "currentLanguage")}</Typography>

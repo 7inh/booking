@@ -1,4 +1,5 @@
 import AppBar from "src/components/Appbar/Appbar";
+import Feature from "src/components/Boardcasts.tsx/Feature";
 import NewestCollection from "src/components/Boardcasts.tsx/NewestCollection";
 import PopularCollection from "src/components/Boardcasts.tsx/PopularCollection";
 import UpcomingCollection from "src/components/Boardcasts.tsx/UpcomingCollection";
@@ -14,6 +15,7 @@ const Landing = () => {
             <PopularCollection />
             <NewestCollection />
             <UpcomingCollection />
+            <Feature />
             <Footer />
         </BoxBase>
     );

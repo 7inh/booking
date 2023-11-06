@@ -25,6 +25,23 @@ export const en: LangType = {
                 "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.",
         },
     },
+    feature: {
+        delivery: {
+            title: "Free Delivery",
+            subTitle:
+                "Worldwide delivery on all. Authorit tively morph next-generation innov tion with extensive models.",
+        },
+        quality: {
+            title: "Quality Assurance",
+            subTitle:
+                "Worldwide delivery on all. Authorit tively morph next-generation innov tion with extensive models.",
+        },
+        service: {
+            title: "Premium Support",
+            subTitle:
+                "Worldwide delivery on all. Authorit tively morph next-generation innov tion with extensive models.",
+        },
+    },
     common: {
         cart: "Cart",
         send: "Send",

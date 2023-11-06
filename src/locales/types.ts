@@ -20,6 +20,20 @@ export type LangType = {
             subTitle: string;
         };
     };
+    feature: {
+        delivery: {
+            title: string;
+            subTitle: string;
+        };
+        quality: {
+            title: string;
+            subTitle: string;
+        };
+        service: {
+            title: string;
+            subTitle: string;
+        };
+    };
     common: {
         cart: string;
         send: string;

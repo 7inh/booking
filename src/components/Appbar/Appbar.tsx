@@ -11,6 +11,7 @@ import TypographyBase from "src/components/Typographys/TypographyBase";
 import { useResponsive } from "src/hooks/utils/useResponsive";
 import useTranslation from "src/hooks/utils/useTranslation";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import SelectLanguage from "src/components/Selects/SelectLanguage";
 
 export interface AppBarProps {
     toggle?: () => void;
@@ -99,13 +100,16 @@ const AppBar = () => {
                         }}
                     >
                         <ShoppingBagOutlinedIcon fontSize="large" />
-                        <BoxVertical mt={0.5}>
+                        <BoxVertical>
                             <TypographyBase variant="caption">
                                 {t("common.cart")} (0)
                             </TypographyBase>
-                            <TypographyBase variant="caption">0.0₫</TypographyBase>
+                            <TypographyBase variant="caption" lineHeight={1}>
+                                0.0₫
+                            </TypographyBase>
                         </BoxVertical>
                     </BoxHorizon>
+                    <SelectLanguage />
                 </BoxHorizon>
             </BoxBase>
         </_AppBar>

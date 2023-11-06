@@ -16,6 +16,12 @@ const Feature = () => {
                 width: "100%",
                 my: 10,
                 gap: 3,
+                flexWrap: "wrap",
+                pr: 1,
+                boxSizing: "border-box",
+                "& > div": {
+                    flexShrink: 0,
+                },
             }}
         >
             <BoxHorizon gap={1}>

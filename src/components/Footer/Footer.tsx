@@ -62,6 +62,18 @@ const Footer = () => {
                                 alignItems: mdDown ? "center" : "flex-start",
                             }}
                         >
+                            <BoxBase width="100%">
+                                <TypographyBase variant="h6" color="white">
+                                    {t("footer.contact")}
+                                </TypographyBase>
+                                <Divider
+                                    sx={{
+                                        bgcolor: "white",
+                                        opacity: 0.5,
+                                        mb: 1,
+                                    }}
+                                />
+                            </BoxBase>
                             <BoxHorizon gap={1}>
                                 <BusinessRoundedIcon />
                                 <TypographyBase variant="caption">
@@ -78,9 +90,20 @@ const Footer = () => {
                             </BoxHorizon>
                         </BoxVertical>
                         <BoxBase>
-                            <TypographyBase variant="caption">
+                            <TypographyBase variant="h6" color="white">
                                 {t("footer.subscribe")}
                             </TypographyBase>
+                            <Divider
+                                sx={{
+                                    bgcolor: "white",
+                                    opacity: 0.5,
+                                    mb: 1,
+                                }}
+                            />
+                            <TypographyBase variant="caption">
+                                {t("footer.subscribeDescription")}
+                            </TypographyBase>
+                            <br />
                             <br />
                             <TextField
                                 size="small"
@@ -126,7 +149,7 @@ const Footer = () => {
                         </BoxBase>
                     </BoxBase>
                 </BoxBase>
-                <BoxBase mt={3}>
+                <BoxBase mt={5}>
                     <Divider
                         sx={{
                             bgcolor: "white",

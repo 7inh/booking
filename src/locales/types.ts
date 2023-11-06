@@ -11,6 +11,14 @@ export type LangType = {
             title: string;
             subTitle: string;
         };
+        newestCollection: {
+            title: string;
+            subTitle: string;
+        };
+        upcomingCollection: {
+            title: string;
+            subTitle: string;
+        };
     };
     common: {
         cart: string;
@@ -27,7 +35,9 @@ export type LangType = {
     };
     footer: {
         thanks: string;
+        contact: string;
         subscribe: string;
+        subscribeDescription: string;
         copyRight: string;
         terms: string;
     };

@@ -14,6 +14,16 @@ export const en: LangType = {
             subTitle:
                 "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.",
         },
+        newestCollection: {
+            title: "Newest Collection",
+            subTitle:
+                "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.",
+        },
+        upcomingCollection: {
+            title: "Upcoming Collection",
+            subTitle:
+                "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.",
+        },
     },
     common: {
         cart: "Cart",
@@ -31,7 +41,10 @@ export const en: LangType = {
     },
     footer: {
         thanks: "Thanks for visiting",
-        subscribe: "Subscribe to our newsletter, you will get the latest news and promotion.",
+        contact: "Contact",
+        subscribe: "Subscribe",
+        subscribeDescription:
+            "Subscribe to our newsletter, you will get the latest news and promotion.",
         copyRight: "© 2023, All rights reserved ",
         terms: "Terms of use",
     },

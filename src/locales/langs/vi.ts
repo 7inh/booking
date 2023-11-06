@@ -13,6 +13,14 @@ export const vi: LangType = {
             title: "Phổ biến",
             subTitle: "Danh sách các đầu sách phổ biến nhất",
         },
+        newestCollection: {
+            title: "Mới nhất",
+            subTitle: "Danh sách các đầu sách mới ra mắt",
+        },
+        upcomingCollection: {
+            title: "Sắp ra mắt",
+            subTitle: "Danh sách các đầu sách sắp ra mắt",
+        },
     },
     common: {
         cart: "Giỏ hàng",
@@ -29,7 +37,9 @@ export const vi: LangType = {
     },
     footer: {
         thanks: "Cảm ơn bạn đã ghé thăm trang web của chúng tôi. Chúng tôi luôn đánh giá cao sự ủng hộ và quan tâm của bạn. Trang web này không thể tồn tại mà không có sự hỗ trợ của bạn. Chúng tôi cam kết tiếp tục cung cấp nội dung và dịch vụ tốt nhất. 🙏💖",
-        subscribe:
+        contact: "Liên hệ",
+        subscribe: "Đăng ký nhận tin",
+        subscribeDescription:
             "Đăng ký nhận tin của chúng tôi, bạn sẽ nhận được tin tức và khuyến mãi mới nhất.",
         copyRight: "© 2023, Bản quyền thuộc về XUAO.vn",
         terms: "Điều khoản sử dụng",

@@ -39,6 +39,7 @@ const Branding = () => {
                     height: "100%",
                     maxHeight: "inherit",
                     bgcolor: "rgba(0,0,0,0.6)",
+                    backdropFilter: "blur(1px)",
                 }}
             ></BoxBase>
             <BoxBase

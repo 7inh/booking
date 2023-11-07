@@ -56,7 +56,7 @@ export const vi: LangType = {
         subscribe: "Đăng ký nhận tin",
         subscribeDescription:
             "Đăng ký nhận tin của chúng tôi, bạn sẽ nhận được tin tức và khuyến mãi mới nhất.",
-        copyRight: "© 2023, Bản quyền thuộc về XUAO.vn",
+        copyRight: "© 2023, Bản quyền thuộc về sumsue.vn",
         terms: "Điều khoản sử dụng",
     },
 };

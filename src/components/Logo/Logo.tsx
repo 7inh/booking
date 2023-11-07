@@ -27,9 +27,10 @@ const Logo = ({ footer }: LogoProps) => {
                 component="img"
                 src={footer ? "/svgs/logo_dark.svg" : "/svgs/logo.svg"}
                 sx={{
-                    height: "50px",
-                    width: "50px",
+                    height: "auto",
+                    width: "35px",
                     color: "primary.main",
+                    mr: 1,
                 }}
             />
             <BoxHorizon>

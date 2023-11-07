@@ -58,7 +58,8 @@ const AppBar = () => {
                     sx={{
                         display: mdDown ? "none" : "",
                         width: "100%",
-                        mx: 10,
+                        maxWidth: "500px",
+                        mx: 2,
                     }}
                 />
                 <BoxHorizon gap={1} flexShrink={0}>

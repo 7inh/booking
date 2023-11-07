@@ -42,8 +42,9 @@ const Navbar = () => {
                             sx={{
                                 p: 1,
                                 px: 2,
+                                cursor: "pointer",
                                 "&:hover": {
-                                    bgcolor: "primary.light",
+                                    bgcolor: "primary.dark",
                                 },
                             }}
                         >
@@ -52,6 +53,7 @@ const Navbar = () => {
                                     variant="button"
                                     sx={{
                                         color: "white",
+                                        fontWeight: "bold",
                                     }}
                                 >
                                     {item.title}

@@ -1,6 +1,5 @@
-import CardMedia from "@mui/material/CardMedia";
+import { CardMedia } from "@mui/material";
 import { PAGE_MAX_WIDTH } from "src/common/const";
-import Particles from "src/components/AnimateBackgrounds/Particles";
 import BoxBase from "src/components/Boxs/BoxBase";
 import ButtonBase from "src/components/Buttons/ButtonBase";
 import TypographyBase from "src/components/Typographys/TypographyBase";
@@ -15,12 +14,33 @@ const Branding = () => {
     return (
         <BoxBase
             sx={{
-                height: "100vh",
+                height: "calc(100vh - 268px)",
                 maxHeight: mdDown ? "600px" : "800px",
                 position: "relative",
+                bgcolor: "primary.main",
+                overflow: "hidden",
             }}
         >
-            <Particles />
+            {/* <Particles /> */}
+            <CardMedia
+                component="img"
+                src="/images/bg.jpg"
+                sx={{
+                    objectFit: "scale-down",
+                    position: "absolute",
+                }}
+            />
+            <BoxBase
+                sx={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    maxHeight: "inherit",
+                    bgcolor: "rgba(0,0,0,0.6)",
+                }}
+            ></BoxBase>
             <BoxBase
                 sx={{
                     display: "flex",
@@ -31,16 +51,16 @@ const Branding = () => {
                     mx: "auto",
                     px: 1,
                     gap: "24px",
-                    textAlign: mdDown ? "center" : "left",
+                    textAlign: "center",
                     boxSizing: "border-box",
                     userSelect: "none",
                     pointerEvents: "none",
                 }}
             >
                 <BoxBase
-                    maxWidth={mdDown ? "100%" : "500px"}
                     sx={{
                         zIndex: 1,
+                        mx: "auto",
                     }}
                 >
                     <TypographyBase
@@ -60,7 +80,7 @@ const Branding = () => {
                             maxWidth: "200px",
                             bgcolor: "primary.main",
                             my: "24px",
-                            mx: mdDown ? "auto" : "",
+                            mx: "auto",
                         }}
                     />
                     <TypographyBase variant="body1" fontWeight={200} color="white">
@@ -78,18 +98,6 @@ const Branding = () => {
                         }}
                     />
                 </BoxBase>
-
-                <CardMedia
-                    component="img"
-                    sx={{
-                        height: "60vh",
-                        maxHeight: "600px",
-                        width: "auto",
-                        zIndex: 1,
-                        display: mdDown ? "none" : "block",
-                    }}
-                    image={"/images/branding.jpeg"}
-                />
             </BoxBase>
         </BoxBase>
     );

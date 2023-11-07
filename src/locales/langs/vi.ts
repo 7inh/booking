@@ -43,8 +43,9 @@ export const vi: LangType = {
     pages: {
         home: {
             branding: {
-                title: "Chào mừng bạn đến với cửa hàng của chúng tôi",
-                subTitle: "Rất nhiều đầu sách hay đang chờ bạn khám phá",
+                title: "Manga & Novel store",
+                subTitle:
+                    "Chào mừng bạn đến với cửa hàng của chúng tôi. Rất nhiều đầu sách hay đang chờ bạn khám phá",
                 button: "Xem ngay",
             },
         },

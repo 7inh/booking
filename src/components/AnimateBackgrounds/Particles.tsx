@@ -23,7 +23,6 @@ const Particles = () => {
                 width: "100%",
                 height: "100%",
                 maxHeight: "inherit",
-                bgcolor: "primary.dark",
             }}
         ></BoxBase>
     );

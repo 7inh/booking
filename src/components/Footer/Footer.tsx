@@ -44,7 +44,7 @@ const Footer = () => {
             >
                 <BoxBase>
                     <BoxBase height="120px">
-                        <Logo />
+                        <Logo footer />
                     </BoxBase>
 
                     <BoxBase

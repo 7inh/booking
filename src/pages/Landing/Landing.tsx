@@ -14,10 +14,10 @@ const Landing = () => {
             <AppBar />
             <Navbar />
             <Branding />
+            <Feature />
             <PopularCollection />
             <NewestCollection />
             <UpcomingCollection />
-            <Feature />
             <Footer />
         </BoxBase>
     );

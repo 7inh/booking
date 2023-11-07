@@ -1,5 +1,5 @@
-import { IconButton, InputAdornment, TextField, TextFieldProps } from "@mui/material";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import { Button, InputAdornment, TextField, TextFieldProps } from "@mui/material";
 
 export interface InputTextProps {
     sx?: TextFieldProps["sx"];
@@ -26,16 +26,25 @@ const InputText = ({ sx, ...props }: InputTextProps) => {
                     },
                 },
                 "& .MuiInputBase-root": {
-                    pr: 0.5,
+                    pr: 0.2,
                 },
                 ...sx,
             }}
             InputProps={{
                 endAdornment: (
                     <InputAdornment position="end">
-                        <IconButton>
+                        <Button
+                            variant="contained"
+                            sx={{
+                                boxShadow: "none",
+                                "&:hover": {
+                                    boxShadow: "none",
+                                    bgcolor: "primary.light",
+                                },
+                            }}
+                        >
                             <SearchOutlinedIcon />
-                        </IconButton>
+                        </Button>
                     </InputAdornment>
                 ),
             }}

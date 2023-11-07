@@ -1,7 +1,7 @@
+import { CardMedia } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
-import SvgColor from "src/components/SvgColor/SvgColor";
 import TypographyBase from "src/components/Typographys/TypographyBase";
 
 export interface LogoProps {
@@ -23,8 +23,9 @@ const Logo = ({ footer }: LogoProps) => {
             }}
             onClick={() => navigate("/")}
         >
-            <SvgColor
-                src="/svgs/logo.svg"
+            <CardMedia
+                component="img"
+                src={footer ? "/svgs/logo_dark.svg" : "/svgs/logo.svg"}
                 sx={{
                     height: "50px",
                     width: "50px",

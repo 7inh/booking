@@ -1,7 +1,11 @@
 import CardMedia from "@mui/material/CardMedia";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useState } from "react";
-import { PAGE_MAX_WIDTH } from "src/common/const";
+import {
+    BOOK_ITEM_HORIZON_HEIGHT,
+    BOOK_ITEM_HORIZON_WIDTH,
+    PAGE_MAX_WIDTH,
+} from "src/common/const";
 import { Book } from "src/common/types";
 import BookItemHorizon from "src/components/Book/BookItemHorizon";
 import BoxBase from "src/components/Boxs/BoxBase";
@@ -103,6 +107,9 @@ const RandomBook = () => {
                                     src={currentSelected.thumbnail}
                                     sx={{
                                         boxShadow: "0px 0px 10px 0px #3333330d",
+                                        width: BOOK_ITEM_HORIZON_WIDTH,
+                                        height: BOOK_ITEM_HORIZON_HEIGHT,
+                                        transform: "scale(2.5)",
                                     }}
                                 />
                             </BoxCenter>

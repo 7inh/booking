@@ -1,6 +1,6 @@
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import CardMedia from "@mui/material/CardMedia";
-import { BOOK_ITEM_WIDTH } from "src/common/const";
+import { BOOK_ITEM_HEIGHT, BOOK_ITEM_WIDTH } from "src/common/const";
 import { Book } from "src/common/types";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxCenter from "src/components/Boxs/BoxCenter";
@@ -16,7 +16,6 @@ const BookItem = (props: BookItemProps) => {
     return (
         <BoxBase
             sx={{
-                width: BOOK_ITEM_WIDTH,
                 cursor: "pointer",
                 border: "1px solid #3333330d",
                 "&:hover": {
@@ -25,13 +24,18 @@ const BookItem = (props: BookItemProps) => {
                 },
             }}
         >
-            <BoxCenter p={5}>
+            <BoxCenter
+                sx={{
+                    p: 5,
+                }}
+            >
                 <CardMedia
                     component="img"
                     src={book.thumbnail}
                     sx={{
-                        width: "100%",
-                        height: "100%",
+                        overflow: "hidden",
+                        width: BOOK_ITEM_WIDTH,
+                        height: BOOK_ITEM_HEIGHT,
                         objectFit: "cover",
                     }}
                 />

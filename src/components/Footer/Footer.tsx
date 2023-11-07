@@ -110,16 +110,16 @@ const Footer = () => {
                                 placeholder="example@email.com"
                                 sx={{
                                     width: "300px",
-                                    borderRadius: "4px",
                                     "& .MuiOutlinedInput-root": {
                                         "& fieldset": {
-                                            borderColor: "#E0E0E0",
+                                            borderColor: "secondary.main",
+                                            borderRadius: "1px",
                                         },
                                         "&:hover fieldset": {
-                                            borderColor: "#E0E0E0",
+                                            borderColor: "secondary.main",
                                         },
                                         "&.Mui-focused fieldset": {
-                                            borderColor: "#E0E0E0",
+                                            borderColor: "secondary.main",
                                         },
                                     },
                                     "& .MuiInputBase-root": {
@@ -136,9 +136,10 @@ const Footer = () => {
                                             <ButtonBase
                                                 label={t("common.send")}
                                                 sx={{
-                                                    borderRadius: "4px 0 0 4px",
+                                                    borderRadius: "1px 0 0 1px",
+                                                    border: "none",
                                                     padding: "30px",
-                                                    bgcolor: "white",
+                                                    bgcolor: "secondary.main",
                                                     color: "primary.dark",
                                                 }}
                                             />

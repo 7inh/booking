@@ -16,9 +16,10 @@ const SelectLanguage = () => {
             size="small"
             onChange={handleChange}
             sx={{
+                borderRadius: "1px",
                 bgcolor: "background.paper",
                 "& fieldset": {
-                    border: "1px solid rgba(145, 158, 171, 0.20)",
+                    border: "1px solid #D72323",
                 },
                 "& .MuiSelect-select": {
                     py: 0,

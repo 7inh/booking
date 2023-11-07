@@ -11,10 +11,10 @@ const InputText = ({ sx, ...props }: InputTextProps) => {
             {...props}
             size="small"
             sx={{
-                borderRadius: "4px",
                 "& .MuiOutlinedInput-root": {
                     "& fieldset": {
                         borderColor: "primary.main",
+                        borderRadius: "1px",
                     },
                     "&:hover fieldset": {
                         borderColor: "primary.main",

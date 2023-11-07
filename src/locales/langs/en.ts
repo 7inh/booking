@@ -45,6 +45,7 @@ export const en: LangType = {
     common: {
         cart: "Cart",
         send: "Send",
+        addToCart: "Add to cart",
     },
     pages: {
         home: {

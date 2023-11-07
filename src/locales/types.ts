@@ -37,6 +37,7 @@ export type LangType = {
     common: {
         cart: string;
         send: string;
+        addToCart: string;
     };
     pages: {
         home: {

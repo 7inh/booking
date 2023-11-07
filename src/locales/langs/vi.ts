@@ -39,6 +39,7 @@ export const vi: LangType = {
     common: {
         cart: "Giỏ hàng",
         send: "Gửi",
+        addToCart: "Thêm vào giỏ hàng",
     },
     pages: {
         home: {

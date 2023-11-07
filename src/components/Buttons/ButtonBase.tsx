@@ -17,12 +17,18 @@ const ButtonBase = (props: CreateButtonProps) => {
             onClick={onClick}
             sx={{
                 textTransform: "none",
-                borderRadius: rounded ? "50px" : "8px",
+                borderRadius: rounded ? "50px" : "1px",
                 boxShadow: "none",
-                color: "#fff",
+                py: 1,
+                bgcolor: rest.variant === "outlined" ? "" : "primary.main",
                 "&:hover": {
-                    backgroundColor: theme.palette.primary.light,
+                    backgroundColor:
+                        rest.variant === "outlined"
+                            ? theme.palette.primary.main
+                            : theme.palette.primary.dark,
                     boxShadow: "none",
+                    color:
+                        rest.variant === "outlined" ? "secondary.main" : theme.palette.primary.main,
                 },
                 ...sx,
             }}

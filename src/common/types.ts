@@ -174,3 +174,9 @@ export interface Book {
     thumbnail: string;
     price: number;
 }
+
+export interface BookAvailability {
+    key: string;
+    name: string;
+    checkBoxState: "checked" | "unchecked";
+}

@@ -60,6 +60,11 @@ export const en: LangType = {
         shop: {
             filter: {
                 price: "Price",
+                availability: "Availability",
+                availabilityList: {
+                    available: "Available",
+                    preOrder: "Pre-order",
+                },
                 range: "to",
             },
         },

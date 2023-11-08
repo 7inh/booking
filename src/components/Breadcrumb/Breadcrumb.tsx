@@ -1,53 +1,78 @@
-import Box from "@mui/material/Box";
-import { Link } from "react-router-dom";
-import { BreadcrumbsLinkProps } from "src/components/Breadcrumb/types";
+import { Fragment } from "react";
+import { useLocation } from "react-router-dom";
+import BoxBase from "src/components/Boxs/BoxBase";
+import BoxHorizon from "src/components/Boxs/BoxHorizon";
+import LinkBase from "src/components/Links/LinkBase";
+import TypographyBase from "src/components/Typographys/TypographyBase";
 
 type Props = {
-    link: BreadcrumbsLinkProps;
-    activeLast?: boolean;
-    disabled: boolean;
-    color?: string;
+    links: {
+        name: string;
+        href: string;
+    }[];
 };
 
-export default function BreadcrumbsLink({ link }: Props) {
-    const { name, href, icon, color } = link;
+const Breadcrumb = ({ links }: Props) => {
+    const location = useLocation();
+    const currentPath = location.pathname;
 
-    const styles = {
-        typography: "body2",
-        alignItems: "center",
-        color: color || "#212b36",
-        display: "inline-flex",
-        textDecoration: "none",
-        fontSize: "14px",
-        lineHeight: "22px",
-    };
+    return (
+        <BoxBase
+            sx={{
+                bgcolor: "secondary.light",
+                position: "relative",
+                color: "primary.main",
+                py: 3,
+                textAlign: "center",
+            }}
+        >
+            <BoxHorizon mx="auto" width="fit-content">
+                {links.map((link, index) => {
+                    const isLast = index === links.length - 1;
+                    const isCurrent = currentPath === link.href;
 
-    const renderContent = (
-        <>
-            {icon && (
-                <Box
-                    component="span"
-                    sx={{
-                        mr: 1,
-                        display: "inherit",
-                        "& svg": { width: 20, height: 20 },
-                    }}
-                >
-                    {icon}
-                </Box>
-            )}
-
-            {name}
-        </>
+                    return (
+                        <Fragment key={link.href}>
+                            <LinkBase to={link.href} disabled={isCurrent}>
+                                <BoxBase
+                                    width="fit-content"
+                                    sx={
+                                        !isCurrent
+                                            ? {
+                                                  "&:hover": {
+                                                      color: "primary.dark",
+                                                  },
+                                              }
+                                            : {}
+                                    }
+                                >
+                                    <TypographyBase
+                                        sx={{
+                                            fontSize: "20px",
+                                            fontWeight: 600,
+                                        }}
+                                    >
+                                        {link.name}
+                                    </TypographyBase>
+                                </BoxBase>
+                            </LinkBase>
+                            {!isLast && (
+                                <BoxBase
+                                    sx={{
+                                        mx: 1,
+                                        fontSize: "20px",
+                                        fontWeight: 600,
+                                    }}
+                                >
+                                    /
+                                </BoxBase>
+                            )}
+                        </Fragment>
+                    );
+                })}
+            </BoxHorizon>
+        </BoxBase>
     );
+};
 
-    if (href) {
-        return (
-            <Link to={href} style={styles}>
-                {renderContent}
-            </Link>
-        );
-    }
-
-    return <Box sx={styles}> {renderContent} </Box>;
-}
+export default Breadcrumb;

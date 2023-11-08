@@ -29,7 +29,7 @@ const FilterSectionBase = ({ children, title }: FilterSectionBaseProps) => {
                 <ExpandMoreIcon
                     sx={{
                         mr: -0.75,
-                        transform: open.value ? "rotate(-180deg)" : "rotate(0deg)",
+                        transform: !open.value ? "rotate(-180deg)" : "rotate(0deg)",
                         transition: "transform 0.2s ease",
                     }}
                 />

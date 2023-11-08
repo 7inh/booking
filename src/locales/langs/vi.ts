@@ -54,6 +54,11 @@ export const vi: LangType = {
         shop: {
             filter: {
                 price: "Giá",
+                availability: "Tình trạng",
+                availabilityList: {
+                    available: "Còn hàng",
+                    preOrder: "Đặt trước",
+                },
                 range: "đến",
             },
         },

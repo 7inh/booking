@@ -51,6 +51,11 @@ export type LangType = {
         shop: {
             filter: {
                 price: string;
+                availability: string;
+                availabilityList: {
+                    available: string;
+                    preOrder: string;
+                };
                 range: string;
             };
         };

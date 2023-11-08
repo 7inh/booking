@@ -14,6 +14,8 @@ import SnackbarProvider from "src/providers/SnackbarProvider";
 import TranslationProvider from "src/providers/TranslationProvider";
 import UnsavedChangesProvider from "src/providers/UnsavedChangesProvider";
 import "./index.css";
+import MainLayout from "src/layouts/MainLayout";
+import Shop from "src/pages/Shop/Shop";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -22,7 +24,17 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Landing />,
+                element: <MainLayout />,
+                children: [
+                    {
+                        path: "/",
+                        element: <Landing />,
+                    },
+                    {
+                        path: "/shop",
+                        element: <Shop />,
+                    },
+                ],
             },
             {
                 path: "/500",

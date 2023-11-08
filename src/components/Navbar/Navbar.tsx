@@ -11,14 +11,17 @@ const Navbar = () => {
         {
             id: 2,
             title: t("nav.shop"),
+            path: "/shop",
         },
         {
             id: 3,
             title: t("nav.about"),
+            path: "/about",
         },
         {
             id: 4,
             title: t("nav.contact"),
+            path: "/contact",
         },
     ];
 
@@ -48,7 +51,7 @@ const Navbar = () => {
                                 },
                             }}
                         >
-                            <LinkBase to={""}>
+                            <LinkBase to={item.path}>
                                 <TypographyBase
                                     variant="button"
                                     sx={{

@@ -40,6 +40,7 @@ export const vi: LangType = {
         cart: "Giỏ hàng",
         send: "Gửi",
         addToCart: "Thêm vào giỏ hàng",
+        filter: "Lọc",
     },
     pages: {
         home: {
@@ -49,6 +50,16 @@ export const vi: LangType = {
                     "Chào mừng bạn đến với cửa hàng của chúng tôi. Rất nhiều đầu sách hay đang chờ bạn khám phá",
                 button: "Xem ngay",
             },
+        },
+        shop: {
+            filter: {
+                range: "đến",
+            },
+        },
+        p404: {
+            title: "404",
+            subTitle: "Trang bạn đang tìm kiếm không tồn tại",
+            button: "Quay lại trang chủ",
         },
     },
     footer: {

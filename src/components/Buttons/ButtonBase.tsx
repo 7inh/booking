@@ -23,12 +23,9 @@ const ButtonBase = (props: CreateButtonProps) => {
                 bgcolor: rest.variant === "outlined" ? "" : "primary.main",
                 "&:hover": {
                     backgroundColor:
-                        rest.variant === "outlined"
-                            ? theme.palette.primary.main
-                            : theme.palette.primary.dark,
+                        rest.variant === "outlined" ? theme.palette.primary.main : "primary.light",
                     boxShadow: "none",
-                    color:
-                        rest.variant === "outlined" ? "secondary.main" : theme.palette.primary.main,
+                    color: "secondary.main",
                 },
                 ...sx,
             }}

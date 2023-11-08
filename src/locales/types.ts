@@ -38,6 +38,7 @@ export type LangType = {
         cart: string;
         send: string;
         addToCart: string;
+        filter: string;
     };
     pages: {
         home: {
@@ -46,6 +47,16 @@ export type LangType = {
                 subTitle: string;
                 button: string;
             };
+        };
+        shop: {
+            filter: {
+                range: string;
+            };
+        };
+        p404: {
+            title: string;
+            subTitle: string;
+            button: string;
         };
     };
     footer: {

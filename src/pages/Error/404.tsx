@@ -1,6 +1,7 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import ButtonBase from "src/components/Buttons/ButtonBase";
 import useTranslation from "src/hooks/utils/useTranslation";
 
 const PageError404 = () => {
@@ -8,7 +9,7 @@ const PageError404 = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        document.title = t("error.pageNotFound404");
+        document.title = t("pages.p404.title");
     }, [t]);
 
     return (
@@ -28,7 +29,7 @@ const PageError404 = () => {
                         color: "#212b36",
                     }}
                 >
-                    {t("error.pageNotFound")}
+                    {t("pages.p404.title")}
                 </Typography>
                 <Box display="flex" gap={1}>
                     <Typography
@@ -39,18 +40,10 @@ const PageError404 = () => {
                             color: "#637381",
                         }}
                     >
-                        {t("error.pageNotFoundContent")}
+                        {t("pages.p404.subTitle")}
                     </Typography>
-                    <Button
-                        variant="outlined"
-                        onClick={() => navigate("/")}
-                        sx={{
-                            flexShrink: 0,
-                        }}
-                    >
-                        {t("message.backToHome")}
-                    </Button>
                 </Box>
+
                 <Box
                     sx={{
                         width: "400px",
@@ -62,6 +55,7 @@ const PageError404 = () => {
                         backgroundSize: "contain, 30%",
                     }}
                 ></Box>
+                <ButtonBase onClick={() => navigate("/")} label={t("pages.p404.button")} />
             </Box>
         </Box>
     );

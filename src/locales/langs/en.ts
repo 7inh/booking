@@ -46,6 +46,7 @@ export const en: LangType = {
         cart: "Cart",
         send: "Send",
         addToCart: "Add to cart",
+        filter: "Filter",
     },
     pages: {
         home: {
@@ -55,6 +56,16 @@ export const en: LangType = {
                     "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.",
                 button: "Shop now",
             },
+        },
+        shop: {
+            filter: {
+                range: "to",
+            },
+        },
+        p404: {
+            title: "404",
+            subTitle: "Page not found",
+            button: "Back to home page",
         },
     },
     footer: {

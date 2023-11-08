@@ -49,8 +49,8 @@ const BookItemHorizon = (props: BookItemHorizonProps) => {
                     }}
                 >
                     <TypographyBase variant="h6">{book.name}</TypographyBase>
-                    <TypographyBase variant="h6" color="#ff6162">
-                        {book.price}
+                    <TypographyBase variant="h6" color="primary.main">
+                        {book.price}₫
                     </TypographyBase>
                 </BoxVertical>
             </BoxHorizon>

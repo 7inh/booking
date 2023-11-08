@@ -55,7 +55,7 @@ const BookItem = (props: BookItemProps) => {
                 >
                     <BoxBase>
                         <TypographyBase variant="h6">{book.name}</TypographyBase>
-                        <TypographyBase variant="h6" color="#ff6162">
+                        <TypographyBase variant="h6" color="primary.main">
                             {book.price}₫
                         </TypographyBase>
                     </BoxBase>
@@ -63,7 +63,7 @@ const BookItem = (props: BookItemProps) => {
                         fontSize="large"
                         sx={{
                             "&:hover": {
-                                color: "#ff6162",
+                                color: "primary.main",
                                 transition: "all 0.3s ease 0s",
                             },
                         }}

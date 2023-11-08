@@ -96,6 +96,11 @@ const Branding = () => {
                             height: "48px",
                             width: "200px",
                             pointerEvents: "all",
+                            boxShadow: "none",
+                            "&:hover": {
+                                color: "secondary.main",
+                                boxShadow: "none",
+                            },
                         }}
                     />
                 </BoxBase>

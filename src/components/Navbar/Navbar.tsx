@@ -35,7 +35,7 @@ const Navbar = () => {
                     mx: "auto",
                 }}
             >
-                <BoxHorizon ml={2}>
+                <BoxHorizon ml={1}>
                     {navData.map((item) => (
                         <BoxBase
                             key={item.id}

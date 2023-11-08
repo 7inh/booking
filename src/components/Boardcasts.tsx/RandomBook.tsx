@@ -91,8 +91,12 @@ const RandomBook = () => {
                                 <TypographyBase variant="h2" fontWeight="bold">
                                     {currentSelected.name}
                                 </TypographyBase>
-                                <TypographyBase fontWeight="400" fontSize="40px" color="#ff6162">
-                                    {currentSelected.price}
+                                <TypographyBase
+                                    fontWeight="400"
+                                    fontSize="40px"
+                                    color="primary.main"
+                                >
+                                    {currentSelected.price}₫
                                 </TypographyBase>
                                 <br />
                                 <ButtonBase

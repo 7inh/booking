@@ -1,9 +1,10 @@
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { TextField } from "@mui/material";
 import Slider from "@mui/material/Slider";
 import { useState } from "react";
 import BoxBase from "src/components/Boxs/BoxBase";
+import BoxCenter from "src/components/Boxs/BoxCenter";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
-import ButtonBase from "src/components/Buttons/ButtonBase";
 import FilterSectionBase from "src/components/Filters/FilterSections/FilterSectionBase";
 import TypographyBase from "src/components/Typographys/TypographyBase";
 import useTranslation from "src/hooks/utils/useTranslation";
@@ -38,8 +39,8 @@ const FilterSectionPrice = () => {
     };
 
     return (
-        <FilterSectionBase title="Price">
-            <BoxBase m={1}>
+        <FilterSectionBase title={t("pages.shop.filter.price")}>
+            <BoxBase>
                 <Slider
                     value={priceRange}
                     onChange={handleChangeRange}
@@ -53,80 +54,101 @@ const FilterSectionPrice = () => {
                 <BoxHorizon
                     sx={{
                         justifyContent: "space-between",
+                        alignItems: "stretch",
+                        gap: 1,
                     }}
                 >
-                    <BoxHorizon gap={0.5}>
-                        <TextField
-                            size="small"
-                            type="number"
-                            value={priceRange[0]}
-                            onChange={(e) => {
-                                handleChangeRange(e, [Number(e.target.value), priceRange[1]], 0);
-                            }}
-                            InputProps={{
-                                inputProps: {
-                                    min: MIN_PRICE,
-                                    max: MAX_PRICE - MIN_DISTANCE,
-                                    step: STEP,
+                    <TextField
+                        fullWidth
+                        size="small"
+                        type="number"
+                        value={priceRange[0]}
+                        onChange={(e) => {
+                            handleChangeRange(e, [Number(e.target.value), priceRange[1]], 0);
+                        }}
+                        InputProps={{
+                            inputProps: {
+                                min: MIN_PRICE,
+                                max: MAX_PRICE - MIN_DISTANCE,
+                                step: STEP,
+                            },
+                        }}
+                        sx={{
+                            "& .MuiOutlinedInput-root": {
+                                "& fieldset": {
+                                    borderColor: "primary.main",
+                                    borderRadius: "1px",
                                 },
-                            }}
-                            sx={{
-                                "& .MuiOutlinedInput-root": {
-                                    "& fieldset": {
-                                        borderColor: "primary.main",
-                                        borderRadius: "1px",
-                                    },
-                                    "&:hover fieldset": {
-                                        borderColor: "primary.main",
-                                    },
+                                "&:hover fieldset": {
+                                    borderColor: "primary.main",
                                 },
-                                "& .MuiInputBase-root": {
-                                    p: 0,
+                            },
+                            "& .MuiInputBase-root": {
+                                p: 0,
+                            },
+                            "& input": {
+                                px: 1,
+                                py: 0.5,
+                            },
+                        }}
+                    >
+                        {priceRange[0]}
+                    </TextField>
+                    <BoxCenter>
+                        <TypographyBase variant="body2" fontWeight={600}>
+                            -
+                        </TypographyBase>
+                    </BoxCenter>
+                    <TextField
+                        fullWidth
+                        size="small"
+                        type="number"
+                        value={priceRange[1]}
+                        onChange={(e) => {
+                            handleChangeRange(e, [priceRange[0], Number(e.target.value)], 1);
+                        }}
+                        InputProps={{
+                            inputProps: {
+                                min: MIN_PRICE + MIN_DISTANCE,
+                                max: MAX_PRICE,
+                                step: STEP,
+                            },
+                        }}
+                        sx={{
+                            "& .MuiOutlinedInput-root": {
+                                "& fieldset": {
+                                    borderColor: "primary.main",
+                                    borderRadius: "1px",
                                 },
-                            }}
-                        >
-                            {priceRange[0]}
-                        </TextField>
-                    </BoxHorizon>
-                    <TypographyBase variant="body2" fontWeight={600}>
-                        {t("pages.shop.filter.range")}
-                    </TypographyBase>
-                    <BoxHorizon>
-                        <TextField
-                            size="small"
-                            type="number"
-                            value={priceRange[1]}
-                            onChange={(e) => {
-                                handleChangeRange(e, [priceRange[0], Number(e.target.value)], 1);
-                            }}
-                            InputProps={{
-                                inputProps: {
-                                    min: MIN_PRICE + MIN_DISTANCE,
-                                    max: MAX_PRICE,
-                                    step: STEP,
+                                "&:hover fieldset": {
+                                    borderColor: "primary.main",
                                 },
-                            }}
-                            sx={{
-                                "& .MuiOutlinedInput-root": {
-                                    "& fieldset": {
-                                        borderColor: "primary.main",
-                                        borderRadius: "1px",
-                                    },
-                                    "&:hover fieldset": {
-                                        borderColor: "primary.main",
-                                    },
-                                },
-                                "& .MuiInputBase-root": {
-                                    p: 0,
-                                },
-                            }}
-                        >
-                            {priceRange[1]}
-                        </TextField>
-                    </BoxHorizon>
+                            },
+                            "& .MuiInputBase-root": {
+                                p: 0,
+                            },
+                            "& input": {
+                                px: 1,
+                                py: 0.5,
+                            },
+                        }}
+                    >
+                        {priceRange[1]}
+                    </TextField>
+                    <BoxCenter
+                        sx={{
+                            bgcolor: "primary.main",
+                            color: "secondary.main",
+                            px: 0.5,
+                            cursor: "pointer",
+                            "&:hover": {
+                                bgcolor: "primary.light",
+                            },
+                        }}
+                    >
+                        <NavigateNextIcon />
+                    </BoxCenter>
                 </BoxHorizon>
-                <br />
-                <ButtonBase fullWidth label={t("common.filter")} />
             </BoxBase>
         </FilterSectionBase>
     );

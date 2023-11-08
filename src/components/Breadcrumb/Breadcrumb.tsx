@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
-import { BreadcrumbsLinkProps } from "src/components/CustomBreadcrumbs/types";
+import { BreadcrumbsLinkProps } from "src/components/Breadcrumb/types";
 
 type Props = {
     link: BreadcrumbsLinkProps;

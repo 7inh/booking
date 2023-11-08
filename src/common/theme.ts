@@ -10,6 +10,7 @@ const theme = createTheme({
         secondary: {
             main: "#F5F7F8",
             dark: "#272727",
+            light: "#F0F0F0",
         },
     },
     typography: {},

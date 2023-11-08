@@ -59,6 +59,7 @@ export const en: LangType = {
         },
         shop: {
             filter: {
+                price: "Price",
                 range: "to",
             },
         },

@@ -3,7 +3,7 @@ import FilterSectionPrice from "src/components/Filters/FilterSections/FilterSect
 
 const FilterBook = () => {
     return (
-        <BoxBase maxWidth="350px">
+        <BoxBase maxWidth="300px">
             <FilterSectionPrice />
         </BoxBase>
     );

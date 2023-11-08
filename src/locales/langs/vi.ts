@@ -53,6 +53,7 @@ export const vi: LangType = {
         },
         shop: {
             filter: {
+                price: "Giá",
                 range: "đến",
             },
         },

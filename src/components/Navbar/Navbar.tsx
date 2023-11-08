@@ -40,18 +40,17 @@ const Navbar = () => {
             >
                 <BoxHorizon ml={1}>
                     {navData.map((item) => (
-                        <BoxBase
-                            key={item.id}
-                            sx={{
-                                p: 1,
-                                px: 2,
-                                cursor: "pointer",
-                                "&:hover": {
-                                    bgcolor: "primary.dark",
-                                },
-                            }}
-                        >
-                            <LinkBase to={item.path}>
+                        <LinkBase to={item.path} key={item.id}>
+                            <BoxBase
+                                sx={{
+                                    p: 1,
+                                    px: 2,
+                                    cursor: "pointer",
+                                    "&:hover": {
+                                        bgcolor: "primary.dark",
+                                    },
+                                }}
+                            >
                                 <TypographyBase
                                     variant="button"
                                     sx={{
@@ -61,8 +60,8 @@ const Navbar = () => {
                                 >
                                     {item.title}
                                 </TypographyBase>
-                            </LinkBase>
-                        </BoxBase>
+                            </BoxBase>
+                        </LinkBase>
                     ))}
                 </BoxHorizon>
             </BoxBase>

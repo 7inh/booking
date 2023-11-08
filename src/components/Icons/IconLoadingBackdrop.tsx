@@ -1,7 +1,7 @@
 import { Backdrop } from "@mui/material";
-import "./index.css";
+import "./IconLoadingBackdrop.css";
 
-const LoadingIcon = ({ open = true, zIndex }: { open?: boolean; zIndex?: number }) => {
+const IconLoadingBackdrop = ({ open = true, zIndex }: { open?: boolean; zIndex?: number }) => {
     return (
         <Backdrop
             open={open}
@@ -25,4 +25,4 @@ const LoadingIcon = ({ open = true, zIndex }: { open?: boolean; zIndex?: number 
     );
 };
 
-export default LoadingIcon;
+export default IconLoadingBackdrop;

@@ -50,6 +50,7 @@ export type LangType = {
         };
         shop: {
             filter: {
+                price: string;
                 range: string;
             };
         };

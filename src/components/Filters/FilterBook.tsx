@@ -7,7 +7,7 @@ import FilterSectionVariant from "src/components/Filters/FilterSections/FilterSe
 
 const FilterBook = () => {
     return (
-        <BoxBase width="100%" maxWidth="300px" flexShrink={0}>
+        <BoxBase width="100%" maxWidth="265px" flexShrink={0}>
             <FilterSectionPrice />
             <Divider
                 sx={{

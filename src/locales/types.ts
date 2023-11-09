@@ -56,6 +56,19 @@ export type LangType = {
                     available: string;
                     preOrder: string;
                 };
+                variant: string;
+                variantList: {
+                    once: string;
+                    combo: string;
+                    fullSet: string;
+                };
+                rare: string;
+                rareList: {
+                    normal: string;
+                    special: string;
+                    limited: string;
+                    collection: string;
+                };
                 range: string;
             };
         };

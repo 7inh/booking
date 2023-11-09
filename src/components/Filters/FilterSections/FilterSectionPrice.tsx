@@ -18,7 +18,7 @@ const MIN_DISTANCE = 10000;
 const FilterSectionPrice = () => {
     const t = useTranslation();
 
-    const [priceRange, setRange] = useState<number[]>([20000, 70000]);
+    const [priceRange, setRange] = useState<number[]>([10000, 70000]);
 
     const handleChangeRange = (_: any, newValue: number | number[], activeThumb: number) => {
         if (!Array.isArray(newValue)) {
@@ -105,7 +105,14 @@ const FilterSectionPrice = () => {
                         type="number"
                         value={priceRange[1]}
                         onChange={(e) => {
-                            handleChangeRange(e, [priceRange[0], Number(e.target.value)], 1);
+                            handleChangeRange(
+                                e,
+                                [
+                                    priceRange[0],
+                                    Math.max(Number(e.target.value), MIN_PRICE + MIN_DISTANCE),
+                                ],
+                                1
+                            );
                         }}
                         InputProps={{
                             inputProps: {

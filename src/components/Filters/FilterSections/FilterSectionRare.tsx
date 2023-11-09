@@ -6,18 +6,28 @@ import BoxVertical from "src/components/Boxs/BoxVertical";
 import FilterSectionBase from "src/components/Filters/FilterSections/FilterSectionBase";
 import useTranslation from "src/hooks/utils/useTranslation";
 
-const FilterSectionAvailability = () => {
+const FilterSectionRare = () => {
     const t = useTranslation();
 
-    const [availabilityValue, setAvailabilityValue] = useState<BookDataCustom[]>([
+    const [rareValue, setRareValue] = useState<BookDataCustom[]>([
         {
-            key: "available",
-            name: t("pages.shop.filter.availabilityList.available"),
+            key: "normal",
+            name: t("pages.shop.filter.rareList.normal"),
             checkBoxState: "unchecked",
         },
         {
-            key: "preOrder",
-            name: t("pages.shop.filter.availabilityList.preOrder"),
+            key: "special",
+            name: t("pages.shop.filter.rareList.special"),
+            checkBoxState: "unchecked",
+        },
+        {
+            key: "limited",
+            name: t("pages.shop.filter.rareList.limited"),
+            checkBoxState: "unchecked",
+        },
+        {
+            key: "collection",
+            name: t("pages.shop.filter.rareList.collection"),
             checkBoxState: "unchecked",
         },
     ]);
@@ -25,7 +35,7 @@ const FilterSectionAvailability = () => {
     const handleChangeState = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
             const { checked } = event.target;
-            setAvailabilityValue((prev) => {
+            setRareValue((prev) => {
                 return prev.map((value) => {
                     return {
                         ...value,
@@ -34,13 +44,13 @@ const FilterSectionAvailability = () => {
                 });
             });
         },
-        [setAvailabilityValue]
+        [setRareValue]
     );
 
     return (
-        <FilterSectionBase title={t("pages.shop.filter.availability")}>
+        <FilterSectionBase title={t("pages.shop.filter.rare")}>
             <BoxVertical>
-                {availabilityValue.map((value) => {
+                {rareValue.map((value) => {
                     return (
                         <FormControlLabel
                             key={value.key}
@@ -60,4 +70,4 @@ const FilterSectionAvailability = () => {
     );
 };
 
-export default FilterSectionAvailability;
+export default FilterSectionRare;

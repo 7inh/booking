@@ -175,7 +175,7 @@ export interface Book {
     price: number;
 }
 
-export interface BookAvailability {
+export interface BookDataCustom {
     key: string;
     name: string;
     checkBoxState: "checked" | "unchecked";

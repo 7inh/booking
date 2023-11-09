@@ -6,18 +6,23 @@ import BoxVertical from "src/components/Boxs/BoxVertical";
 import FilterSectionBase from "src/components/Filters/FilterSections/FilterSectionBase";
 import useTranslation from "src/hooks/utils/useTranslation";
 
-const FilterSectionAvailability = () => {
+const FilterSectionVariant = () => {
     const t = useTranslation();
 
-    const [availabilityValue, setAvailabilityValue] = useState<BookDataCustom[]>([
+    const [variantValue, setVariantValue] = useState<BookDataCustom[]>([
         {
-            key: "available",
-            name: t("pages.shop.filter.availabilityList.available"),
+            key: "once",
+            name: t("pages.shop.filter.variantList.once"),
             checkBoxState: "unchecked",
         },
         {
-            key: "preOrder",
-            name: t("pages.shop.filter.availabilityList.preOrder"),
+            key: "combo",
+            name: t("pages.shop.filter.variantList.combo"),
+            checkBoxState: "unchecked",
+        },
+        {
+            key: "fullSet",
+            name: t("pages.shop.filter.variantList.fullSet"),
             checkBoxState: "unchecked",
         },
     ]);
@@ -25,7 +30,7 @@ const FilterSectionAvailability = () => {
     const handleChangeState = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
             const { checked } = event.target;
-            setAvailabilityValue((prev) => {
+            setVariantValue((prev) => {
                 return prev.map((value) => {
                     return {
                         ...value,
@@ -34,13 +39,13 @@ const FilterSectionAvailability = () => {
                 });
             });
         },
-        [setAvailabilityValue]
+        [setVariantValue]
     );
 
     return (
-        <FilterSectionBase title={t("pages.shop.filter.availability")}>
+        <FilterSectionBase title={t("pages.shop.filter.variant")}>
             <BoxVertical>
-                {availabilityValue.map((value) => {
+                {variantValue.map((value) => {
                     return (
                         <FormControlLabel
                             key={value.key}
@@ -60,4 +65,4 @@ const FilterSectionAvailability = () => {
     );
 };
 
-export default FilterSectionAvailability;
+export default FilterSectionVariant;

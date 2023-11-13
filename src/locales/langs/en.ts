@@ -47,6 +47,7 @@ export const en: LangType = {
         send: "Send",
         addToCart: "Add to cart",
         filter: "Filter",
+        page: "Page",
     },
     pages: {
         home: {
@@ -79,6 +80,15 @@ export const en: LangType = {
                     collection: "Collection",
                 },
                 range: "to",
+            },
+            result: {
+                showItemsOf: "Showing %{from}-%{to} of %{total} items",
+            },
+            order: {
+                newest: "Newest",
+                oldest: "Oldest",
+                priceHighToLow: "Price: High to Low",
+                priceLowToHigh: "Price: Low to High",
             },
         },
         p404: {

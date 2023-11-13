@@ -33,15 +33,12 @@ const FilterSectionRare = () => {
     ]);
 
     const handleChangeState = useCallback(
-        (event: React.ChangeEvent<HTMLInputElement>) => {
+        (event: React.ChangeEvent<HTMLInputElement>, idx: number) => {
             const { checked } = event.target;
             setRareValue((prev) => {
-                return prev.map((value) => {
-                    return {
-                        ...value,
-                        checkBoxState: checked ? "checked" : "unchecked",
-                    };
-                });
+                const newState = [...prev];
+                newState[idx].checkBoxState = checked ? "checked" : "unchecked";
+                return newState;
             });
         },
         [setRareValue]
@@ -50,7 +47,7 @@ const FilterSectionRare = () => {
     return (
         <FilterSectionBase title={t("pages.shop.filter.rare")}>
             <BoxVertical>
-                {rareValue.map((value) => {
+                {rareValue.map((value, idx) => {
                     return (
                         <FormControlLabel
                             key={value.key}
@@ -59,7 +56,7 @@ const FilterSectionRare = () => {
                                 <Checkbox
                                     size="small"
                                     checked={value.checkBoxState === "checked"}
-                                    onChange={handleChangeState}
+                                    onChange={(event) => handleChangeState(event, idx)}
                                 />
                             }
                         />

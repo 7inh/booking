@@ -28,15 +28,12 @@ const FilterSectionVariant = () => {
     ]);
 
     const handleChangeState = useCallback(
-        (event: React.ChangeEvent<HTMLInputElement>) => {
+        (event: React.ChangeEvent<HTMLInputElement>, idx: number) => {
             const { checked } = event.target;
             setVariantValue((prev) => {
-                return prev.map((value) => {
-                    return {
-                        ...value,
-                        checkBoxState: checked ? "checked" : "unchecked",
-                    };
-                });
+                const newState = [...prev];
+                newState[idx].checkBoxState = checked ? "checked" : "unchecked";
+                return newState;
             });
         },
         [setVariantValue]
@@ -45,7 +42,7 @@ const FilterSectionVariant = () => {
     return (
         <FilterSectionBase title={t("pages.shop.filter.variant")}>
             <BoxVertical>
-                {variantValue.map((value) => {
+                {variantValue.map((value, idx) => {
                     return (
                         <FormControlLabel
                             key={value.key}
@@ -54,7 +51,7 @@ const FilterSectionVariant = () => {
                                 <Checkbox
                                     size="small"
                                     checked={value.checkBoxState === "checked"}
-                                    onChange={handleChangeState}
+                                    onChange={(event) => handleChangeState(event, idx)}
                                 />
                             }
                         />

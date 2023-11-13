@@ -39,6 +39,7 @@ export type LangType = {
         send: string;
         addToCart: string;
         filter: string;
+        page: string;
     };
     pages: {
         home: {
@@ -70,6 +71,15 @@ export type LangType = {
                     collection: string;
                 };
                 range: string;
+            };
+            result: {
+                showItemsOf: string;
+            };
+            order: {
+                newest: string;
+                oldest: string;
+                priceHighToLow: string;
+                priceLowToHigh: string;
             };
         };
         p404: {

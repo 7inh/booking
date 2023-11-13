@@ -91,8 +91,14 @@ const Paging: React.FC<PagingProps> = ({ page, totalItems, itemsPerPage, onPageC
                     }}
                     sx={{
                         width: "70px",
+                        "& .MuiOutlinedInput-root": {
+                            "& fieldset": {
+                                borderRadius: "1px",
+                            },
+                        },
                         input: {
                             pr: "4px !important",
+                            px: 1,
                         },
                     }}
                 />
@@ -111,12 +117,14 @@ const Paging: React.FC<PagingProps> = ({ page, totalItems, itemsPerPage, onPageC
                             key={uuidv4()}
                             sx={{
                                 fontSize: "16px !important",
+                                border: "0.5px solid",
+                                borderColor: currentPage === page ? "primary.main" : "grey.400",
                                 bgcolor: currentPage === page ? "primary.main" : "inherit",
-                                color: currentPage === page ? "white" : "inherit",
+                                color: currentPage === page ? "white" : "primary.dark",
                                 minWidth: "32px",
                                 minHeight: "32px",
-                                borderRadius: "4px",
-                                fontWeight: 200,
+                                borderRadius: "32px",
+                                fontWeight: 400,
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",

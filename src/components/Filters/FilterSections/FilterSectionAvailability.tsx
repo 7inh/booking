@@ -23,15 +23,12 @@ const FilterSectionAvailability = () => {
     ]);
 
     const handleChangeState = useCallback(
-        (event: React.ChangeEvent<HTMLInputElement>) => {
+        (event: React.ChangeEvent<HTMLInputElement>, idx: number) => {
             const { checked } = event.target;
             setAvailabilityValue((prev) => {
-                return prev.map((value) => {
-                    return {
-                        ...value,
-                        checkBoxState: checked ? "checked" : "unchecked",
-                    };
-                });
+                const newState = [...prev];
+                newState[idx].checkBoxState = checked ? "checked" : "unchecked";
+                return newState;
             });
         },
         [setAvailabilityValue]
@@ -40,7 +37,7 @@ const FilterSectionAvailability = () => {
     return (
         <FilterSectionBase title={t("pages.shop.filter.availability")}>
             <BoxVertical>
-                {availabilityValue.map((value) => {
+                {availabilityValue.map((value, idx) => {
                     return (
                         <FormControlLabel
                             key={value.key}
@@ -49,7 +46,7 @@ const FilterSectionAvailability = () => {
                                 <Checkbox
                                     size="small"
                                     checked={value.checkBoxState === "checked"}
-                                    onChange={handleChangeState}
+                                    onChange={(event) => handleChangeState(event, idx)}
                                 />
                             }
                         />

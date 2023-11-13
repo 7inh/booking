@@ -41,6 +41,7 @@ export const vi: LangType = {
         send: "Gửi",
         addToCart: "Thêm vào giỏ hàng",
         filter: "Lọc",
+        page: "Trang",
     },
     pages: {
         home: {
@@ -73,6 +74,15 @@ export const vi: LangType = {
                     collection: "Sưu tầm",
                 },
                 range: "đến",
+            },
+            result: {
+                showItemsOf: "Hiển thị %{from}-%{to} trong số %{total} sản phẩm",
+            },
+            order: {
+                newest: "Mới nhất",
+                oldest: "Cũ nhất",
+                priceHighToLow: "Giá: Cao đến thấp",
+                priceLowToHigh: "Giá: Thấp đến cao",
             },
         },
         p404: {

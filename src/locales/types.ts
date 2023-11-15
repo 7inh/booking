@@ -38,6 +38,7 @@ export type LangType = {
         cart: string;
         send: string;
         addToCart: string;
+        buyNow: string;
         filter: string;
         page: string;
     };

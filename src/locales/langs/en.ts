@@ -46,6 +46,7 @@ export const en: LangType = {
         cart: "Cart",
         send: "Send",
         addToCart: "Add to cart",
+        buyNow: "Buy now",
         filter: "Filter",
         page: "Page",
     },

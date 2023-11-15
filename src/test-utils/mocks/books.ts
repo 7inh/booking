@@ -1,4 +1,4 @@
-import { Book } from "src/common/types";
+import { Book, BookDetail } from "src/common/types";
 
 export const book1: Book[] = [
     {
@@ -50,3 +50,11 @@ export const book1: Book[] = [
         price: 100,
     },
 ];
+
+export const book2: BookDetail = {
+    id: "1",
+    name: "Isekai Tensei Soudouki",
+    thumbnail: "https://picsum.photos/200/300",
+    price: 100000,
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+};

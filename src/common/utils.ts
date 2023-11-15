@@ -1,6 +1,5 @@
 import groupBy from "lodash/groupBy";
 import { DateTime } from "luxon";
-import { Transaction, User } from "src/common/types";
 import { LocaleType } from "src/locales/types";
 
 export function formatDateTime(date: Date) {
@@ -148,19 +147,6 @@ export const getLocale = (locales?: string): LocaleType => {
     return "en";
 };
 
-export const getBotLevelName = (level: number) => {
-    switch (level) {
-        case 1:
-            return "owner";
-        case 2:
-            return "organization";
-        case 3:
-            return "kamiStore";
-        default:
-            return false;
-    }
-};
-
 export const getLanguageName = (lang: string) => {
     switch (lang.toLowerCase()) {
         case "vietnamese": {
@@ -172,38 +158,6 @@ export const getLanguageName = (lang: string) => {
         default:
             return lang;
     }
-};
-
-export const isAllowPublish = (user: User, organizeId?: string, groupId?: string) => {
-    if (["ADMIN", "CREATOR"].includes(user.roles)) return true;
-
-    if (!organizeId) return false;
-
-    const orgRole = user.orgRoles?.find((org) => org.organizationId === organizeId);
-    if (orgRole) {
-        const [role] = orgRole.roles;
-        if (["ADMIN", "CREATOR"].includes(role)) return true;
-    }
-
-    if (!groupId) return false;
-
-    const groupRole = orgRole?.groupInfo?.find((group) => group.groupId === groupId);
-    if (groupRole) {
-        const [role] = groupRole.roles;
-        if (["ADMIN", "CREATOR"].includes(role)) return true;
-    }
-
-    return false;
-};
-
-export const isAllowPublishToStore = (user: User, organizeId: string) => {
-    const orgRole = user.orgRoles?.find((org) => org.organizationId === organizeId);
-    if (orgRole) {
-        const [role] = orgRole.roles;
-        return role === "ADMIN";
-    }
-
-    return false;
 };
 
 export const downloadImage = (src: string, fileName: string) => {
@@ -234,16 +188,6 @@ export const getUrlParams = (url: string) => {
     return params;
 };
 
-export const getChatErrorCode = (response: any) => {
-    try {
-        const { success, message } = JSON.parse(response);
-        if (success) return null;
-        const { code } = JSON.parse(message);
-        return code;
-    } catch (error) {
-        return null;
-    }
-};
 export const randomColor = () => {
     let color;
     do {
@@ -294,51 +238,16 @@ export const capitalizeWords = (str: string) => {
         .join(" ");
 };
 
-export const getExpireDate = (locales = "en") => {
-    const today = DateTime.now();
-    const expireDate = today.plus({ month: 1 });
-    if (locales === "vi") return expireDate.setLocale("vi").toFormat("dd 'tháng' MM, yyyy");
-    return expireDate.toFormat("MMMM dd, yyyy");
-};
-
-export const calculateExpireTime = ({
-    remainNum,
-    remainType,
-}: {
-    remainNum: number;
-    remainType: "months" | "days";
-}) => {
-    const today = DateTime.now();
-    const expireTime = today.plus({ [remainType]: remainNum });
-
-    return expireTime;
-};
-
 export const toTimeString = (locales = "en", expireTimeFormat: DateTime) => {
     if (locales === "vi") return expireTimeFormat.setLocale("vi").toFormat("dd 'tháng' MM, yyyy");
     return expireTimeFormat.toFormat("MMMM dd, yyyy");
 };
 
-export const groupTransactionByCreateTime = (
-    transactions: Transaction[],
-    locales = "vi"
-): { [key: string]: Transaction[] } & { today?: Transaction[]; yesterday?: Transaction[] } => {
-    const today = DateTime.now();
-    const yesterday = today.minus({ days: 1 });
-
-    const getDateKey = (transaction: Transaction): string => {
-        const createTime = DateTime.fromFormat(transaction.createTime, "dd/MM/yyyy HH:mm:ss");
-        if (createTime.hasSame(today, "day")) return "today";
-        if (createTime.hasSame(yesterday, "day")) return "yesterday";
-        return toTimeString(locales, createTime);
-    };
-
-    const group = groupBy(transactions, getDateKey);
-
-    return group;
-};
-
 export const getOperatorSymbol = (value: number) => {
     if (value >= 0) return "+";
     return "";
+};
+
+export const addCommas = (value: number) => {
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };

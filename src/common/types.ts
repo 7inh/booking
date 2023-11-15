@@ -175,6 +175,10 @@ export interface Book {
     price: number;
 }
 
+export interface BookDetail extends Book {
+    description: string;
+}
+
 export interface BookDataCustom {
     key: string;
     name: string;

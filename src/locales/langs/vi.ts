@@ -40,6 +40,7 @@ export const vi: LangType = {
         cart: "Giỏ hàng",
         send: "Gửi",
         addToCart: "Thêm vào giỏ hàng",
+        buyNow: "Mua ngay",
         filter: "Lọc",
         page: "Trang",
     },

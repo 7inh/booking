@@ -16,6 +16,7 @@ import UnsavedChangesProvider from "src/providers/UnsavedChangesProvider";
 import "./index.css";
 import MainLayout from "src/layouts/MainLayout";
 import Shop from "src/pages/Shop/Shop";
+import Book from "src/pages/Book/Book";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
                     {
                         path: "/shop",
                         element: <Shop />,
+                    },
+                    {
+                        path: "/book/:id",
+                        element: <Book />,
                     },
                 ],
             },

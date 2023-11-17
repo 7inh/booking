@@ -1,9 +1,6 @@
 import { AxiosError } from "axios";
 import { useMutation, useQuery } from "react-query";
-import auth from "src/common/instances/firebaseAuth-instance";
-import instance from "src/common/instances/instance";
-import { extractResponseToLoginData, updateInstanceToken } from "src/common/internals";
-import { clearAllStorage, isRequestSuccessful } from "src/common/utils";
+import { clearAllStorage } from "src/common/utils";
 
 export type ServiceRequiredDefinition<T = any> = Required<T>;
 
@@ -74,27 +71,7 @@ export function createQueryService<S extends ServiceMap>(service: S) {
             onError: async (error: AxiosError) => {
                 if (error.response?.status === 401) {
                     try {
-                        auth.onAuthStateChanged((user) => {
-                            if (user) {
-                                user.getIdToken().then(async (idToken) => {
-                                    const response = await instance.post("/auth/verify_token", {
-                                        token: idToken,
-                                    });
-
-                                    if (isRequestSuccessful(response)) {
-                                        updateInstanceToken(
-                                            extractResponseToLoginData(response).token
-                                        );
-                                    } else {
-                                        clearAllStorage();
-                                        window.location.href = "/auth/login";
-                                    }
-                                });
-                            } else {
-                                clearAllStorage();
-                                window.location.href = "/auth/login";
-                            }
-                        });
+                        // TODO: implement refresh token
                     } catch (error) {
                         setTimeout(() => {
                             clearAllStorage();

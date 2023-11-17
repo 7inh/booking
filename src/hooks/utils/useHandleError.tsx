@@ -1,6 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
-import DialogMaximumVerify from "src/components/Dialogs/DialogMaximumVerify";
-import { useBoolean } from "src/hooks/utils/useBoolean";
+import { useCallback } from "react";
 import useSnackBar from "src/hooks/utils/useSnackBar";
 import useTranslation from "src/hooks/utils/useTranslation";
 
@@ -12,16 +10,9 @@ export const getErrorCode = (error: any) => {
     }
 };
 
-const errorDialogMap = {
-    MAXIMUM_FAILED: DialogMaximumVerify,
-};
-
 const useHandleError = () => {
     const t = useTranslation();
     const snackbar = useSnackBar();
-
-    const openDialog = useBoolean(false);
-    const [currentErrorCode, setCurrentErrorCode] = useState<string | null>(null);
 
     const handleShowSnackBar = useCallback(
         (errorCode: string) => {
@@ -43,27 +34,13 @@ const useHandleError = () => {
                 });
                 return;
             }
-            if (errorCode === "MAXIMUM_FAILED") {
-                setCurrentErrorCode(errorCode);
-                openDialog.onTrue();
-                return;
-            }
             handleShowSnackBar(errorCode);
         },
-        [handleShowSnackBar, openDialog, snackbar, t]
+        [handleShowSnackBar, snackbar, t]
     );
-
-    const errorDialog = useMemo(() => {
-        if (!currentErrorCode || !(currentErrorCode in errorDialogMap)) return null;
-
-        const ErrorDialog = errorDialogMap[currentErrorCode as keyof typeof errorDialogMap];
-
-        return <ErrorDialog open={openDialog.value} onClose={() => openDialog.onFalse()} />;
-    }, [currentErrorCode, openDialog]);
 
     return {
         handleError,
-        errorDialog,
     };
 };
 

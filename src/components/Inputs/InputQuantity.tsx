@@ -8,7 +8,7 @@ import useTranslation from "src/hooks/utils/useTranslation";
 
 export interface InputQuantityProps {}
 
-const InputQuantity = (props: InputQuantityProps) => {
+const InputQuantity = () => {
     const t = useTranslation();
 
     const [value, setValue] = useState(1);

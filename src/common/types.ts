@@ -170,13 +170,28 @@ export interface GiftType {
 
 export interface Book {
     id: string;
-    name: string;
+    title: string;
     thumbnail: string;
     price: number;
 }
 
 export interface BookDetail extends Book {
     description: string;
+    publisher: string;
+    publishDate: string;
+    author: string;
+    height: number;
+    width: number;
+    length: number;
+    weight: number;
+    quantity: number;
+    sold: number;
+    pages: number;
+    format: string;
+    language: string;
+    availability: "available" | "pre-order";
+    variant: "once" | "combo" | "full-set";
+    rare: "normal" | "special" | "limited" | "collection";
 }
 
 export interface BookDataCustom {

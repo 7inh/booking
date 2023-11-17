@@ -1,4 +1,5 @@
 import { PAGE_MAX_WIDTH } from "src/common/const";
+import BookDetail from "src/components/Book/BookDetail";
 import BoxBase from "src/components/Boxs/BoxBase";
 import Breadcrumb from "src/components/Breadcrumb/Breadcrumb";
 import Overview from "src/pages/Book/Overview";
@@ -31,6 +32,10 @@ const Book = () => {
             >
                 <BoxBase mx={1}>
                     <Overview book={book} />
+                    <br />
+                    <br />
+                    <br />
+                    <BookDetail book={book} />
                 </BoxBase>
             </BoxBase>
         </>

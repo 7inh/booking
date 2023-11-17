@@ -1,4 +1,4 @@
-import AddBoxIcon from "@mui/icons-material/AddBox";
+import AddBoxSharpIcon from "@mui/icons-material/AddBoxSharp";
 import CardMedia from "@mui/material/CardMedia";
 import { BOOK_ITEM_HEIGHT, BOOK_ITEM_WIDTH } from "src/common/const";
 import { Book } from "src/common/types";
@@ -54,12 +54,12 @@ const BookItem = (props: BookItemProps) => {
                     }}
                 >
                     <BoxBase>
-                        <TypographyBase variant="h6">{book.name}</TypographyBase>
+                        <TypographyBase variant="h6">{book.title}</TypographyBase>
                         <TypographyBase variant="h6" color="primary.main">
                             {book.price}₫
                         </TypographyBase>
                     </BoxBase>
-                    <AddBoxIcon
+                    <AddBoxSharpIcon
                         fontSize="large"
                         sx={{
                             "&:hover": {

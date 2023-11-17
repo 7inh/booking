@@ -20,7 +20,7 @@ const Overview = ({ book }: OverviewProps) => {
             }}
         >
             <BoxBase showBorder p={10}>
-                <CardMedia component="img" image={book.thumbnail} alt={book.name} />
+                <CardMedia component="img" image={book.thumbnail} alt={book.title} />
             </BoxBase>
             <BoxBase>
                 <TypographyBase
@@ -29,7 +29,7 @@ const Overview = ({ book }: OverviewProps) => {
                         fontWeight: 500,
                     }}
                 >
-                    {book.name}
+                    {book.title}
                 </TypographyBase>
                 <TypographyBase
                     sx={{
@@ -49,6 +49,8 @@ const Overview = ({ book }: OverviewProps) => {
                 >
                     {book.description}
                 </TypographyBase>
+                <br />
+
                 <br />
                 <BoxBase>
                     <BoxHorizon>

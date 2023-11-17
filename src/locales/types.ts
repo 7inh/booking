@@ -83,6 +83,25 @@ export type LangType = {
                 priceLowToHigh: string;
             };
         };
+        book: {
+            detail: string;
+            publisher: string;
+            publishDate: string;
+            language: string;
+            format: string;
+            pages: string;
+            height: string;
+            width: string;
+            length: string;
+            weight: string;
+            availability: string;
+            dimensions: string;
+            variant: string;
+            rare: string;
+            quantity: string;
+            sold: string;
+            author: string;
+        };
         p404: {
             title: string;
             subTitle: string;

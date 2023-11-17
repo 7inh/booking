@@ -89,7 +89,7 @@ const RandomBook = () => {
                                 }}
                             >
                                 <TypographyBase variant="h2" fontWeight="bold">
-                                    {currentSelected.name}
+                                    {currentSelected.title}
                                 </TypographyBase>
                                 <TypographyBase
                                     fontWeight="400"

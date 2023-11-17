@@ -4,7 +4,6 @@ import PopularCollection from "src/components/Boardcasts.tsx/PopularCollection";
 import RandomBook from "src/components/Boardcasts.tsx/RandomBook";
 import UpcomingCollection from "src/components/Boardcasts.tsx/UpcomingCollection";
 import BoxBase from "src/components/Boxs/BoxBase";
-import Footer from "src/components/Footer/Footer";
 import Branding from "src/pages/Landing/Branding";
 
 const Landing = () => {
@@ -16,7 +15,6 @@ const Landing = () => {
             <PopularCollection />
             <NewestCollection />
             <UpcomingCollection />
-            <Footer />
         </BoxBase>
     );
 };

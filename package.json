@@ -1,7 +1,8 @@
 {
-  "name": "kamibrain-web",
+  "name": "booking",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://github.com/7inh/7inh.github.io",
   "scripts": {
     "dev": "vite --open http://localhost:8089",
     "test": "jest",

@@ -91,9 +91,7 @@ const CheckOut = () => {
                         >
                             {t("pages.checkout.checkoutInfo")}
                         </TypographyBase>
-                        <BoxBase>
-                            <FormCheckOut />
-                        </BoxBase>
+                        <FormCheckOut />
                         <ButtonBase fullWidth label={t("pages.checkout.submit")}></ButtonBase>
                         <br />
                         <br />

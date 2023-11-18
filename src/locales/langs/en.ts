@@ -58,6 +58,7 @@ export const en: LangType = {
     },
     pages: {
         home: {
+            title: "Home",
             branding: {
                 title: "Welcome to our store",
                 subTitle:
@@ -66,6 +67,7 @@ export const en: LangType = {
             },
         },
         shop: {
+            title: "Shop",
             filter: {
                 price: "Price",
                 availability: "Availability",
@@ -99,6 +101,7 @@ export const en: LangType = {
             },
         },
         book: {
+            title: "Book",
             detail: "Detail",
             publisher: "Publisher",
             availability: "Availability",
@@ -116,6 +119,15 @@ export const en: LangType = {
             weight: "Weight",
             width: "Width",
             author: "Author",
+        },
+        cart: {
+            title: "Cart",
+            yourCart: "Your cart",
+            billInfo: "Billing information",
+            subTotal: "Subtotal",
+            shipping: "Shipping fee",
+            total: "Total",
+            processToCheckout: "Process to checkout",
         },
         p404: {
             title: "404",

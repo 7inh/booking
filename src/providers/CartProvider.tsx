@@ -54,14 +54,31 @@ const CartProvider = ({ children }: CartProviderProps) => {
         localStorage.removeItem("cart");
     }, [setState]);
 
+    const updateCart = useCallback(
+        (id: string, quantity: number) => {
+            const index = state.items.findIndex((i) => i.book.id === id);
+            if (index !== -1) {
+                const newItems = [...state.items];
+                newItems[index].quantity = quantity;
+                setState((state) => ({
+                    ...state,
+                    items: newItems,
+                }));
+                localStorage.setItem("cart", JSON.stringify(newItems));
+            }
+        },
+        [state.items]
+    );
+
     const value = useMemo(
         () => ({
             ...state,
             addToCart,
             removeFromCart,
             clearCart,
+            updateCart,
         }),
-        [state, addToCart, removeFromCart, clearCart]
+        [state, addToCart, removeFromCart, clearCart, updateCart]
     );
 
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

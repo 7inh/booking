@@ -50,6 +50,7 @@ export type LangType = {
     };
     pages: {
         home: {
+            title: string;
             branding: {
                 title: string;
                 subTitle: string;
@@ -57,6 +58,7 @@ export type LangType = {
             };
         };
         shop: {
+            title: string;
             filter: {
                 price: string;
                 availability: string;
@@ -90,6 +92,7 @@ export type LangType = {
             };
         };
         book: {
+            title: string;
             detail: string;
             publisher: string;
             publishDate: string;
@@ -107,6 +110,15 @@ export type LangType = {
             quantity: string;
             sold: string;
             author: string;
+        };
+        cart: {
+            title: string;
+            yourCart: string;
+            billInfo: string;
+            subTotal: string;
+            shipping: string;
+            total: string;
+            processToCheckout: string;
         };
         p404: {
             title: string;

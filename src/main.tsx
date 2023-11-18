@@ -16,6 +16,7 @@ import MainLayout from "src/layouts/MainLayout";
 import Shop from "src/pages/Shop/Shop";
 import Book from "src/pages/Book/Book";
 import CartProvider from "src/providers/CartProvider";
+import Cart from "src/pages/Cart/Cart";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
                     {
                         path: "/book/:id",
                         element: <Book />,
+                    },
+                    {
+                        path: "/cart",
+                        element: <Cart />,
                     },
                 ],
             },

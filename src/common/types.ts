@@ -201,6 +201,6 @@ export interface BookDataCustom {
 }
 
 export interface CartItem {
-    book: BookDetail;
+    book: Book;
     quantity: number;
 }

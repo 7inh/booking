@@ -52,6 +52,7 @@ export const vi: LangType = {
     },
     pages: {
         home: {
+            title: "Trang chủ",
             branding: {
                 title: "Manga & Novel store",
                 subTitle:
@@ -60,6 +61,7 @@ export const vi: LangType = {
             },
         },
         shop: {
+            title: "Cửa hàng",
             filter: {
                 price: "Giá",
                 availability: "Tình trạng",
@@ -93,6 +95,7 @@ export const vi: LangType = {
             },
         },
         book: {
+            title: "Đầu sách",
             detail: "Thông tin chi tiết",
             publisher: "Nhà xuất bản",
             availability: "Tình trạng",
@@ -110,6 +113,15 @@ export const vi: LangType = {
             weight: "Cân nặng",
             width: "Chiều rộng",
             author: "Tác giả",
+        },
+        cart: {
+            title: "Giỏ hàng",
+            yourCart: "Giỏ hàng của bạn",
+            billInfo: "Thông tin thanh toán",
+            subTotal: "Tạm tính",
+            shipping: "Phí vận chuyển",
+            total: "Tổng tiền",
+            processToCheckout: "Tiến hành thanh toán",
         },
         p404: {
             title: "404",

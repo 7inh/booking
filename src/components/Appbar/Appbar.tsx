@@ -16,6 +16,7 @@ import { useCartContext } from "src/contexts/CartContext";
 import { useResponsive } from "src/hooks/utils/useResponsive";
 import useTranslation from "src/hooks/utils/useTranslation";
 import CloseIcon from "@mui/icons-material/Close";
+import { useNavigate } from "react-router-dom";
 
 export interface AppBarProps {
     toggle?: () => void;
@@ -24,6 +25,7 @@ export interface AppBarProps {
 const AppBar = () => {
     const { items, removeFromCart } = useCartContext();
     const t = useTranslation();
+    const navigate = useNavigate();
 
     const mdDown = useResponsive("down", "md");
 
@@ -229,6 +231,9 @@ const AppBar = () => {
                                     }}
                                     fullWidth
                                     label={t("common.checkout")}
+                                    onClick={() => {
+                                        navigate("/cart");
+                                    }}
                                 ></ButtonBase>
                             </>
                         ) : (

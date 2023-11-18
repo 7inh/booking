@@ -9,6 +9,7 @@ interface CartContextType extends CartState {
     addToCart: (book: CartItem) => void;
     removeFromCart: (bookId: string) => void;
     clearCart: () => void;
+    updateCart: (bookId: string, quantity: number) => void;
 }
 
 const CartContext = createContext<CartContextType>({
@@ -16,6 +17,7 @@ const CartContext = createContext<CartContextType>({
     addToCart: () => {},
     removeFromCart: () => {},
     clearCart: () => {},
+    updateCart: () => {},
 });
 
 CartContext.displayName = "CartContext";

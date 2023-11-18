@@ -17,7 +17,7 @@ import Shop from "src/pages/Shop/Shop";
 import Book from "src/pages/Book/Book";
 import CartProvider from "src/providers/CartProvider";
 import Cart from "src/pages/Cart/Cart";
-import CheckOut from "src/pages/CheckOut/Checkout";
+import CheckOut from "src/pages/CheckOut/CheckOut";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([

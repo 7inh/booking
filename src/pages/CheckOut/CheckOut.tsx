@@ -62,24 +62,24 @@ const CheckOut = () => {
                 />
             </BoxHorizon>
             <Divider />
-            <BoxBase
+            <BoxHorizon
                 sx={{
-                    maxWidth: PAGE_MAX_WIDTH,
-                    mx: "auto",
+                    alignItems: "stretch",
                 }}
             >
+                <BoxBase flexGrow={1}></BoxBase>
                 <BoxHorizon
+                    width="100%"
+                    maxWidth={PAGE_MAX_WIDTH - 2 * 10}
                     sx={{
-                        alignItems: "stretch",
-                        mx: 1,
                         gap: 10,
+                        alignItems: "stretch",
                     }}
                 >
                     <BoxBase
-                        flexGrow={1}
                         sx={{
                             bgcolor: "rgb(255,255,255)",
-                            py: 2,
+                            flexGrow: 1,
                         }}
                     >
                         <TypographyBase
@@ -207,7 +207,8 @@ const CheckOut = () => {
                         </BoxBase>
                     </BoxBase>
                 </BoxHorizon>
-            </BoxBase>
+                <BoxBase flexGrow={1} bgcolor="rgb(250,250,250)"></BoxBase>
+            </BoxHorizon>
         </>
     );
 };

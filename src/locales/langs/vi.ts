@@ -123,6 +123,18 @@ export const vi: LangType = {
             total: "Tổng tiền",
             processToCheckout: "Tiến hành thanh toán",
         },
+        checkout: {
+            title: "Thanh toán",
+            checkoutInfo: "Thông tin thanh toán",
+            form: {
+                name: "Tên người nhận",
+                email: "Email",
+                phone: "Số điện thoại",
+                address: "Địa chỉ nhận hàng",
+                note: "Ghi chú cho người bán",
+            },
+            submit: "Đặt hàng",
+        },
         p404: {
             title: "404",
             subTitle: "Trang bạn đang tìm kiếm không tồn tại",

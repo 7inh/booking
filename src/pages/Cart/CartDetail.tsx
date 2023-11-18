@@ -8,6 +8,7 @@ import ButtonBase from "src/components/Buttons/ButtonBase";
 import TypographyBase from "src/components/Typographys/TypographyBase";
 import useTranslation from "src/hooks/utils/useTranslation";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useNavigate } from "react-router-dom";
 
 export interface CartDetailProps {
     items: CartItem[];
@@ -17,6 +18,7 @@ export interface CartDetailProps {
 
 const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
     const t = useTranslation();
+    const navigate = useNavigate();
 
     const cartTotalValue = useMemo(() => {
         return items.reduce((acc, item) => acc + item.book.price * item.quantity, 0);
@@ -272,7 +274,22 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
                         </TypographyBase>
                     </BoxBase>
                     <br />
-                    <ButtonBase fullWidth label={t("pages.cart.processToCheckout")}></ButtonBase>
+                    <ButtonBase
+                        fullWidth
+                        label={t("pages.cart.processToCheckout")}
+                        onClick={() => {
+                            navigate(
+                                {
+                                    pathname: "/checkout",
+                                },
+                                {
+                                    state: {
+                                        items: items,
+                                    },
+                                }
+                            );
+                        }}
+                    ></ButtonBase>
                 </BoxBase>
             </BoxBase>
         </BoxBase>

@@ -120,6 +120,18 @@ export type LangType = {
             total: string;
             processToCheckout: string;
         };
+        checkout: {
+            title: string;
+            checkoutInfo: string;
+            form: {
+                name: string;
+                email: string;
+                phone: string;
+                address: string;
+                note: string;
+            };
+            submit: string;
+        };
         p404: {
             title: string;
             subTitle: string;

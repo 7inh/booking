@@ -129,6 +129,18 @@ export const en: LangType = {
             total: "Total",
             processToCheckout: "Process to checkout",
         },
+        checkout: {
+            title: "Checkout",
+            checkoutInfo: "Checkout information",
+            form: {
+                name: "Recipient name",
+                email: "Email",
+                phone: "Phone number",
+                address: "Address",
+                note: "Note",
+            },
+            submit: "Submit",
+        },
         p404: {
             title: "404",
             subTitle: "Page not found",

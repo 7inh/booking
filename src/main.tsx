@@ -17,6 +17,7 @@ import Shop from "src/pages/Shop/Shop";
 import Book from "src/pages/Book/Book";
 import CartProvider from "src/providers/CartProvider";
 import Cart from "src/pages/Cart/Cart";
+import CheckOut from "src/pages/CheckOut/Checkout";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
                         element: <Cart />,
                     },
                 ],
+            },
+            {
+                path: "/checkout",
+                element: <CheckOut />,
             },
             {
                 path: "/500",

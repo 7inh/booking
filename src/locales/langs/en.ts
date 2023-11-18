@@ -52,6 +52,9 @@ export const en: LangType = {
         buyNow: "Buy now",
         filter: "Filter",
         page: "Page",
+        totalCart: "Total",
+        checkout: "Checkout",
+        emptyCart: "Your cart is empty",
     },
     pages: {
         home: {

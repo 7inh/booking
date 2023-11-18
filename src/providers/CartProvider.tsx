@@ -12,6 +12,17 @@ const CartProvider = ({ children }: CartProviderProps) => {
 
     const addToCart = useCallback(
         (item: any) => {
+            const index = state.items.findIndex((i) => i.book.id === item.book.id);
+            if (index !== -1) {
+                const newItems = [...state.items];
+                newItems[index].quantity += item.quantity;
+                setState((state) => ({
+                    ...state,
+                    items: newItems,
+                }));
+                localStorage.setItem("cart", JSON.stringify(newItems));
+                return;
+            }
             setState((state) => ({
                 ...state,
                 items: [...state.items, item],

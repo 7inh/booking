@@ -44,6 +44,9 @@ export type LangType = {
         buyNow: string;
         filter: string;
         page: string;
+        totalCart: string;
+        checkout: string;
+        emptyCart: string;
     };
     pages: {
         home: {

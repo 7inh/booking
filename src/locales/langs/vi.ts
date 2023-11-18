@@ -46,6 +46,9 @@ export const vi: LangType = {
         buyNow: "Mua ngay",
         filter: "Lọc",
         page: "Trang",
+        totalCart: "Tổng tiền",
+        checkout: "Thanh toán",
+        emptyCart: "Giỏ hàng trống",
     },
     pages: {
         home: {

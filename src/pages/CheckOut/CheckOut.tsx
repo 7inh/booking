@@ -87,6 +87,7 @@ const CheckOut = () => {
                                 fontSize: "24px",
                                 fontWeight: 600,
                                 mb: 2,
+                                mt: 3,
                             }}
                         >
                             {t("pages.checkout.checkoutInfo")}
@@ -103,6 +104,7 @@ const CheckOut = () => {
                             borderLeft: "1px solid rgb(224,224,224)",
                         }}
                     >
+                        <br />
                         {items.map((item) => {
                             return (
                                 <BoxHorizon

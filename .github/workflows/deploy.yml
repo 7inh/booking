@@ -30,6 +30,4 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: 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
-          publish_branch: gh-pages
-          publish_dir: ./dist
+          folder: dist

@@ -23,6 +23,12 @@ export type LangType = {
     success: {
         addToCart: string;
     };
+    error: {
+        somethingWentWrong: string;
+    };
+    message: {
+        backToHome: string;
+    };
     feature: {
         delivery: {
             title: string;
@@ -131,6 +137,13 @@ export type LangType = {
                 note: string;
             };
             submit: string;
+        };
+        about: {
+            title: string;
+            whatWeAre: {
+                title: string;
+                content: string;
+            };
         };
         p404: {
             title: string;

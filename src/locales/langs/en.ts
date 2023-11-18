@@ -28,6 +28,12 @@ export const en: LangType = {
     success: {
         addToCart: "Add to cart successfully",
     },
+    error: {
+        somethingWentWrong: "Something went wrong",
+    },
+    message: {
+        backToHome: "Back to home page",
+    },
     feature: {
         delivery: {
             title: "Free Delivery",
@@ -140,6 +146,14 @@ export const en: LangType = {
                 note: "Note",
             },
             submit: "Submit",
+        },
+        about: {
+            title: "About",
+            whatWeAre: {
+                title: "What we are",
+                content:
+                    "We are a team of designers and developers that create high quality HTML Template & Woocommerce, Shopify Theme.",
+            },
         },
         p404: {
             title: "404",

@@ -18,6 +18,7 @@ import CartProvider from "src/providers/CartProvider";
 import SnackbarProvider from "src/providers/SnackbarProvider";
 import TranslationProvider from "src/providers/TranslationProvider";
 import "./index.css";
+import About from "src/pages/About/About";
 
 const queryClient = new QueryClient();
 const router = createHashRouter([
@@ -47,6 +48,10 @@ const router = createHashRouter([
                     {
                         path: "/cart",
                         element: <Cart />,
+                    },
+                    {
+                        path: "/about",
+                        element: <About />,
                     },
                 ],
             },

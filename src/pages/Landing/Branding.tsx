@@ -1,4 +1,5 @@
 import { CardMedia } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { PAGE_MAX_WIDTH } from "src/common/const";
 import BoxBase from "src/components/Boxs/BoxBase";
 import ButtonBase from "src/components/Buttons/ButtonBase";
@@ -8,6 +9,7 @@ import useTranslation from "src/hooks/utils/useTranslation";
 
 const Branding = () => {
     const t = useTranslation();
+    const navigate = useNavigate();
 
     const mdDown = useResponsive("down", "md");
 
@@ -101,6 +103,9 @@ const Branding = () => {
                                 color: "secondary.main",
                                 boxShadow: "none",
                             },
+                        }}
+                        onClick={() => {
+                            navigate("/shop");
                         }}
                     />
                 </BoxBase>

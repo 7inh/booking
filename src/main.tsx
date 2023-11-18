@@ -9,10 +9,8 @@ import PageError403 from "src/pages/Error/403";
 import PageError404 from "src/pages/Error/404";
 import PageError500 from "src/pages/Error/500";
 import Landing from "src/pages/Landing/Landing";
-import NavProvider from "src/providers/NavProvider";
 import SnackbarProvider from "src/providers/SnackbarProvider";
 import TranslationProvider from "src/providers/TranslationProvider";
-import UnsavedChangesProvider from "src/providers/UnsavedChangesProvider";
 import "./index.css";
 import MainLayout from "src/layouts/MainLayout";
 import Shop from "src/pages/Shop/Shop";
@@ -61,15 +59,11 @@ ReactDOM.render(
     <React.StrictMode>
         <QueryClientProvider client={queryClient}>
             <ThemeProvider theme={theme}>
-                <UnsavedChangesProvider>
-                    <TranslationProvider>
-                        <SnackbarProvider>
-                            <NavProvider>
-                                <RouterProvider router={router} />
-                            </NavProvider>
-                        </SnackbarProvider>
-                    </TranslationProvider>
-                </UnsavedChangesProvider>
+                <TranslationProvider>
+                    <SnackbarProvider>
+                        <RouterProvider router={router} />
+                    </SnackbarProvider>
+                </TranslationProvider>
             </ThemeProvider>
         </QueryClientProvider>
     </React.StrictMode>,

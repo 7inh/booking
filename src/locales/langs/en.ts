@@ -25,6 +25,9 @@ export const en: LangType = {
                 "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.",
         },
     },
+    success: {
+        addToCart: "Add to cart successfully",
+    },
     feature: {
         delivery: {
             title: "Free Delivery",

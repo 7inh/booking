@@ -22,6 +22,9 @@ export const vi: LangType = {
             subTitle: "Danh sách các đầu sách sắp ra mắt",
         },
     },
+    success: {
+        addToCart: "Thêm vào giỏ hàng thành công",
+    },
     feature: {
         delivery: {
             title: "Giao hàng tận tay",

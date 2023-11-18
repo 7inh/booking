@@ -199,3 +199,8 @@ export interface BookDataCustom {
     name: string;
     checkBoxState: "checked" | "unchecked";
 }
+
+export interface CartItem {
+    book: BookDetail;
+    quantity: number;
+}

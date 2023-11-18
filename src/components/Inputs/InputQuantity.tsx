@@ -6,9 +6,11 @@ import ButtonBase from "src/components/Buttons/ButtonBase";
 import TypographyBase from "src/components/Typographys/TypographyBase";
 import useTranslation from "src/hooks/utils/useTranslation";
 
-export interface InputQuantityProps {}
+export interface InputQuantityProps {
+    onAddToCart: (quantity: number) => void;
+}
 
-const InputQuantity = () => {
+const InputQuantity = ({ onAddToCart }: InputQuantityProps) => {
     const t = useTranslation();
 
     const [value, setValue] = useState(1);
@@ -102,6 +104,9 @@ const InputQuantity = () => {
                 sx={{
                     fontWeight: 400,
                     textTransform: "uppercase",
+                }}
+                onClick={() => {
+                    onAddToCart(value);
                 }}
             ></ButtonBase>
             <ButtonBase

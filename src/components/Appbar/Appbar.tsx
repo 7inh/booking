@@ -1,7 +1,9 @@
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { AppBar as _AppBar } from "@mui/material";
+import { useMemo } from "react";
 import { PAGE_MAX_WIDTH } from "src/common/const";
+import { addCommas } from "src/common/utils";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import BoxVertical from "src/components/Boxs/BoxVertical";
@@ -9,6 +11,7 @@ import InputText from "src/components/Inputs/InputText";
 import Logo from "src/components/Logo/Logo";
 import SelectLanguage from "src/components/Selects/SelectLanguage";
 import TypographyBase from "src/components/Typographys/TypographyBase";
+import { useCartContext } from "src/contexts/CartContext";
 import { useResponsive } from "src/hooks/utils/useResponsive";
 import useTranslation from "src/hooks/utils/useTranslation";
 
@@ -17,9 +20,14 @@ export interface AppBarProps {
 }
 
 const AppBar = () => {
+    const { items } = useCartContext();
     const t = useTranslation();
 
     const mdDown = useResponsive("down", "md");
+
+    const cartTotalValue = useMemo(() => {
+        return items.reduce((acc, item) => acc + item.book.price * item.quantity, 0);
+    }, [items]);
 
     return (
         <_AppBar
@@ -73,10 +81,10 @@ const AppBar = () => {
                         <ShoppingBagOutlinedIcon fontSize="large" />
                         <BoxVertical>
                             <TypographyBase variant="caption">
-                                {t("common.cart")} (0)
+                                {t("common.cart")} ({items.length})
                             </TypographyBase>
                             <TypographyBase variant="caption" lineHeight={1}>
-                                0.0₫
+                                {addCommas(cartTotalValue)}₫
                             </TypographyBase>
                         </BoxVertical>
                     </BoxHorizon>

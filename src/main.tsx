@@ -15,6 +15,7 @@ import "./index.css";
 import MainLayout from "src/layouts/MainLayout";
 import Shop from "src/pages/Shop/Shop";
 import Book from "src/pages/Book/Book";
+import CartProvider from "src/providers/CartProvider";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -23,7 +24,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <MainLayout />,
+                element: (
+                    <CartProvider>
+                        <MainLayout />
+                    </CartProvider>
+                ),
                 children: [
                     {
                         path: "/",

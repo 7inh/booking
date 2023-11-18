@@ -20,6 +20,9 @@ export type LangType = {
             subTitle: string;
         };
     };
+    success: {
+        addToCart: string;
+    };
     feature: {
         delivery: {
             title: string;

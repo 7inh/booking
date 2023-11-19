@@ -30,7 +30,7 @@ const AppBar = () => {
     const mdDown = useResponsive("down", "md");
 
     const cartTotalValue = useMemo(() => {
-        return items.reduce((acc, item) => acc + item.book.current_price * item.quantity, 0);
+        return items.reduce((acc, item) => acc + item.book.current_price * item.quantity, 0) || 0;
     }, [items]);
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -131,125 +131,130 @@ const AppBar = () => {
                             horizontal: "right",
                         }}
                     >
-                        <TypographyBase
-                            sx={{
-                                fontWeight: 400,
-                                fontSize: "1.2rem",
-                                mb: 1,
-                            }}
-                        >
-                            {t("common.cart")} ({items.length})
-                        </TypographyBase>
-                        <Divider />
-                        <br />
-                        {items.map((item) => {
-                            return (
-                                <BoxHorizon
-                                    key={item.book.id}
-                                    sx={{
-                                        width: "100%",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                        mb: 1,
-                                    }}
-                                >
+                        <BoxBase>
+                            <TypographyBase
+                                sx={{
+                                    fontWeight: 400,
+                                    fontSize: "1.2rem",
+                                    mb: 1,
+                                }}
+                            >
+                                {t("common.cart")} ({items.length})
+                            </TypographyBase>
+                            <Divider />
+                            <br />
+                            {items.map((item) => {
+                                return (
                                     <BoxHorizon
-                                        gap={1}
+                                        key={item.book.id}
                                         sx={{
-                                            alignItems: "stretch",
                                             width: "100%",
+                                            justifyContent: "space-between",
+                                            alignItems: "center",
+                                            mb: 1,
                                         }}
                                     >
-                                        <CardMedia
-                                            component="img"
-                                            src={item.book.cover}
+                                        <BoxHorizon
+                                            gap={1}
                                             sx={{
-                                                width: "50px",
-                                                height: "50px",
-                                                objectFit: "scale-down",
-                                                p: 0.5,
+                                                alignItems: "stretch",
+                                                width: "100%",
                                             }}
-                                        />
-                                        <BoxVertical gap={1} flexGrow={1}>
-                                            <TypographyBase variant="caption">
-                                                {item.book.title}
-                                            </TypographyBase>
-                                            <BoxHorizon gap={1}>
-                                                <TypographyBase
-                                                    variant="caption"
-                                                    lineHeight={1}
-                                                    sx={{
-                                                        bgcolor: "grey.300",
-                                                        p: 0.5,
-                                                        px: 1,
-                                                    }}
-                                                >
-                                                    {item.quantity}
+                                        >
+                                            <CardMedia
+                                                component="img"
+                                                src={item.book.cover}
+                                                sx={{
+                                                    width: "50px",
+                                                    height: "50px",
+                                                    objectFit: "scale-down",
+                                                    p: 0.5,
+                                                }}
+                                            />
+                                            <BoxVertical gap={1} flexGrow={1}>
+                                                <TypographyBase variant="caption">
+                                                    {item.book.title}
                                                 </TypographyBase>
-                                                <TypographyBase variant="caption" lineHeight={1}>
-                                                    {addCommas(item.book.current_price)}₫
-                                                </TypographyBase>
-                                            </BoxHorizon>
-                                        </BoxVertical>
-                                        <CloseIcon
-                                            fontSize="small"
-                                            sx={{
-                                                cursor: "pointer",
-                                                color: "primary.dark",
-                                                mt: 0.5,
-                                            }}
-                                            onClick={() => {
-                                                removeFromCart(item.book.id);
-                                            }}
-                                        />
+                                                <BoxHorizon gap={1}>
+                                                    <TypographyBase
+                                                        variant="caption"
+                                                        lineHeight={1}
+                                                        sx={{
+                                                            bgcolor: "grey.300",
+                                                            p: 0.5,
+                                                            px: 1,
+                                                        }}
+                                                    >
+                                                        {item.quantity}
+                                                    </TypographyBase>
+                                                    <TypographyBase
+                                                        variant="caption"
+                                                        lineHeight={1}
+                                                    >
+                                                        {addCommas(item.book.current_price)}₫
+                                                    </TypographyBase>
+                                                </BoxHorizon>
+                                            </BoxVertical>
+                                            <CloseIcon
+                                                fontSize="small"
+                                                sx={{
+                                                    cursor: "pointer",
+                                                    color: "primary.dark",
+                                                    mt: 0.5,
+                                                }}
+                                                onClick={() => {
+                                                    removeFromCart(item.book.id);
+                                                }}
+                                            />
+                                        </BoxHorizon>
                                     </BoxHorizon>
-                                </BoxHorizon>
-                            );
-                        })}
-                        {items.length ? (
-                            <>
-                                <br />
-                                <Divider />
-                                <BoxHorizon
-                                    sx={{
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                        my: 1,
-                                    }}
-                                >
-                                    <TypographyBase variant="body1">
-                                        {t("common.totalCart")}
+                                );
+                            })}
+                            {items.length ? (
+                                <>
+                                    <br />
+                                    <Divider />
+                                    <BoxHorizon
+                                        sx={{
+                                            justifyContent: "space-between",
+                                            alignItems: "center",
+                                            my: 1,
+                                        }}
+                                    >
+                                        <TypographyBase variant="body1">
+                                            {t("common.totalCart")}
+                                        </TypographyBase>
+                                        <TypographyBase variant="body2" lineHeight={1}>
+                                            {addCommas(cartTotalValue)}₫
+                                        </TypographyBase>
+                                    </BoxHorizon>
+                                    <Divider />
+                                    <ButtonBase
+                                        sx={{
+                                            mt: 2,
+                                        }}
+                                        fullWidth
+                                        label={t("common.checkout")}
+                                        onClick={() => {
+                                            navigate("/cart");
+                                        }}
+                                    ></ButtonBase>
+                                </>
+                            ) : (
+                                <BoxBase>
+                                    <TypographyBase
+                                        sx={{
+                                            color: "grey.500",
+                                            py: 2,
+                                        }}
+                                        variant="body2"
+                                        textAlign="center"
+                                    >
+                                        {t("common.emptyCart")}
                                     </TypographyBase>
-                                    <TypographyBase variant="body2" lineHeight={1}>
-                                        {addCommas(cartTotalValue)}₫
-                                    </TypographyBase>
-                                </BoxHorizon>
-                                <Divider />
-                                <ButtonBase
-                                    sx={{
-                                        mt: 2,
-                                    }}
-                                    fullWidth
-                                    label={t("common.checkout")}
-                                    onClick={() => {
-                                        navigate("/cart");
-                                    }}
-                                ></ButtonBase>
-                            </>
-                        ) : (
-                            <BoxBase>
-                                <TypographyBase
-                                    sx={{
-                                        color: "grey.500",
-                                        py: 2,
-                                    }}
-                                    variant="body2"
-                                    textAlign="center"
-                                >
-                                    {t("common.emptyCart")}
-                                </TypographyBase>
-                            </BoxBase>
-                        )}
+                                </BoxBase>
+                            )}
+                        </BoxBase>
                     </Menu>
                     <SelectLanguage />
                 </BoxHorizon>

@@ -1,5 +1,6 @@
 import AddBoxSharpIcon from "@mui/icons-material/AddBoxSharp";
 import CardMedia from "@mui/material/CardMedia";
+import { useNavigate } from "react-router-dom";
 import { BOOK_ITEM_HEIGHT, BOOK_ITEM_WIDTH } from "src/common/const";
 import { Book } from "src/common/types";
 import { addCommas } from "src/common/utils";
@@ -16,6 +17,8 @@ export interface BookItemProps {
 const BookItem = (props: BookItemProps) => {
     const { book } = props;
 
+    const navigate = useNavigate();
+
     const { addToCart } = useCartContext();
 
     return (
@@ -29,30 +32,34 @@ const BookItem = (props: BookItemProps) => {
                 },
                 position: "relative",
             }}
+            onClick={() => navigate(`/book/${book.id}`)}
         >
-            <BoxBase
-                sx={{
-                    bgcolor: "primary.main",
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    zIndex: 1,
-                    borderRadius: "0 0 0.5rem 0",
-                    minWidth: "50px",
-                }}
-            >
-                <TypographyBase
+            {book.discount !== "0%" ? (
+                <BoxBase
                     sx={{
-                        color: "white",
-                        fontSize: "18px",
-                        fontWeight: 400,
-                        p: 1,
-                        textAlign: "center",
+                        bgcolor: "primary.main",
+                        position: "absolute",
+                        top: 5,
+                        left: 5,
+                        zIndex: 1,
+                        borderRadius: "50px",
+                        minWidth: "50px",
                     }}
                 >
-                    {book.discount}
-                </TypographyBase>
-            </BoxBase>
+                    <TypographyBase
+                        sx={{
+                            color: "white",
+                            fontSize: "14px",
+                            px: 1,
+                            py: 0.25,
+                            fontWeight: 400,
+                            textAlign: "center",
+                        }}
+                    >
+                        {book.discount}
+                    </TypographyBase>
+                </BoxBase>
+            ) : null}
             <BoxCenter
                 sx={{
                     p: 5,

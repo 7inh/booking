@@ -61,6 +61,7 @@ export const en: LangType = {
         totalCart: "Total",
         checkout: "Checkout",
         emptyCart: "Your cart is empty",
+        updating: "Updating",
     },
     pages: {
         home: {
@@ -95,6 +96,10 @@ export const en: LangType = {
                     collection: "Collection",
                 },
                 range: "to",
+                formatList: {
+                    paperback: "Paperback",
+                    hardcover: "Hardcover",
+                },
             },
             result: {
                 showItemsOf: "Showing %{from}-%{to} of %{total} items",

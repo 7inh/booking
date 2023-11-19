@@ -11,6 +11,8 @@ export interface BookDetailProps {
 const BookDetail = ({ book }: BookDetailProps) => {
     const t = useTranslation();
 
+    // const updatingTranslate = useMemo(() => t("common.updating"), [t]);
+
     const renderDetail = useCallback((label: string, value: string) => {
         return (
             <BoxBase
@@ -60,26 +62,26 @@ const BookDetail = ({ book }: BookDetailProps) => {
 
             {renderDetail(t("pages.book.author"), book.author)}
             {renderDetail(t("pages.book.publisher"), book.publisher)}
-            {renderDetail(t("pages.book.publishDate"), book.publishDate)}
-            {renderDetail(t("pages.book.language"), book.language)}
+            {/* {renderDetail(t("pages.book.publishDate"), book.publishDate)} */}
+            {/* {renderDetail(t("pages.book.language"), book.language)} */}
             {renderDetail(t("pages.book.quantity"), book.quantity.toString())}
-            {renderDetail(t("pages.book.sold"), book.sold.toString())}
-            {renderDetail(
+            {/* {renderDetail(t("pages.book.sold"), book.sold.toString())} */}
+            {/* {renderDetail(
                 t("pages.book.availability"),
                 t("pages.shop.filter.availabilityList." + book.availability)
-            )}
-            {renderDetail(t("pages.book.format"), book.format)}
+            )} */}
+            {renderDetail(t("pages.book.format"), t("pages.shop.filter.formatList." + book.format))}
             {renderDetail(t("pages.book.pages"), book.pages.toString())}
-            {renderDetail(
-                t("pages.book.dimensions"),
-                `${book.width} x ${book.height} x ${book.length} cm`
-            )}
-            {renderDetail(t("pages.book.weight"), `${book.weight} g`)}
-            {renderDetail(t("pages.book.rare"), t(`pages.shop.filter.rareList.${book.rare}`))}
-            {renderDetail(
+            {renderDetail(t("pages.book.dimensions"), `${book.size}`)}
+            {renderDetail(t("pages.book.weight"), `${book.weight}`)}
+            {/* {renderDetail(
+                t("pages.book.rare"),
+                book.rare ? t(`pages.shop.filter.rareList.${book.rare}`) : updatingTranslate
+            )} */}
+            {/* {renderDetail(
                 t("pages.book.variant"),
                 t(`pages.shop.filter.variantList.${book.variant}`)
-            )}
+            )} */}
         </BoxBase>
     );
 };

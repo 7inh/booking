@@ -53,6 +53,7 @@ export type LangType = {
         totalCart: string;
         checkout: string;
         emptyCart: string;
+        updating: string;
     };
     pages: {
         home: {
@@ -86,6 +87,10 @@ export type LangType = {
                     collection: string;
                 };
                 range: string;
+                formatList: {
+                    paperback: string;
+                    hardcover: string;
+                };
             };
             result: {
                 showItemsOf: string;

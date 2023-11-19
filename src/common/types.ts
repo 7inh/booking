@@ -182,9 +182,7 @@ export interface BookDetail extends Book {
     publisher: string;
     publishDate: string;
     author: string;
-    height: number;
-    width: number;
-    length: number;
+    size: string;
     weight: number;
     quantity: number;
     sold: number;

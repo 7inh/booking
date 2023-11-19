@@ -8,6 +8,7 @@ import Paging from "src/components/Paging/Paging";
 import SelectOrder from "src/components/Selects/SelectOrder";
 import TypographyBase from "src/components/Typographys/TypographyBase";
 import useGetItemPerPage from "src/hooks/useGetItemPerPage";
+import useGetItemTotal from "src/hooks/useGetItemTotal";
 import useTranslation from "src/hooks/utils/useTranslation";
 
 const FilterResult = () => {
@@ -20,6 +21,7 @@ const FilterResult = () => {
         page,
         perPage: 9,
     });
+    const { data: totalItems } = useGetItemTotal();
 
     return (
         <BoxBase height="100%" flexGrow={1}>
@@ -40,7 +42,7 @@ const FilterResult = () => {
                     {t("pages.shop.result.showItemsOf", {
                         from: 1,
                         to: 10,
-                        total: 100,
+                        total: totalItems,
                     })}
                 </TypographyBase>
                 <BoxBase>
@@ -66,7 +68,7 @@ const FilterResult = () => {
             <ListBook books={books} />
             <br />
             <Paging
-                totalItems={103}
+                totalItems={totalItems}
                 itemsPerPage={9}
                 page={page}
                 onPageChange={(page) => setPage(page)}

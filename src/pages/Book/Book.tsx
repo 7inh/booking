@@ -1,12 +1,15 @@
+import { useParams } from "react-router-dom";
 import { PAGE_MAX_WIDTH } from "src/common/const";
 import BookDetail from "src/components/Book/BookDetail";
 import BoxBase from "src/components/Boxs/BoxBase";
 import Breadcrumb from "src/components/Breadcrumb/Breadcrumb";
+import useGetItemById from "src/hooks/useGetItemById";
 import Overview from "src/pages/Book/Overview";
-import { book2 } from "src/test-utils/mocks/books";
 
 const Book = () => {
-    const book = book2;
+    const { id } = useParams<{ id: string }>();
+
+    const { data: book } = useGetItemById({ id: parseInt(id || "0") });
 
     return (
         <>
@@ -30,13 +33,15 @@ const Book = () => {
                     mb: 5,
                 }}
             >
-                <BoxBase mx={1}>
-                    <Overview book={book} />
-                    <br />
-                    <br />
-                    <br />
-                    <BookDetail book={book} />
-                </BoxBase>
+                {book ? (
+                    <BoxBase mx={1}>
+                        <Overview book={book} />
+                        <br />
+                        <br />
+                        <br />
+                        <BookDetail book={book} />
+                    </BoxBase>
+                ) : null}
             </BoxBase>
         </>
     );

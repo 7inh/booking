@@ -55,6 +55,7 @@ export const vi: LangType = {
         totalCart: "Tổng tiền",
         checkout: "Thanh toán",
         emptyCart: "Giỏ hàng trống",
+        updating: "Đang cập nhật",
     },
     pages: {
         home: {
@@ -89,6 +90,10 @@ export const vi: LangType = {
                     collection: "Sưu tầm",
                 },
                 range: "đến",
+                formatList: {
+                    paperback: "Bìa mềm",
+                    hardcover: "Bìa cứng",
+                },
             },
             result: {
                 showItemsOf: "Hiển thị %{from}-%{to} trong số %{total} sản phẩm",

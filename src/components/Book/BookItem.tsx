@@ -9,6 +9,8 @@ import BoxCenter from "src/components/Boxs/BoxCenter";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import TypographyBase from "src/components/Typographys/TypographyBase";
 import { useCartContext } from "src/contexts/CartContext";
+import useSnackBar from "src/hooks/utils/useSnackBar";
+import useTranslation from "src/hooks/utils/useTranslation";
 
 export interface BookItemProps {
     book: Book;
@@ -18,6 +20,8 @@ const BookItem = (props: BookItemProps) => {
     const { book } = props;
 
     const navigate = useNavigate();
+    const t = useTranslation();
+    const snackbar = useSnackBar();
 
     const { addToCart } = useCartContext();
 
@@ -121,12 +125,17 @@ const BookItem = (props: BookItemProps) => {
                                 transition: "all 0.3s ease 0s",
                             },
                         }}
-                        onClick={() =>
+                        onClick={(event) => {
+                            snackbar({
+                                message: t("success.addToCart"),
+                                severity: "success",
+                            });
                             addToCart({
                                 book,
                                 quantity: 1,
-                            })
-                        }
+                            });
+                            event.stopPropagation();
+                        }}
                     />
                 </BoxHorizon>
             </BoxBase>

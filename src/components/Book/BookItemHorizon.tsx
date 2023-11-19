@@ -35,7 +35,7 @@ const BookItemHorizon = (props: BookItemHorizonProps) => {
                 <BoxBase>
                     <CardMedia
                         component="img"
-                        src={book.thumbnail}
+                        src={book.cover}
                         sx={{
                             width: BOOK_ITEM_HORIZON_WIDTH,
                             height: BOOK_ITEM_HORIZON_HEIGHT,
@@ -50,7 +50,7 @@ const BookItemHorizon = (props: BookItemHorizonProps) => {
                 >
                     <TypographyBase variant="h6">{book.title}</TypographyBase>
                     <TypographyBase variant="h6" color="primary.main">
-                        {book.price}₫
+                        {book.current_price}₫
                     </TypographyBase>
                 </BoxVertical>
             </BoxHorizon>

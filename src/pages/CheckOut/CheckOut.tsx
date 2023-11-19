@@ -20,7 +20,7 @@ const CheckOut = () => {
     const items: CartItem[] = useMemo(() => state?.items || [], [state]);
 
     const cartTotalValue = useMemo(() => {
-        return items.reduce((acc, item) => acc + item.book.price * item.quantity, 0);
+        return items.reduce((acc, item) => acc + item.book.current_price * item.quantity, 0);
     }, [items]);
 
     const shippingFee = useMemo(() => {
@@ -117,7 +117,7 @@ const CheckOut = () => {
                                 >
                                     <CardMedia
                                         component="img"
-                                        src={item.book.thumbnail}
+                                        src={item.book.cover}
                                         alt={item.book.title}
                                         sx={{
                                             width: "40px",
@@ -147,11 +147,11 @@ const CheckOut = () => {
                                                 color: "rgb(117,117,117)",
                                             }}
                                         >
-                                            {addCommas(item.book.price)} x {item.quantity}
+                                            {addCommas(item.book.current_price)} x {item.quantity}
                                         </TypographyBase>
                                     </BoxBase>
                                     <TypographyBase variant="body2">
-                                        {addCommas(item.book.price * item.quantity)}
+                                        {addCommas(item.book.current_price * item.quantity)}
                                     </TypographyBase>
                                 </BoxHorizon>
                             );

@@ -30,7 +30,7 @@ const AppBar = () => {
     const mdDown = useResponsive("down", "md");
 
     const cartTotalValue = useMemo(() => {
-        return items.reduce((acc, item) => acc + item.book.price * item.quantity, 0);
+        return items.reduce((acc, item) => acc + item.book.current_price * item.quantity, 0);
     }, [items]);
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -162,7 +162,7 @@ const AppBar = () => {
                                     >
                                         <CardMedia
                                             component="img"
-                                            src={item.book.thumbnail}
+                                            src={item.book.cover}
                                             sx={{
                                                 width: "50px",
                                                 height: "50px",
@@ -187,7 +187,7 @@ const AppBar = () => {
                                                     {item.quantity}
                                                 </TypographyBase>
                                                 <TypographyBase variant="caption" lineHeight={1}>
-                                                    {addCommas(item.book.price)}₫
+                                                    {addCommas(item.book.current_price)}₫
                                                 </TypographyBase>
                                             </BoxHorizon>
                                         </BoxVertical>

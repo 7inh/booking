@@ -2,10 +2,12 @@ import AddBoxSharpIcon from "@mui/icons-material/AddBoxSharp";
 import CardMedia from "@mui/material/CardMedia";
 import { BOOK_ITEM_HEIGHT, BOOK_ITEM_WIDTH } from "src/common/const";
 import { Book } from "src/common/types";
+import { addCommas } from "src/common/utils";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxCenter from "src/components/Boxs/BoxCenter";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import TypographyBase from "src/components/Typographys/TypographyBase";
+import { useCartContext } from "src/contexts/CartContext";
 
 export interface BookItemProps {
     book: Book;
@@ -13,6 +15,9 @@ export interface BookItemProps {
 
 const BookItem = (props: BookItemProps) => {
     const { book } = props;
+
+    const { addToCart } = useCartContext();
+
     return (
         <BoxBase
             sx={{
@@ -22,8 +27,32 @@ const BookItem = (props: BookItemProps) => {
                     boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
                     transition: "all 0.3s ease 0s",
                 },
+                position: "relative",
             }}
         >
+            <BoxBase
+                sx={{
+                    bgcolor: "primary.main",
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    zIndex: 1,
+                    borderRadius: "0 0 0.5rem 0",
+                    minWidth: "50px",
+                }}
+            >
+                <TypographyBase
+                    sx={{
+                        color: "white",
+                        fontSize: "18px",
+                        fontWeight: 400,
+                        p: 1,
+                        textAlign: "center",
+                    }}
+                >
+                    {book.discount}
+                </TypographyBase>
+            </BoxBase>
             <BoxCenter
                 sx={{
                     p: 5,
@@ -31,7 +60,7 @@ const BookItem = (props: BookItemProps) => {
             >
                 <CardMedia
                     component="img"
-                    src={book.thumbnail}
+                    src={book.cover}
                     sx={{
                         overflow: "hidden",
                         width: BOOK_ITEM_WIDTH,
@@ -55,9 +84,27 @@ const BookItem = (props: BookItemProps) => {
                 >
                     <BoxBase>
                         <TypographyBase variant="h6">{book.title}</TypographyBase>
-                        <TypographyBase variant="h6" color="primary.main">
-                            {book.price}₫
-                        </TypographyBase>
+                        <BoxHorizon
+                            gap={1}
+                            sx={{
+                                alignItems: "stretch",
+                            }}
+                        >
+                            <TypographyBase variant="h6" color="primary.main">
+                                {addCommas(book.current_price)}₫
+                            </TypographyBase>
+                            <TypographyBase
+                                sx={{
+                                    textDecoration: "line-through",
+                                    fontWeight: 400,
+                                    fontSize: "0.9rem",
+                                    color: "text.disabled",
+                                    mt: 0.45,
+                                }}
+                            >
+                                {addCommas(book.old_price)}₫
+                            </TypographyBase>
+                        </BoxHorizon>
                     </BoxBase>
                     <AddBoxSharpIcon
                         fontSize="large"
@@ -67,6 +114,12 @@ const BookItem = (props: BookItemProps) => {
                                 transition: "all 0.3s ease 0s",
                             },
                         }}
+                        onClick={() =>
+                            addToCart({
+                                book,
+                                quantity: 1,
+                            })
+                        }
                     />
                 </BoxHorizon>
             </BoxBase>

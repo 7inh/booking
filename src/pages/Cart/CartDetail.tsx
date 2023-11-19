@@ -21,7 +21,7 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
     const navigate = useNavigate();
 
     const cartTotalValue = useMemo(() => {
-        return items.reduce((acc, item) => acc + item.book.price * item.quantity, 0);
+        return items.reduce((acc, item) => acc + item.book.current_price * item.quantity, 0);
     }, [items]);
 
     const shippingFee = useMemo(() => {
@@ -66,7 +66,7 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
                         >
                             <CardMedia
                                 component="img"
-                                src={item.book.thumbnail}
+                                src={item.book.cover}
                                 sx={{
                                     width: "100px",
                                     height: "100px",
@@ -99,7 +99,7 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
                                             color: "#f44336",
                                         }}
                                     >
-                                        {item.book.price.toLocaleString("vi-VN", {
+                                        {item.book.current_price.toLocaleString("vi-VN", {
                                             style: "currency",
                                             currency: "VND",
                                         })}

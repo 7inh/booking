@@ -7,15 +7,19 @@ import ListBook from "src/components/Lists/ListBook";
 import Paging from "src/components/Paging/Paging";
 import SelectOrder from "src/components/Selects/SelectOrder";
 import TypographyBase from "src/components/Typographys/TypographyBase";
+import useGetItemPerPage from "src/hooks/useGetItemPerPage";
 import useTranslation from "src/hooks/utils/useTranslation";
-import { book1 } from "src/test-utils/mocks/books";
 
 const FilterResult = () => {
     const t = useTranslation();
 
     const [currentView, setCurrentView] = useState<"grid" | "list">("grid");
+    const [page, setPage] = useState(1);
 
-    const books = book1;
+    const { data: books } = useGetItemPerPage({
+        page,
+        perPage: 9,
+    });
 
     return (
         <BoxBase height="100%" flexGrow={1}>
@@ -61,7 +65,12 @@ const FilterResult = () => {
 
             <ListBook books={books} />
             <br />
-            <Paging totalItems={100} itemsPerPage={10} page={1} onPageChange={() => {}} />
+            <Paging
+                totalItems={103}
+                itemsPerPage={9}
+                page={page}
+                onPageChange={(page) => setPage(page)}
+            />
         </BoxBase>
     );
 };

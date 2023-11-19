@@ -27,7 +27,7 @@ const Overview = ({ book }: OverviewProps) => {
             }}
         >
             <BoxBase showBorder p={10}>
-                <CardMedia component="img" image={book.thumbnail} alt={book.title} />
+                <CardMedia component="img" image={book.cover} alt={book.title} />
             </BoxBase>
             <BoxBase>
                 <TypographyBase
@@ -45,7 +45,7 @@ const Overview = ({ book }: OverviewProps) => {
                         color: "primary.main",
                     }}
                 >
-                    {addCommas(book.price)}₫
+                    {addCommas(book.current_price)}₫
                 </TypographyBase>
                 <TypographyBase
                     sx={{

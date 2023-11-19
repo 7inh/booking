@@ -171,8 +171,10 @@ export interface GiftType {
 export interface Book {
     id: string;
     title: string;
-    thumbnail: string;
-    price: number;
+    cover: string;
+    current_price: number;
+    old_price: number;
+    discount: string;
 }
 
 export interface BookDetail extends Book {

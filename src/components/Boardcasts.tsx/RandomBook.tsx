@@ -56,7 +56,7 @@ const RandomBook = () => {
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
                                 backgroundRepeat: "no-repeat",
-                                backgroundImage: `url(${currentSelected.thumbnail})`,
+                                backgroundImage: `url(${currentSelected.cover})`,
 
                                 "&:before": {
                                     content: "''",
@@ -96,7 +96,7 @@ const RandomBook = () => {
                                     fontSize="40px"
                                     color="primary.main"
                                 >
-                                    {currentSelected.price}₫
+                                    {currentSelected.current_price}₫
                                 </TypographyBase>
                                 <br />
                                 <ButtonBase
@@ -108,7 +108,7 @@ const RandomBook = () => {
                             <BoxCenter width="35%" flexShrink={0} zIndex={2}>
                                 <CardMedia
                                     component="img"
-                                    src={currentSelected.thumbnail}
+                                    src={currentSelected.cover}
                                     sx={{
                                         boxShadow: "0px 0px 10px 0px #3333330d",
                                         width: BOOK_ITEM_HORIZON_WIDTH,

@@ -157,6 +157,7 @@ export type LangType = {
                 email: string;
                 subject: string;
                 message: string;
+                submit: string;
             };
             submit: string;
         };

@@ -8,9 +8,10 @@ import useTranslation from "src/hooks/utils/useTranslation";
 
 export interface InputQuantityProps {
     onAddToCart: (quantity: number) => void;
+    onBuyNow?: (quantity: number) => void;
 }
 
-const InputQuantity = ({ onAddToCart }: InputQuantityProps) => {
+const InputQuantity = ({ onAddToCart, onBuyNow }: InputQuantityProps) => {
     const t = useTranslation();
 
     const [value, setValue] = useState(1);
@@ -115,6 +116,7 @@ const InputQuantity = ({ onAddToCart }: InputQuantityProps) => {
                     gridColumn: "1 / 3",
                     fontSize: "20px",
                 }}
+                onClick={() => onBuyNow?.(value)}
             ></ButtonBase>
         </BoxBase>
     );

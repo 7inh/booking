@@ -1,4 +1,5 @@
 import { CardMedia } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { BookDetail } from "src/common/types";
 import { addCommas } from "src/common/utils";
 import BoxBase from "src/components/Boxs/BoxBase";
@@ -18,6 +19,7 @@ const Overview = ({ book }: OverviewProps) => {
     const { addToCart } = useCartContext();
     const snackbar = useSnackBar();
     const t = useTranslation();
+    const navigate = useNavigate();
 
     return (
         <BoxBase
@@ -114,6 +116,10 @@ const Overview = ({ book }: OverviewProps) => {
                                     message: t("success.addToCart"),
                                     severity: "success",
                                 });
+                            }}
+                            onBuyNow={(quantity) => {
+                                addToCart({ book, quantity });
+                                navigate("/cart");
                             }}
                         />
                     </BoxHorizon>

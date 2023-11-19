@@ -167,6 +167,7 @@ export const en: LangType = {
                 email: "Email",
                 subject: "Subject",
                 message: "Message",
+                submit: "Send message",
             },
             submit: "Submit",
         },

@@ -161,6 +161,7 @@ export const vi: LangType = {
                 email: "Email của bạn",
                 subject: "Tiêu đề",
                 message: "Tin nhắn",
+                submit: "Gửi tin nhắn",
             },
             submit: "Gửi tin nhắn",
         },

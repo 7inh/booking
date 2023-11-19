@@ -149,6 +149,16 @@ export const vi: LangType = {
                     "Chúng tôi là những người yêu sách. Chúng tôi muốn chia sẻ niềm đam mê đó với bạn. Chúng tôi luôn cố gắng cung cấp những đầu sách chất lượng nhất, với giá cả hợp lý nhất. Chúng tôi luôn mong muốn bạn có được những trải nghiệm tuyệt vời nhất khi đến với cửa hàng của chúng tôi. Chúng tôi luôn đánh giá cao sự ủng hộ và quan tâm của bạn. Trang web này không thể tồn tại mà không có sự hỗ trợ của bạn. Chúng tôi cam kết tiếp tục cung cấp nội dung và dịch vụ tốt nhất. 🙏💖",
             },
         },
+        contact: {
+            title: "Liên hệ",
+            form: {
+                name: "Tên của bạn",
+                email: "Email của bạn",
+                subject: "Tiêu đề",
+                message: "Tin nhắn",
+            },
+            submit: "Gửi tin nhắn",
+        },
         p404: {
             title: "404",
             subTitle: "Trang bạn đang tìm kiếm không tồn tại",

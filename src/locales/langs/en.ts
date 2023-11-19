@@ -155,6 +155,16 @@ export const en: LangType = {
                     "We are a team of designers and developers that create high quality HTML Template & Woocommerce, Shopify Theme.",
             },
         },
+        contact: {
+            title: "Contact",
+            form: {
+                name: "Name",
+                email: "Email",
+                subject: "Subject",
+                message: "Message",
+            },
+            submit: "Submit",
+        },
         p404: {
             title: "404",
             subTitle: "Page not found",

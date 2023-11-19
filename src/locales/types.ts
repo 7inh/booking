@@ -145,6 +145,16 @@ export type LangType = {
                 content: string;
             };
         };
+        contact: {
+            title: string;
+            form: {
+                name: string;
+                email: string;
+                subject: string;
+                message: string;
+            };
+            submit: string;
+        };
         p404: {
             title: string;
             subTitle: string;

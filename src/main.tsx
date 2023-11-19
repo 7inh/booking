@@ -19,6 +19,7 @@ import SnackbarProvider from "src/providers/SnackbarProvider";
 import TranslationProvider from "src/providers/TranslationProvider";
 import "./index.css";
 import About from "src/pages/About/About";
+import Contact from "src/pages/Contact/Contact";
 
 const queryClient = new QueryClient();
 const router = createHashRouter([
@@ -52,6 +53,10 @@ const router = createHashRouter([
                     {
                         path: "/about",
                         element: <About />,
+                    },
+                    {
+                        path: "/contact",
+                        element: <Contact />,
                     },
                 ],
             },

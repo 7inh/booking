@@ -45,6 +45,14 @@ export const vi: LangType = {
             subTitle: "Vui lòng khách đến, vừa lòng khách đi.",
         },
     },
+    dialog: {
+        orderSuccess: {
+            title: "Đặt hàng thành công",
+            content:
+                "Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.\n Chúc bạn một ngày tốt lành.",
+            confirmText: "Quay lại trang chủ",
+        },
+    },
     common: {
         cart: "Giỏ hàng",
         send: "Gửi",

@@ -1,6 +1,6 @@
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { CardMedia, Divider } from "@mui/material";
-import { useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PAGE_MAX_WIDTH } from "src/common/const";
 import { CartItem } from "src/common/types";
@@ -8,14 +8,24 @@ import { addCommas } from "src/common/utils";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import ButtonBase from "src/components/Buttons/ButtonBase";
-import FormCheckOut from "src/components/Forms/FormCheckOut";
+import DialogOrderSuccess from "src/components/Dialogs/DialogOrderSuccess";
+import FormCheckOut, { OrderFormValuesProps } from "src/components/Forms/FormCheckOut";
 import TypographyBase from "src/components/Typographys/TypographyBase";
+import useSubmitOrder from "src/hooks/useSubmitOrder";
 import useTranslation from "src/hooks/utils/useTranslation";
 
 const CheckOut = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
     const t = useTranslation();
+
+    const [openDialogOrderSuccess, setOpenDialogOrderSuccess] = useState(false);
+
+    const { submitOrder } = useSubmitOrder({
+        onSubmitOrderSuccess: () => {
+            setOpenDialogOrderSuccess(true);
+        },
+    });
 
     const items: CartItem[] = useMemo(() => state?.items || [], [state]);
 
@@ -31,8 +41,38 @@ const CheckOut = () => {
         return cartTotalValue + shippingFee;
     }, [cartTotalValue, shippingFee]);
 
+    const handleSubmit = useCallback(
+        (data: OrderFormValuesProps) => {
+            submitOrder({
+                ...data,
+                items: items
+                    .map((item) =>
+                        JSON.stringify({
+                            book_id: item.book.id,
+                            title: item.book.title,
+                            price: item.book.current_price,
+                            quantity: item.quantity,
+                        })
+                    )
+                    .join("|"),
+            });
+        },
+        [items, submitOrder]
+    );
+
     return (
         <>
+            <DialogOrderSuccess
+                open={openDialogOrderSuccess}
+                onClose={() => {
+                    localStorage.removeItem("cart");
+                    window.location.href = "/";
+                }}
+                onConfirm={() => {
+                    localStorage.removeItem("cart");
+                    window.location.href = "/";
+                }}
+            />
             <BoxHorizon
                 sx={{
                     maxWidth: PAGE_MAX_WIDTH,
@@ -92,8 +132,15 @@ const CheckOut = () => {
                         >
                             {t("pages.checkout.checkoutInfo")}
                         </TypographyBase>
-                        <FormCheckOut />
-                        <ButtonBase fullWidth label={t("pages.checkout.submit")}></ButtonBase>
+                        <FormCheckOut onSubmit={handleSubmit} />
+                        <ButtonBase
+                            fullWidth
+                            label={t("pages.checkout.submit")}
+                            onClick={() => {
+                                const form = document.querySelector("form");
+                                form?.requestSubmit();
+                            }}
+                        ></ButtonBase>
                         <br />
                         <br />
                     </BoxBase>

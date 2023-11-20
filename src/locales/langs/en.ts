@@ -51,6 +51,13 @@ export const en: LangType = {
                 "Worldwide delivery on all. Authorit tively morph next-generation innov tion with extensive models.",
         },
     },
+    dialog: {
+        orderSuccess: {
+            title: "Order success",
+            content: "We will contact you as soon as possible",
+            confirmText: "Back to home page",
+        },
+    },
     common: {
         cart: "Cart",
         send: "Send",

@@ -43,6 +43,13 @@ export type LangType = {
             subTitle: string;
         };
     };
+    dialog: {
+        orderSuccess: {
+            title: string;
+            content: string;
+            confirmText: string;
+        };
+    };
     common: {
         cart: string;
         send: string;

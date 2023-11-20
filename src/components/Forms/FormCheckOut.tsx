@@ -1,11 +1,10 @@
-import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import BoxBase from "src/components/Boxs/BoxBase";
 import RHFTextField from "src/components/RHFs/RHFTextField";
 import useTranslation from "src/hooks/utils/useTranslation";
 import FormProvider from "src/providers/FormProvider";
 
-type FormValuesProps = {
+export type OrderFormValuesProps = {
     name: string;
     email: string;
     phone: string;
@@ -13,10 +12,14 @@ type FormValuesProps = {
     note: string;
 };
 
-const FormCheckOut = () => {
+export interface FormCheckOutProps {
+    onSubmit: (data: OrderFormValuesProps) => void;
+}
+
+const FormCheckOut = ({ onSubmit }: FormCheckOutProps) => {
     const t = useTranslation();
 
-    const methods = useForm<FormValuesProps>({
+    const methods = useForm<OrderFormValuesProps>({
         defaultValues: {
             name: "",
             email: "",
@@ -27,10 +30,6 @@ const FormCheckOut = () => {
     });
 
     const { handleSubmit } = methods;
-
-    const onSubmit = useCallback((data: FormValuesProps) => {
-        console.log(data);
-    }, []);
 
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>

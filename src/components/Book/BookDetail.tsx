@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { BookDetail } from "src/common/types";
 import BoxBase from "src/components/Boxs/BoxBase";
 import TypographyBase from "src/components/Typographys/TypographyBase";
@@ -8,10 +8,60 @@ export interface BookDetailProps {
     book: BookDetail;
 }
 
+const mapPublisher = (publisher: number) => {
+    switch (publisher) {
+        case 1:
+            return "NSB Kim Đồng";
+        case 2:
+            return "NSB Trẻ";
+        default:
+            return "";
+    }
+};
+
+const mapAvailability = (availability: number) => {
+    switch (availability) {
+        case 1:
+            return "preOrder";
+        case 2:
+            return "available";
+        case 3:
+            return "outOfStock";
+        default:
+            return "";
+    }
+};
+
+const mapFormat = (format: number) => {
+    switch (format) {
+        case 1:
+            return "paperback";
+        case 2:
+            return "hardcover";
+        default:
+            return "";
+    }
+};
+
+const mapRare = (rare: number) => {
+    switch (rare) {
+        case 1:
+            return "normal";
+        case 2:
+            return "special";
+        case 3:
+            return "limited";
+        case 4:
+            return "collection";
+        default:
+            return "";
+    }
+};
+
 const BookDetail = ({ book }: BookDetailProps) => {
     const t = useTranslation();
 
-    // const updatingTranslate = useMemo(() => t("common.updating"), [t]);
+    const updatingTranslate = useMemo(() => t("common.updating"), [t]);
 
     const renderDetail = useCallback((label: string, value: string) => {
         return (
@@ -61,27 +111,24 @@ const BookDetail = ({ book }: BookDetailProps) => {
             </TypographyBase>
 
             {renderDetail(t("pages.book.author"), book.author)}
-            {renderDetail(t("pages.book.publisher"), book.publisher)}
-            {/* {renderDetail(t("pages.book.publishDate"), book.publishDate)} */}
-            {/* {renderDetail(t("pages.book.language"), book.language)} */}
-            {renderDetail(t("pages.book.quantity"), book.quantity.toString())}
-            {/* {renderDetail(t("pages.book.sold"), book.sold.toString())} */}
-            {/* {renderDetail(
+            {renderDetail(t("pages.book.publisher"), mapPublisher(book.publisher))}
+            {renderDetail(
                 t("pages.book.availability"),
-                t("pages.shop.filter.availabilityList." + book.availability)
-            )} */}
-            {renderDetail(t("pages.book.format"), t("pages.shop.filter.formatList." + book.format))}
+                t("pages.shop.filter.availabilityList." + mapAvailability(book.availability))
+            )}
+            {renderDetail(
+                t("pages.book.format"),
+                t("pages.shop.filter.formatList." + mapFormat(book.format))
+            )}
             {renderDetail(t("pages.book.pages"), book.pages.toString())}
-            {renderDetail(t("pages.book.dimensions"), `${book.size}`)}
+            {renderDetail(t("pages.book.size"), `${book.size}`)}
             {renderDetail(t("pages.book.weight"), `${book.weight}`)}
-            {/* {renderDetail(
+            {renderDetail(
                 t("pages.book.rare"),
-                book.rare ? t(`pages.shop.filter.rareList.${book.rare}`) : updatingTranslate
-            )} */}
-            {/* {renderDetail(
-                t("pages.book.variant"),
-                t(`pages.shop.filter.variantList.${book.variant}`)
-            )} */}
+                book.rare
+                    ? t(`pages.shop.filter.rareList.${mapRare(book.rare)}`)
+                    : updatingTranslate
+            )}
         </BoxBase>
     );
 };

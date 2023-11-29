@@ -36,8 +36,12 @@ const Overview = ({ book }: OverviewProps) => {
                     position: "relative",
                 }}
             >
-                <CardMedia component="img" image={book.cover} alt={book.title} />
-                {book.discount !== "0%" ? (
+                <CardMedia
+                    component="img"
+                    image={book.cover.replace("compact", "master")}
+                    alt={book.title}
+                />
+                {book.discount !== 0 ? (
                     <BoxCenter
                         sx={{
                             bgcolor: "primary.main",
@@ -60,7 +64,7 @@ const Overview = ({ book }: OverviewProps) => {
                                 fontWeight: 400,
                             }}
                         >
-                            {book.discount}
+                            {book.discount}%
                         </TypographyBase>
                     </BoxCenter>
                 ) : null}

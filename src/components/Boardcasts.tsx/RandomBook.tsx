@@ -1,8 +1,10 @@
 import CardMedia from "@mui/material/CardMedia";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BOOK_ITEM_HORIZON_WIDTH, PAGE_MAX_WIDTH } from "src/common/const";
 import { Book } from "src/common/types";
+import { addCommas } from "src/common/utils";
 import BookItemHorizon from "src/components/Book/BookItemHorizon";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxCenter from "src/components/Boxs/BoxCenter";
@@ -10,12 +12,16 @@ import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import BoxVertical from "src/components/Boxs/BoxVertical";
 import ButtonBase from "src/components/Buttons/ButtonBase";
 import TypographyBase from "src/components/Typographys/TypographyBase";
+import { useCartContext } from "src/contexts/CartContext";
 import useGetRandom from "src/hooks/useGetRandom";
 import { useResponsive } from "src/hooks/utils/useResponsive";
 import useTranslation from "src/hooks/utils/useTranslation";
 
 const RandomBook = () => {
     const t = useTranslation();
+    const navigate = useNavigate();
+
+    const { addToCart } = useCartContext();
 
     const lgDown = useResponsive("down", "lg");
 
@@ -101,12 +107,28 @@ const RandomBook = () => {
                                     fontSize="40px"
                                     color="primary.main"
                                 >
-                                    {currentSelected.current_price}₫
+                                    {addCommas(currentSelected.current_price)}₫
                                 </TypographyBase>
                                 <br />
                                 <ButtonBase
                                     label={t("common.addToCart")}
                                     variant="outlined"
+                                    fullWidth
+                                    sx={{
+                                        mb: 1,
+                                    }}
+                                    onClick={() => {
+                                        addToCart({
+                                            quantity: 1,
+                                            book: currentSelected,
+                                        });
+                                    }}
+                                />
+                                <ButtonBase
+                                    label={t("common.detail")}
+                                    onClick={() => {
+                                        navigate("/book/" + currentSelected.id);
+                                    }}
                                     fullWidth
                                 />
                             </BoxVertical>

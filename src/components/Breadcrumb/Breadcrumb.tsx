@@ -33,11 +33,11 @@ const Breadcrumb = ({ links }: Props) => {
 
                     return (
                         <Fragment key={link.href}>
-                            <LinkBase to={link.href} disabled={isCurrent}>
+                            <LinkBase to={link.href} disabled={isCurrent || isLast}>
                                 <BoxBase
                                     width="fit-content"
                                     sx={
-                                        !isCurrent
+                                        !isCurrent && !isLast
                                             ? {
                                                   "&:hover": {
                                                       color: "primary.dark",

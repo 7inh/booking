@@ -4,9 +4,12 @@ import BookDetail from "src/components/Book/BookDetail";
 import BoxBase from "src/components/Boxs/BoxBase";
 import Breadcrumb from "src/components/Breadcrumb/Breadcrumb";
 import useGetItemById from "src/hooks/useGetItemById";
+import useTranslation from "src/hooks/utils/useTranslation";
 import Overview from "src/pages/Book/Overview";
 
 const Book = () => {
+    const t = useTranslation();
+
     const { id } = useParams<{ id: string }>();
 
     const { data: book } = useGetItemById({ id: parseInt(id || "0") });
@@ -16,12 +19,12 @@ const Book = () => {
             <Breadcrumb
                 links={[
                     {
-                        name: "Home",
+                        name: t("pages.home.title"),
                         href: "/",
                     },
                     {
-                        name: "Shop",
-                        href: "/shop",
+                        name: t("pages.book.title"),
+                        href: "/book",
                     },
                 ]}
             />

@@ -64,6 +64,7 @@ export const vi: LangType = {
         checkout: "Thanh toán",
         emptyCart: "Giỏ hàng trống",
         updating: "Đang cập nhật",
+        detail: "Chi tiết",
     },
     pages: {
         home: {
@@ -83,6 +84,7 @@ export const vi: LangType = {
                 availabilityList: {
                     available: "Còn hàng",
                     preOrder: "Đặt trước",
+                    outOfStock: "Hết hàng",
                 },
                 variant: "Dạng",
                 variantList: {
@@ -128,7 +130,7 @@ export const vi: LangType = {
             rare: "Độ hiếm",
             sold: "Đã bán",
             variant: "Dạng",
-            dimensions: "Kích thước",
+            size: "Kích thước",
             weight: "Cân nặng",
             width: "Chiều rộng",
             author: "Tác giả",

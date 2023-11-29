@@ -61,6 +61,7 @@ export type LangType = {
         checkout: string;
         emptyCart: string;
         updating: string;
+        detail: string;
     };
     pages: {
         home: {
@@ -79,6 +80,7 @@ export type LangType = {
                 availabilityList: {
                     available: string;
                     preOrder: string;
+                    outOfStock: string;
                 };
                 variant: string;
                 variantList: {
@@ -122,7 +124,7 @@ export type LangType = {
             length: string;
             weight: string;
             availability: string;
-            dimensions: string;
+            size: string;
             variant: string;
             rare: string;
             quantity: string;

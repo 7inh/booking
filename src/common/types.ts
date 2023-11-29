@@ -174,12 +174,12 @@ export interface Book {
     cover: string;
     current_price: number;
     old_price: number;
-    discount: string;
+    discount: number;
 }
 
 export interface BookDetail extends Book {
     description: string;
-    publisher: string;
+    publisher: number;
     publishDate: string;
     author: string;
     size: string;
@@ -187,11 +187,11 @@ export interface BookDetail extends Book {
     quantity: number;
     sold: number;
     pages: number;
-    format: string;
+    format: number;
     language: string;
-    availability: "available" | "pre-order";
+    availability: number;
     variant: "once" | "combo" | "full-set";
-    rare: "normal" | "special" | "limited" | "collection";
+    rare: number;
 }
 
 export interface BookDataCustom {

@@ -69,6 +69,7 @@ export const en: LangType = {
         checkout: "Checkout",
         emptyCart: "Your cart is empty",
         updating: "Updating",
+        detail: "Detail",
     },
     pages: {
         home: {
@@ -88,6 +89,7 @@ export const en: LangType = {
                 availabilityList: {
                     available: "Available",
                     preOrder: "Pre-order",
+                    outOfStock: "Out of stock",
                 },
                 variant: "Variant",
                 variantList: {
@@ -130,7 +132,7 @@ export const en: LangType = {
             pages: "Pages",
             publishDate: "Publish date",
             quantity: "Quantity",
-            dimensions: "Dimensions",
+            size: "Size",
             rare: "Rare",
             sold: "Sold",
             variant: "Variant",

@@ -40,7 +40,7 @@ const BookItem = (props: BookItemProps) => {
             }}
             onClick={() => navigate(`/book/${book.id}`)}
         >
-            {book.discount !== "0%" ? (
+            {book.discount !== 0 ? (
                 <BoxBase
                     sx={{
                         bgcolor: "primary.main",
@@ -62,7 +62,7 @@ const BookItem = (props: BookItemProps) => {
                             textAlign: "center",
                         }}
                     >
-                        {book.discount}
+                        {book.discount}%
                     </TypographyBase>
                 </BoxBase>
             ) : null}

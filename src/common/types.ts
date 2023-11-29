@@ -204,3 +204,9 @@ export interface CartItem {
     book: Book;
     quantity: number;
 }
+
+export interface Coupon {
+    code: string;
+    discount: number;
+    value: number;
+}

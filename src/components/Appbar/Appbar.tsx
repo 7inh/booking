@@ -1,9 +1,10 @@
+import CloseIcon from "@mui/icons-material/Close";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { CardMedia, Divider, Menu, AppBar as _AppBar } from "@mui/material";
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { PAGE_MAX_WIDTH } from "src/common/const";
-import { addCommas } from "src/common/utils";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import BoxVertical from "src/components/Boxs/BoxVertical";
@@ -15,8 +16,6 @@ import TypographyBase from "src/components/Typographys/TypographyBase";
 import { useCartContext } from "src/contexts/CartContext";
 import { useResponsive } from "src/hooks/utils/useResponsive";
 import useTranslation from "src/hooks/utils/useTranslation";
-import CloseIcon from "@mui/icons-material/Close";
-import { useNavigate } from "react-router-dom";
 
 export interface AppBarProps {
     toggle?: () => void;
@@ -102,7 +101,10 @@ const AppBar = () => {
                                 {t("common.cart")} ({items.length})
                             </TypographyBase>
                             <TypographyBase variant="caption" lineHeight={1}>
-                                {addCommas(cartTotalValue)}₫
+                                {cartTotalValue.toLocaleString("vi-VN", {
+                                    style: "currency",
+                                    currency: "VND",
+                                })}
                             </TypographyBase>
                         </BoxVertical>
                     </BoxHorizon>
@@ -115,11 +117,11 @@ const AppBar = () => {
                             marginTop: "16px",
                             // set min width
                             "& .MuiMenu-paper": {
-                                minWidth: "300px",
+                                width: "100%",
+                                maxWidth: "400px",
                                 borderRadius: "0px",
                                 p: 1,
                                 px: 3,
-                                boxShadow: "rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;",
                             },
                         }}
                         anchorOrigin={{
@@ -158,7 +160,7 @@ const AppBar = () => {
                                             gap={1}
                                             sx={{
                                                 alignItems: "stretch",
-                                                width: "100%",
+                                                flexShrink: 0,
                                             }}
                                         >
                                             <CardMedia
@@ -191,7 +193,13 @@ const AppBar = () => {
                                                         variant="caption"
                                                         lineHeight={1}
                                                     >
-                                                        {addCommas(item.book.current_price)}₫
+                                                        {item.book.current_price.toLocaleString(
+                                                            "vi-VN",
+                                                            {
+                                                                style: "currency",
+                                                                currency: "VND",
+                                                            }
+                                                        )}
                                                     </TypographyBase>
                                                 </BoxHorizon>
                                             </BoxVertical>
@@ -225,7 +233,10 @@ const AppBar = () => {
                                             {t("common.totalCart")}
                                         </TypographyBase>
                                         <TypographyBase variant="body2" lineHeight={1}>
-                                            {addCommas(cartTotalValue)}₫
+                                            {cartTotalValue.toLocaleString("vi-VN", {
+                                                style: "currency",
+                                                currency: "VND",
+                                            })}
                                         </TypographyBase>
                                     </BoxHorizon>
                                     <Divider />
@@ -237,6 +248,7 @@ const AppBar = () => {
                                         label={t("common.checkout")}
                                         onClick={() => {
                                             navigate("/cart");
+                                            handleClose();
                                         }}
                                     ></ButtonBase>
                                 </>

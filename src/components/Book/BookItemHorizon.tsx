@@ -50,7 +50,10 @@ const BookItemHorizon = (props: BookItemHorizonProps) => {
                 >
                     <TypographyBase variant="h6">{book.title}</TypographyBase>
                     <TypographyBase variant="h6" color="primary.main">
-                        {book.current_price}₫
+                        {book.current_price.toLocaleString("vi-VN", {
+                            style: "currency",
+                            currency: "VND",
+                        })}
                     </TypographyBase>
                 </BoxVertical>
             </BoxHorizon>

@@ -70,6 +70,7 @@ export const en: LangType = {
         emptyCart: "Your cart is empty",
         updating: "Updating",
         detail: "Detail",
+        submitCoupon: "Submit",
     },
     pages: {
         home: {
@@ -148,6 +149,8 @@ export const en: LangType = {
             shipping: "Shipping fee",
             total: "Total",
             processToCheckout: "Process to checkout",
+            coupon: "Coupon",
+            discountValue: "Discount",
         },
         checkout: {
             title: "Checkout",

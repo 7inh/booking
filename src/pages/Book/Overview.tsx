@@ -1,7 +1,6 @@
 import { CardMedia } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { BookDetail } from "src/common/types";
-import { addCommas } from "src/common/utils";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxCenter from "src/components/Boxs/BoxCenter";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
@@ -86,7 +85,10 @@ const Overview = ({ book }: OverviewProps) => {
                             color: "primary.main",
                         }}
                     >
-                        {addCommas(book.current_price)}₫
+                        {book.current_price.toLocaleString("vi-VN", {
+                            style: "currency",
+                            currency: "VND",
+                        })}
                     </TypographyBase>
                     <TypographyBase
                         sx={{
@@ -96,7 +98,10 @@ const Overview = ({ book }: OverviewProps) => {
                             textDecoration: "line-through",
                         }}
                     >
-                        {addCommas(book.old_price)}₫
+                        {book.old_price.toLocaleString("vi-VN", {
+                            style: "currency",
+                            currency: "VND",
+                        })}
                     </TypographyBase>
                 </BoxHorizon>
                 <TypographyBase

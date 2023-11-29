@@ -4,7 +4,6 @@ import { useCallback, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PAGE_MAX_WIDTH } from "src/common/const";
 import { CartItem } from "src/common/types";
-import { addCommas } from "src/common/utils";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import ButtonBase from "src/components/Buttons/ButtonBase";
@@ -194,11 +193,21 @@ const CheckOut = () => {
                                                 color: "rgb(117,117,117)",
                                             }}
                                         >
-                                            {addCommas(item.book.current_price)} x {item.quantity}
+                                            {item.book.current_price.toLocaleString("vi-VN", {
+                                                style: "currency",
+                                                currency: "VND",
+                                            })}{" "}
+                                            x {item.quantity}
                                         </TypographyBase>
                                     </BoxBase>
                                     <TypographyBase variant="body2">
-                                        {addCommas(item.book.current_price * item.quantity)}
+                                        {(item.book.current_price * item.quantity).toLocaleString(
+                                            "vi-VN",
+                                            {
+                                                style: "currency",
+                                                currency: "VND",
+                                            }
+                                        )}
                                     </TypographyBase>
                                 </BoxHorizon>
                             );

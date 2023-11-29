@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BOOK_ITEM_HORIZON_WIDTH, PAGE_MAX_WIDTH } from "src/common/const";
 import { Book } from "src/common/types";
-import { addCommas } from "src/common/utils";
 import BookItemHorizon from "src/components/Book/BookItemHorizon";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxCenter from "src/components/Boxs/BoxCenter";
@@ -107,7 +106,10 @@ const RandomBook = () => {
                                     fontSize="40px"
                                     color="primary.main"
                                 >
-                                    {addCommas(currentSelected.current_price)}₫
+                                    {currentSelected.current_price.toLocaleString("vi-VN", {
+                                        style: "currency",
+                                        currency: "VND",
+                                    })}
                                 </TypographyBase>
                                 <br />
                                 <ButtonBase

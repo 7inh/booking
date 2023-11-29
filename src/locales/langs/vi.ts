@@ -65,6 +65,7 @@ export const vi: LangType = {
         emptyCart: "Giỏ hàng trống",
         updating: "Đang cập nhật",
         detail: "Chi tiết",
+        submitCoupon: "Áp dụng",
     },
     pages: {
         home: {
@@ -143,6 +144,8 @@ export const vi: LangType = {
             shipping: "Phí vận chuyển",
             total: "Tổng tiền",
             processToCheckout: "Tiến hành thanh toán",
+            coupon: "Mã giảm giá",
+            discountValue: "Giảm",
         },
         checkout: {
             title: "Thanh toán",

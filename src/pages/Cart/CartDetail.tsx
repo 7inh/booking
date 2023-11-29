@@ -1,6 +1,6 @@
 import { CardMedia, Divider, TextField } from "@mui/material";
-import { useMemo } from "react";
-import { CartItem } from "src/common/types";
+import { useMemo, useState } from "react";
+import { CartItem, Coupon } from "src/common/types";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxCenter from "src/components/Boxs/BoxCenter";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
@@ -9,6 +9,8 @@ import TypographyBase from "src/components/Typographys/TypographyBase";
 import useTranslation from "src/hooks/utils/useTranslation";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useNavigate } from "react-router-dom";
+import InputCoupon from "src/components/Inputs/InputCoupon";
+import ListCoupon from "src/components/Lists/ListCoupon";
 
 export interface CartDetailProps {
     items: CartItem[];
@@ -20,6 +22,8 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
     const t = useTranslation();
     const navigate = useNavigate();
 
+    const [coupons, setCoupons] = useState<Coupon[]>([]);
+
     const cartTotalValue = useMemo(() => {
         return items.reduce((acc, item) => acc + item.book.current_price * item.quantity, 0);
     }, [items]);
@@ -28,15 +32,19 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
         return 25000;
     }, []);
 
-    const cartTotalValueWithShippingFee = useMemo(() => {
-        return cartTotalValue + shippingFee;
-    }, [cartTotalValue, shippingFee]);
+    const couponValue = useMemo(() => {
+        return coupons.reduce((acc, coupon) => acc + coupon.value, 0);
+    }, [coupons]);
+
+    const finalFee = useMemo(() => {
+        return cartTotalValue + shippingFee - couponValue;
+    }, [cartTotalValue, couponValue, shippingFee]);
 
     return (
         <BoxBase>
             <TypographyBase
                 sx={{
-                    fontSize: "1.5rem",
+                    fontSize: "28px",
                     fontWeight: 400,
                 }}
             >
@@ -51,11 +59,11 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
             >
                 <BoxBase
                     flexGrow={1}
-                    sx={
-                        {
-                            // border: "1px solid #ccc",
-                        }
-                    }
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 1,
+                    }}
                 >
                     {items.map((item) => (
                         <BoxHorizon
@@ -99,10 +107,13 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
                                             color: "#f44336",
                                         }}
                                     >
-                                        {item.book.current_price.toLocaleString("vi-VN", {
-                                            style: "currency",
-                                            currency: "VND",
-                                        })}
+                                        {(item.book.current_price * item.quantity).toLocaleString(
+                                            "vi-VN",
+                                            {
+                                                style: "currency",
+                                                currency: "VND",
+                                            }
+                                        )}
                                     </TypographyBase>
                                 </BoxBase>
                                 <BoxBase
@@ -205,6 +216,7 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
                     sx={{
                         width: "350px",
                         border: "1px solid #ccc",
+                        height: "fit-content",
                         p: 2,
                     }}
                 >
@@ -219,39 +231,89 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
                     <Divider sx={{ my: 1 }} />
                     <BoxBase
                         sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
+                            // fontFamily: "consolas",
+                            my: 2,
                         }}
                     >
-                        <TypographyBase variant="body1">{t("pages.cart.subTotal")}</TypographyBase>
-                        <TypographyBase
+                        <BoxBase
                             sx={{
-                                fontSize: "20px",
+                                display: "flex",
+                                justifyContent: "space-between",
                             }}
                         >
-                            {cartTotalValue.toLocaleString("vi-VN", {
-                                style: "currency",
-                                currency: "VND",
-                            })}
-                        </TypographyBase>
+                            <TypographyBase variant="body1">
+                                {t("pages.cart.subTotal")}
+                            </TypographyBase>
+                            <TypographyBase
+                                sx={{
+                                    fontSize: "20px",
+                                }}
+                            >
+                                {cartTotalValue.toLocaleString("vi-VN", {
+                                    style: "currency",
+                                    currency: "VND",
+                                })}
+                            </TypographyBase>
+                        </BoxBase>
+                        <BoxBase
+                            sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                            }}
+                        >
+                            <TypographyBase variant="body1">
+                                {t("pages.cart.shipping")}
+                            </TypographyBase>
+                            <TypographyBase
+                                sx={{
+                                    fontSize: "20px",
+                                }}
+                            >
+                                {shippingFee.toLocaleString("vi-VN", {
+                                    style: "currency",
+                                    currency: "VND",
+                                })}
+                            </TypographyBase>
+                        </BoxBase>
+                        <BoxBase
+                            sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                            }}
+                        >
+                            <TypographyBase variant="body1">
+                                {t("pages.cart.coupon")}
+                            </TypographyBase>
+                            <TypographyBase
+                                sx={{
+                                    fontSize: "20px",
+                                }}
+                            >
+                                -
+                                {couponValue.toLocaleString("vi-VN", {
+                                    style: "currency",
+                                    currency: "VND",
+                                })}
+                            </TypographyBase>
+                        </BoxBase>
                     </BoxBase>
-                    <BoxBase
-                        sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        <TypographyBase variant="body1">{t("pages.cart.shipping")}</TypographyBase>
+                    <Divider sx={{ my: 1 }} />
+                    <BoxBase my={2}>
                         <TypographyBase
                             sx={{
-                                fontSize: "20px",
+                                fontSize: "18px",
+                                fontWeight: 500,
+                                mb: 1,
                             }}
                         >
-                            {shippingFee.toLocaleString("vi-VN", {
-                                style: "currency",
-                                currency: "VND",
-                            })}
+                            {t("pages.cart.coupon")}
                         </TypographyBase>
+                        <InputCoupon
+                            onSubmit={(coupon) => {
+                                setCoupons([...coupons, coupon]);
+                            }}
+                        />
+                        <ListCoupon coupons={coupons} />
                     </BoxBase>
                     <Divider sx={{ my: 1 }} />
                     <BoxBase
@@ -267,7 +329,7 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
                                 color: "#f44336",
                             }}
                         >
-                            {cartTotalValueWithShippingFee.toLocaleString("vi-VN", {
+                            {finalFee.toLocaleString("vi-VN", {
                                 style: "currency",
                                 currency: "VND",
                             })}

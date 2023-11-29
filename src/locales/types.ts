@@ -62,6 +62,7 @@ export type LangType = {
         emptyCart: string;
         updating: string;
         detail: string;
+        submitCoupon: string;
     };
     pages: {
         home: {
@@ -139,6 +140,8 @@ export type LangType = {
             shipping: string;
             total: string;
             processToCheckout: string;
+            coupon: string;
+            discountValue: string;
         };
         checkout: {
             title: string;

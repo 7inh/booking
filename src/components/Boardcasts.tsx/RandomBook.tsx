@@ -1,11 +1,7 @@
 import CardMedia from "@mui/material/CardMedia";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useState } from "react";
-import {
-    BOOK_ITEM_HORIZON_HEIGHT,
-    BOOK_ITEM_HORIZON_WIDTH,
-    PAGE_MAX_WIDTH,
-} from "src/common/const";
+import { BOOK_ITEM_HORIZON_WIDTH, PAGE_MAX_WIDTH } from "src/common/const";
 import { Book } from "src/common/types";
 import BookItemHorizon from "src/components/Book/BookItemHorizon";
 import BoxBase from "src/components/Boxs/BoxBase";
@@ -14,15 +10,23 @@ import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import BoxVertical from "src/components/Boxs/BoxVertical";
 import ButtonBase from "src/components/Buttons/ButtonBase";
 import TypographyBase from "src/components/Typographys/TypographyBase";
+import useGetRandom from "src/hooks/useGetRandom";
+import { useResponsive } from "src/hooks/utils/useResponsive";
 import useTranslation from "src/hooks/utils/useTranslation";
-import { book1 } from "src/test-utils/mocks/books";
 
 const RandomBook = () => {
     const t = useTranslation();
 
+    const lgDown = useResponsive("down", "lg");
+
     const [currentSelected, setCurrentSelected] = useState<Book | null>(null);
 
-    const books = book1.slice(0, 3);
+    const { data: books } = useGetRandom({
+        onSuccess: (data) => {
+            if (data.length > 0) setCurrentSelected(data[0]);
+        },
+    });
+
     return (
         <BoxBase
             sx={{
@@ -33,7 +37,7 @@ const RandomBook = () => {
             <BoxBase
                 sx={{
                     display: "grid",
-                    gridTemplateColumns: "1fr 400px",
+                    gridTemplateColumns: lgDown ? "1fr" : "1fr 400px",
                     gap: 3,
                     mx: 1,
                 }}
@@ -41,6 +45,7 @@ const RandomBook = () => {
                 <BoxBase
                     sx={{
                         border: "1px solid #3333330d",
+                        minHeight: "400px",
                     }}
                 >
                     {currentSelected ? (
@@ -88,7 +93,7 @@ const RandomBook = () => {
                                     zIndex: 2,
                                 }}
                             >
-                                <TypographyBase variant="h2" fontWeight="bold">
+                                <TypographyBase variant="h3" fontWeight="bold">
                                     {currentSelected.title}
                                 </TypographyBase>
                                 <TypographyBase
@@ -108,11 +113,11 @@ const RandomBook = () => {
                             <BoxCenter width="35%" flexShrink={0} zIndex={2}>
                                 <CardMedia
                                     component="img"
-                                    src={currentSelected.cover}
+                                    src={currentSelected.cover.replace("compact", "master")}
                                     sx={{
                                         boxShadow: "0px 0px 10px 0px #3333330d",
                                         width: BOOK_ITEM_HORIZON_WIDTH,
-                                        height: BOOK_ITEM_HORIZON_HEIGHT,
+                                        height: "auto",
                                         transform: "scale(2.5)",
                                     }}
                                 />

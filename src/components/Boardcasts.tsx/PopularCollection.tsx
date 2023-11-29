@@ -2,13 +2,13 @@ import { BOOK_ITEM_WIDTH, PAGE_MAX_WIDTH } from "src/common/const";
 import BookItem from "src/components/Book/BookItem";
 import BoxBase from "src/components/Boxs/BoxBase";
 import TypographyBase from "src/components/Typographys/TypographyBase";
+import useGetPopular from "src/hooks/useGetPopular";
 import useTranslation from "src/hooks/utils/useTranslation";
-import { book1 } from "src/test-utils/mocks/books";
 
 const PopularCollection = () => {
     const t = useTranslation();
 
-    const books = book1;
+    const { data: books } = useGetPopular({});
 
     return (
         <BoxBase
@@ -37,7 +37,15 @@ const PopularCollection = () => {
                 }}
             >
                 {books.map((book) => {
-                    return <BookItem key={book.id} book={book} />;
+                    return (
+                        <BookItem
+                            key={book.id}
+                            book={{
+                                ...book,
+                                cover: book.cover.replace("compact", "large"),
+                            }}
+                        />
+                    );
                 })}
             </BoxBase>
         </BoxBase>

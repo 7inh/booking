@@ -35,6 +35,8 @@ const BookItem = (props: BookItemProps) => {
                     transition: "all 0.3s ease 0s",
                 },
                 position: "relative",
+                display: "flex",
+                flexDirection: "column",
             }}
             onClick={() => navigate(`/book/${book.id}`)}
         >
@@ -76,13 +78,14 @@ const BookItem = (props: BookItemProps) => {
                         overflow: "hidden",
                         width: BOOK_ITEM_WIDTH,
                         height: BOOK_ITEM_HEIGHT,
-                        objectFit: "cover",
+                        objectFit: "scale-down",
                     }}
                 />
             </BoxCenter>
             <BoxBase
                 sx={{
                     boxShadow: "0 0 10px 0 rgb(0 0 0 / 5%)",
+                    flexGrow: 1,
                 }}
             >
                 <BoxHorizon

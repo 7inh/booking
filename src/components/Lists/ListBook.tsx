@@ -19,7 +19,15 @@ const ListBook = ({ books }: ListBookProps) => {
             }}
         >
             {books.map((book) => {
-                return <BookItem key={book.id} book={book} />;
+                return (
+                    <BookItem
+                        key={book.id}
+                        book={{
+                            ...book,
+                            cover: book.cover.replace("compact", "large"),
+                        }}
+                    />
+                );
             })}
         </BoxBase>
     );

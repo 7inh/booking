@@ -40,8 +40,8 @@ const FilterResult = () => {
                     }}
                 >
                     {t("pages.shop.result.showItemsOf", {
-                        from: 1,
-                        to: 10,
+                        from: page * 9 - 8,
+                        to: page * 9,
                         total: totalItems,
                     })}
                 </TypographyBase>

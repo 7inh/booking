@@ -35,7 +35,7 @@ const BookItemHorizon = (props: BookItemHorizonProps) => {
                 <BoxBase>
                     <CardMedia
                         component="img"
-                        src={book.cover}
+                        src={book.cover.replace("compact", "large")}
                         sx={{
                             width: BOOK_ITEM_HORIZON_WIDTH,
                             height: BOOK_ITEM_HORIZON_HEIGHT,

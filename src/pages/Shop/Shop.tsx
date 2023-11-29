@@ -4,18 +4,20 @@ import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import Breadcrumb from "src/components/Breadcrumb/Breadcrumb";
 import FilterBook from "src/components/Filters/FilterBook";
 import FilterResult from "src/components/Filters/FilterResult";
+import useTranslation from "src/hooks/utils/useTranslation";
 
 const Shop = () => {
+    const t = useTranslation();
     return (
         <>
             <Breadcrumb
                 links={[
                     {
-                        name: "Home",
+                        name: t("pages.home.title"),
                         href: "/",
                     },
                     {
-                        name: "Shop",
+                        name: t("pages.shop.title"),
                         href: "/shop",
                     },
                 ]}

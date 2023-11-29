@@ -2,13 +2,13 @@ import { BOOK_ITEM_WIDTH, PAGE_MAX_WIDTH } from "src/common/const";
 import BookItem from "src/components/Book/BookItem";
 import BoxBase from "src/components/Boxs/BoxBase";
 import TypographyBase from "src/components/Typographys/TypographyBase";
+import useGetComingSoon from "src/hooks/useGetComingSoon";
 import useTranslation from "src/hooks/utils/useTranslation";
-import { book1 } from "src/test-utils/mocks/books";
 
 const UpcomingCollection = () => {
     const t = useTranslation();
 
-    const books = book1;
+    const { data: books } = useGetComingSoon({});
 
     return (
         <BoxBase
@@ -37,7 +37,15 @@ const UpcomingCollection = () => {
                 }}
             >
                 {books.map((book) => {
-                    return <BookItem key={book.id} book={book} />;
+                    return (
+                        <BookItem
+                            key={book.id}
+                            book={{
+                                ...book,
+                                cover: book.cover.replace("compact", "large"),
+                            }}
+                        />
+                    );
                 })}
             </BoxBase>
         </BoxBase>

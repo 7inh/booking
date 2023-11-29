@@ -5,7 +5,7 @@ const FIREBASE_CONFIG = {
 
 const hosts = {
     dev: {
-        API_HOST: "https://tam-van-be-production.up.railway.app/api",
+        API_HOST: "http://localhost:6969/api",
         FIREBASE: FIREBASE_CONFIG.dev,
     },
     prod: {

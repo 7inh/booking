@@ -31,6 +31,7 @@ export const vi: LangType = {
     },
     message: {
         backToHome: "Quay lại trang chủ",
+        notFoundItem: "Không tìm thấy sản phẩm phù hợp",
     },
     feature: {
         delivery: {

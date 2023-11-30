@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 import { FilterBookType } from "src/common/types";
 import { mapFilterToParams } from "src/common/utils";
 import BoxBase from "src/components/Boxs/BoxBase";
+import BoxCenter from "src/components/Boxs/BoxCenter";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import IconLoadingBackdrop from "src/components/Icons/IconLoadingBackdrop";
 import ListBook from "src/components/Lists/ListBook";
@@ -32,7 +33,11 @@ const FilterResult = ({ filter }: FilterResultProps) => {
 
     const params = useMemo(() => mapFilterToParams(filter), [filter]);
 
-    const { data: books, isFetching } = useGetItemPerPage({
+    const {
+        data: books,
+        isFetching,
+        isFetched,
+    } = useGetItemPerPage({
         page,
         perPage,
         filter: params,
@@ -40,62 +45,84 @@ const FilterResult = ({ filter }: FilterResultProps) => {
     });
     const { data: totalItems } = useGetItemTotal({ filter: params, title: q });
 
+    const renderBodyWithContent = useMemo(() => {
+        return (
+            <>
+                <BoxHorizon
+                    sx={{
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        gap: 2,
+                        mb: 1,
+                    }}
+                >
+                    <SelectOrder onChange={() => {}} />
+                    <TypographyBase
+                        sx={{
+                            fontWeight: 300,
+                        }}
+                    >
+                        {t("pages.shop.result.showItemsOf", {
+                            from: page * perPage - perPage + 1,
+                            to: Math.min(page * perPage, totalItems),
+                            total: totalItems,
+                        })}
+                    </TypographyBase>
+                    <BoxBase>
+                        <ViewModuleIcon
+                            sx={{
+                                color: currentView === "grid" ? "primary.main" : "primary.dark",
+                                fontSize: "30px",
+                                cursor: "pointer",
+                            }}
+                            onClick={() => setCurrentView("grid")}
+                        />
+                        <ViewListIcon
+                            sx={{
+                                fontSize: "30px",
+                                color: currentView === "list" ? "primary.main" : "primary.dark",
+                                cursor: "pointer",
+                            }}
+                            onClick={() => setCurrentView("list")}
+                        />
+                    </BoxBase>
+                </BoxHorizon>
+                <br />
+
+                {currentView === "grid" ? (
+                    <ListBook books={books} />
+                ) : (
+                    <ListBookHorizon books={books} />
+                )}
+                <br />
+                <Paging
+                    totalItems={totalItems}
+                    itemsPerPage={perPage}
+                    page={page}
+                    onPageChange={(page) => setPage(page)}
+                />
+            </>
+        );
+    }, [books, currentView, page, t, totalItems]);
+
     return (
         <BoxBase height="100%" flexGrow={1}>
             <IconLoadingBackdrop open={isFetching} />
-            <BoxHorizon
-                sx={{
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    gap: 2,
-                    mb: 1,
-                }}
-            >
-                <SelectOrder onChange={() => {}} />
-                <TypographyBase
-                    sx={{
-                        fontWeight: 300,
-                    }}
-                >
-                    {t("pages.shop.result.showItemsOf", {
-                        from: page * perPage - perPage + 1,
-                        to: Math.min(page * perPage, totalItems),
-                        total: totalItems,
-                    })}
-                </TypographyBase>
-                <BoxBase>
-                    <ViewModuleIcon
-                        sx={{
-                            color: currentView === "grid" ? "primary.main" : "primary.dark",
-                            fontSize: "30px",
-                            cursor: "pointer",
-                        }}
-                        onClick={() => setCurrentView("grid")}
-                    />
-                    <ViewListIcon
-                        sx={{
-                            fontSize: "30px",
-                            color: currentView === "list" ? "primary.main" : "primary.dark",
-                            cursor: "pointer",
-                        }}
-                        onClick={() => setCurrentView("list")}
-                    />
-                </BoxBase>
-            </BoxHorizon>
-            <br />
 
-            {currentView === "grid" ? (
-                <ListBook books={books} />
+            {isFetched && !isFetching && books.length === 0 ? (
+                <BoxCenter height="500px">
+                    <TypographyBase
+                        sx={{
+                            fontWeight: 300,
+                            fontSize: "20px",
+                        }}
+                    >
+                        {t("message.notFoundItem")}
+                    </TypographyBase>
+                </BoxCenter>
             ) : (
-                <ListBookHorizon books={books} />
+                renderBodyWithContent
             )}
-            <br />
-            <Paging
-                totalItems={totalItems}
-                itemsPerPage={perPage}
-                page={page}
-                onPageChange={(page) => setPage(page)}
-            />
         </BoxBase>
     );
 };

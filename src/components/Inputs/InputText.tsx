@@ -1,7 +1,8 @@
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { Button, InputAdornment, TextField, TextFieldProps } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
+import ClearIcon from "@mui/icons-material/Clear";
 
 export interface InputTextProps {
     sx?: TextFieldProps["sx"];
@@ -9,20 +10,31 @@ export interface InputTextProps {
 }
 
 const InputText = ({ sx, onSearch, ...props }: InputTextProps) => {
+    const location = useLocation();
     const [searchParams] = useSearchParams();
     const q = searchParams.get("q") || "";
-    const [search, setSearch] = useState("");
+    const [search, setSearch] = useState(q);
+
+    const [enableClear, setEnableClear] = useState(false);
 
     const handleSearch = useCallback(() => {
         onSearch?.(search);
     }, [onSearch, search]);
 
-    // clear search when q is empty
     useEffect(() => {
-        if (!q) {
+        const path = location.pathname;
+        if (!path.includes("/shop")) {
             setSearch("");
         }
-    }, [q]);
+    }, [location]);
+
+    useEffect(() => {
+        if (search && !enableClear) {
+            setEnableClear(true);
+        } else if (!search && enableClear) {
+            setEnableClear(false);
+        }
+    }, [enableClear, search]);
 
     return (
         <TextField
@@ -53,6 +65,17 @@ const InputText = ({ sx, onSearch, ...props }: InputTextProps) => {
             InputProps={{
                 endAdornment: (
                     <InputAdornment position="end">
+                        <ClearIcon
+                            sx={{
+                                mr: 1,
+                                cursor: "pointer",
+                                display: enableClear ? "block" : "none",
+                            }}
+                            onClick={() => {
+                                setSearch("");
+                                onSearch?.("");
+                            }}
+                        />
                         <Button
                             variant="contained"
                             sx={{

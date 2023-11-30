@@ -34,6 +34,7 @@ export const en: LangType = {
     },
     message: {
         backToHome: "Back to home page",
+        notFoundItem: "No matching products found",
     },
     feature: {
         delivery: {

@@ -29,6 +29,7 @@ export type LangType = {
     };
     message: {
         backToHome: string;
+        notFoundItem: string;
     };
     feature: {
         delivery: {

@@ -27,6 +27,7 @@ export const en: LangType = {
     },
     success: {
         addToCart: "Add to cart successfully",
+        sendMessage: "Send message successfully",
     },
     error: {
         somethingWentWrong: "Something went wrong",
@@ -180,6 +181,12 @@ export const en: LangType = {
                 subject: "Subject",
                 message: "Message",
                 submit: "Send message",
+            },
+            formValidation: {
+                name: "Please enter your name",
+                email: "Invalid email address",
+                subject: "Please enter your subject",
+                message: "Please enter your message",
             },
             submit: "Submit",
         },

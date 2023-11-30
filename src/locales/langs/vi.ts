@@ -24,6 +24,7 @@ export const vi: LangType = {
     },
     success: {
         addToCart: "Thêm vào giỏ hàng thành công",
+        sendMessage: "Gửi tin nhắn thành công",
     },
     error: {
         somethingWentWrong: "Có lỗi xảy ra",
@@ -175,6 +176,12 @@ export const vi: LangType = {
                 subject: "Tiêu đề",
                 message: "Tin nhắn",
                 submit: "Gửi tin nhắn",
+            },
+            formValidation: {
+                name: "Vui lòng nhập tên của bạn",
+                email: "Email không hợp lệ",
+                subject: "Vui lòng nhập tiêu đề",
+                message: "Vui lòng nhập tin nhắn",
             },
             submit: "Gửi tin nhắn",
         },

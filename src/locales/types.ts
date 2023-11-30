@@ -22,6 +22,7 @@ export type LangType = {
     };
     success: {
         addToCart: string;
+        sendMessage: string;
     };
     error: {
         somethingWentWrong: string;
@@ -170,6 +171,12 @@ export type LangType = {
                 subject: string;
                 message: string;
                 submit: string;
+            };
+            formValidation: {
+                name: string;
+                email: string;
+                subject: string;
+                message: string;
             };
             submit: string;
         };

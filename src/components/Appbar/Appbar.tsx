@@ -161,6 +161,7 @@ const AppBar = () => {
                                             sx={{
                                                 alignItems: "stretch",
                                                 flexShrink: 0,
+                                                width: "100%",
                                             }}
                                         >
                                             <CardMedia

@@ -170,7 +170,7 @@ export const en: LangType = {
             whatWeAre: {
                 title: "What we are",
                 content:
-                    "We are a team of designers and developers that create high quality HTML Template & Woocommerce, Shopify Theme.",
+                    "We are a team passionate about comics. This passion is the driving force behind our desire to share it with you. Our goal is to offer the highest quality comic series at the most reasonable prices. We hope you have exciting experiences exploring our store. Your support and interest are not only a great source of motivation but also a crucial foundation for the existence of this website. We are committed to continuing to provide the best possible content and services. 🙏💖",
             },
         },
         contact: {
@@ -197,7 +197,7 @@ export const en: LangType = {
         },
     },
     footer: {
-        thanks: "Thanks for visiting",
+        thanks: "Sincere thanks for visiting our website. Your support and interest mean a lot to us. This website would not exist without your backing. We are committed to continually providing the best content and services. 🙏💖",
         contact: "Contact",
         subscribe: "Subscribe",
         subscribeDescription:

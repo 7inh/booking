@@ -175,6 +175,7 @@ export interface Book {
     current_price: number;
     old_price: number;
     discount: number;
+    description?: string;
 }
 
 export interface BookDetail extends Book {

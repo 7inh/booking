@@ -111,6 +111,19 @@ const RandomBook = () => {
                                         currency: "VND",
                                     })}
                                 </TypographyBase>
+                                <TypographyBase
+                                    fontWeight="400"
+                                    fontSize="30px"
+                                    color="text.secondary"
+                                    sx={{
+                                        textDecoration: "line-through",
+                                    }}
+                                >
+                                    {currentSelected.old_price.toLocaleString("vi-VN", {
+                                        style: "currency",
+                                        currency: "VND",
+                                    })}
+                                </TypographyBase>
                                 <br />
                                 <ButtonBase
                                     label={t("common.addToCart")}

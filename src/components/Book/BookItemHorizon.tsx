@@ -49,12 +49,26 @@ const BookItemHorizon = (props: BookItemHorizonProps) => {
                     }}
                 >
                     <TypographyBase variant="h6">{book.title}</TypographyBase>
-                    <TypographyBase variant="h6" color="primary.main">
-                        {book.current_price.toLocaleString("vi-VN", {
-                            style: "currency",
-                            currency: "VND",
-                        })}
-                    </TypographyBase>
+                    <BoxHorizon gap={1}>
+                        <TypographyBase variant="h6" color="primary.main">
+                            {book.current_price.toLocaleString("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                            })}
+                        </TypographyBase>
+                        <TypographyBase
+                            variant="body1"
+                            color="text.secondary"
+                            sx={{
+                                textDecoration: "line-through",
+                            }}
+                        >
+                            {book.old_price.toLocaleString("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                            })}
+                        </TypographyBase>
+                    </BoxHorizon>
                 </BoxVertical>
             </BoxHorizon>
         </BoxBase>

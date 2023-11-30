@@ -4,6 +4,7 @@ import { useState } from "react";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import ListBook from "src/components/Lists/ListBook";
+import ListBookHorizon from "src/components/Lists/ListBookHorizon";
 import Paging from "src/components/Paging/Paging";
 import SelectOrder from "src/components/Selects/SelectOrder";
 import TypographyBase from "src/components/Typographys/TypographyBase";
@@ -65,7 +66,11 @@ const FilterResult = () => {
                 </BoxBase>
             </BoxHorizon>
 
-            <ListBook books={books} />
+            {currentView === "grid" ? (
+                <ListBook books={books} />
+            ) : (
+                <ListBookHorizon books={books} />
+            )}
             <br />
             <Paging
                 totalItems={totalItems}

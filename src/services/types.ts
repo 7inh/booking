@@ -4,10 +4,12 @@ export interface ItemGetPerPage {
     page: number;
     perPage: number;
     filter?: FilterBookParams;
+    title?: string;
 }
 
 export interface ItemGetTotal {
     filter?: FilterBookParams;
+    title?: string;
 }
 
 export interface ItemGetById {

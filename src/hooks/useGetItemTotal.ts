@@ -3,9 +3,10 @@ import doQuery from "src/services/services";
 
 export interface UseGetItemTotalProps {
     filter?: FilterBookParams;
+    title?: string;
 }
 
-const useGetItemTotal = ({ filter }: UseGetItemTotalProps) => {
+const useGetItemTotal = ({ filter, title }: UseGetItemTotalProps) => {
     const {
         data = 0,
         isFetched,
@@ -16,6 +17,7 @@ const useGetItemTotal = ({ filter }: UseGetItemTotalProps) => {
         action: "getTotal",
         params: {
             filter,
+            title,
         },
         option: {
             enable: true,

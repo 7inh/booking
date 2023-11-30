@@ -5,10 +5,11 @@ export interface UseGetItemPerPageProps {
     page: number;
     perPage: number;
     filter?: FilterBookParams;
+    title?: string;
 }
 
 const useGetItemPerPage = (props: UseGetItemPerPageProps) => {
-    const { page, perPage, filter } = props;
+    const { page, perPage, filter, title } = props;
     const {
         data = [],
         isFetched,
@@ -21,6 +22,7 @@ const useGetItemPerPage = (props: UseGetItemPerPageProps) => {
             page,
             perPage,
             filter,
+            title,
         },
         option: {
             enable: true,

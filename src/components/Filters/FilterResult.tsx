@@ -1,6 +1,7 @@
 import ViewListIcon from "@mui/icons-material/ViewList";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import { useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { FilterBookType } from "src/common/types";
 import { mapFilterToParams } from "src/common/utils";
 import BoxBase from "src/components/Boxs/BoxBase";
@@ -22,6 +23,8 @@ export interface FilterResultProps {
 const perPage = 12;
 
 const FilterResult = ({ filter }: FilterResultProps) => {
+    const [searchParams] = useSearchParams();
+    const q = searchParams.get("q") || "";
     const t = useTranslation();
 
     const [currentView, setCurrentView] = useState<"grid" | "list">("grid");
@@ -33,8 +36,9 @@ const FilterResult = ({ filter }: FilterResultProps) => {
         page,
         perPage,
         filter: params,
+        title: q,
     });
-    const { data: totalItems } = useGetItemTotal({ filter: params });
+    const { data: totalItems } = useGetItemTotal({ filter: params, title: q });
 
     return (
         <BoxBase height="100%" flexGrow={1}>

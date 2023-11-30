@@ -3,7 +3,7 @@ import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { CardMedia, Divider, Menu, AppBar as _AppBar } from "@mui/material";
 import { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { PAGE_MAX_WIDTH } from "src/common/const";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
@@ -22,6 +22,7 @@ export interface AppBarProps {
 }
 
 const AppBar = () => {
+    const [, setSearchParams] = useSearchParams();
     const { items, removeFromCart } = useCartContext();
     const t = useTranslation();
     const navigate = useNavigate();
@@ -81,6 +82,10 @@ const AppBar = () => {
                         width: "100%",
                         maxWidth: "500px",
                         mx: 2,
+                    }}
+                    onSearch={(value) => {
+                        navigate("/shop");
+                        setSearchParams({ q: value });
                     }}
                 />
                 <BoxHorizon gap={1} flexShrink={0}>

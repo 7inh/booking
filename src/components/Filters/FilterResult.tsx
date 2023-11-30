@@ -12,6 +12,8 @@ import useGetItemPerPage from "src/hooks/useGetItemPerPage";
 import useGetItemTotal from "src/hooks/useGetItemTotal";
 import useTranslation from "src/hooks/utils/useTranslation";
 
+const perPage = 12;
+
 const FilterResult = () => {
     const t = useTranslation();
 
@@ -20,7 +22,7 @@ const FilterResult = () => {
 
     const { data: books } = useGetItemPerPage({
         page,
-        perPage: 9,
+        perPage,
     });
     const { data: totalItems } = useGetItemTotal();
 
@@ -41,8 +43,8 @@ const FilterResult = () => {
                     }}
                 >
                     {t("pages.shop.result.showItemsOf", {
-                        from: page * 9 - 8,
-                        to: page * 9,
+                        from: page * perPage - perPage + 1,
+                        to: page * perPage,
                         total: totalItems,
                     })}
                 </TypographyBase>
@@ -65,6 +67,7 @@ const FilterResult = () => {
                     />
                 </BoxBase>
             </BoxHorizon>
+            <br />
 
             {currentView === "grid" ? (
                 <ListBook books={books} />
@@ -74,7 +77,7 @@ const FilterResult = () => {
             <br />
             <Paging
                 totalItems={totalItems}
-                itemsPerPage={9}
+                itemsPerPage={perPage}
                 page={page}
                 onPageChange={(page) => setPage(page)}
             />

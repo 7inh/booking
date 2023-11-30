@@ -9,6 +9,13 @@ export interface SnackbarData {
     id: string;
 }
 
+const mapBgColor = {
+    error: "#D72323", // Match with main red
+    warning: "#FF9600", // Match with dark orange
+    info: "#0065FF", // Match with main blue
+    success: "#4CAF50", // Softer green
+};
+
 function SnackBarStack(): JSX.Element {
     const { snackbars, removeSnackbar } = useSnackbarContext();
 
@@ -17,8 +24,8 @@ function SnackBarStack(): JSX.Element {
             {snackbars.map((snackbar, idx) => (
                 <Snackbar
                     anchorOrigin={{
-                        vertical: "top",
-                        horizontal: "center",
+                        vertical: "bottom",
+                        horizontal: "left",
                     }}
                     key={snackbar.id}
                     open={true}
@@ -28,13 +35,17 @@ function SnackBarStack(): JSX.Element {
                         removeSnackbar(snackbar.id);
                     }}
                     sx={{
-                        marginTop: 7 * idx,
+                        marginBottom: 7 * idx,
                     }}
                 >
                     <MuiAlert
                         onClose={() => removeSnackbar(snackbar.id)}
                         severity={snackbar.severity}
-                        sx={{ width: "100%" }}
+                        sx={{
+                            width: "100%",
+                            bgcolor: snackbar.severity ? mapBgColor[snackbar.severity] : "",
+                        }}
+                        variant="filled"
                     >
                         {snackbar.message}
                     </MuiAlert>

@@ -1,13 +1,16 @@
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { CardMedia } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { BOOK_ITEM_HORIZON_HEIGHT, BOOK_ITEM_HORIZON_WIDTH } from "src/common/const";
 import { Book } from "src/common/types";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxCenter from "src/components/Boxs/BoxCenter";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import BoxVertical from "src/components/Boxs/BoxVertical";
-import TypographyBase from "src/components/Typographys/TypographyBase";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ButtonBase from "src/components/Buttons/ButtonBase";
+import TypographyBase from "src/components/Typographys/TypographyBase";
+import { useCartContext } from "src/contexts/CartContext";
+import useSnackBar from "src/hooks/utils/useSnackBar";
 import useTranslation from "src/hooks/utils/useTranslation";
 
 export interface BookItemHorizonV2Props {
@@ -17,7 +20,13 @@ export interface BookItemHorizonV2Props {
 
 const BookItemHorizonV2 = (props: BookItemHorizonV2Props) => {
     const t = useTranslation();
+    const snackbar = useSnackBar();
+    const navigate = useNavigate();
+
     const { book, onClick } = props;
+
+    const { addToCart } = useCartContext();
+
     return (
         <BoxBase
             sx={{
@@ -149,8 +158,19 @@ const BookItemHorizonV2 = (props: BookItemHorizonV2Props) => {
                                     bgcolor: "primary.main",
                                     color: "white",
                                     transition: "all 0.3s ease",
-                                    border: "none",
+                                    borderColor: "primary.main",
                                 },
+                            }}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                addToCart({
+                                    quantity: 1,
+                                    book,
+                                });
+                                snackbar({
+                                    message: t("success.addToCart"),
+                                    severity: "success",
+                                });
                             }}
                         >
                             <ShoppingCartIcon />
@@ -160,6 +180,14 @@ const BookItemHorizonV2 = (props: BookItemHorizonV2Props) => {
                                 flexShrink: 0,
                             }}
                             label={t("common.buyNow")}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                addToCart({
+                                    quantity: 1,
+                                    book,
+                                });
+                                navigate("/cart");
+                            }}
                         />
                     </BoxHorizon>
                 </BoxBase>

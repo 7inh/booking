@@ -14,10 +14,12 @@ import TypographyBase from "src/components/Typographys/TypographyBase";
 import { useCartContext } from "src/contexts/CartContext";
 import useGetRandom from "src/hooks/useGetRandom";
 import { useResponsive } from "src/hooks/utils/useResponsive";
+import useSnackBar from "src/hooks/utils/useSnackBar";
 import useTranslation from "src/hooks/utils/useTranslation";
 
 const RandomBook = () => {
     const t = useTranslation();
+    const snackbar = useSnackBar();
     const navigate = useNavigate();
 
     const { addToCart } = useCartContext();
@@ -136,6 +138,10 @@ const RandomBook = () => {
                                         addToCart({
                                             quantity: 1,
                                             book: currentSelected,
+                                        });
+                                        snackbar({
+                                            message: t("success.addToCart"),
+                                            severity: "success",
                                         });
                                     }}
                                 />

@@ -73,7 +73,7 @@ export const vi: LangType = {
         home: {
             title: "Trang chủ",
             branding: {
-                title: "Manga & Novel store",
+                title: "Manga store online",
                 subTitle:
                     "Chào mừng bạn đến với cửa hàng của chúng tôi. Rất nhiều đầu sách hay đang chờ bạn khám phá",
                 button: "Xem ngay",

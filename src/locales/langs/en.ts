@@ -10,19 +10,16 @@ export const en: LangType = {
     },
     broadcast: {
         popularCollection: {
-            title: "Popular Collection",
-            subTitle:
-                "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.",
+            title: "Popular",
+            subTitle: "List of the most popular books",
         },
         newestCollection: {
-            title: "Newest Collection",
-            subTitle:
-                "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.",
+            title: "Newest",
+            subTitle: "List of the latest book releases",
         },
         upcomingCollection: {
-            title: "Upcoming Collection",
-            subTitle:
-                "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.",
+            title: "Upcoming",
+            subTitle: "List of upcoming book releases",
         },
     },
     success: {
@@ -38,19 +35,16 @@ export const en: LangType = {
     },
     feature: {
         delivery: {
-            title: "Free Delivery",
-            subTitle:
-                "Worldwide delivery on all. Authorit tively morph next-generation innov tion with extensive models.",
+            title: "Door-to-Door Delivery",
+            subTitle: "We offer nationwide delivery services.",
         },
         quality: {
-            title: "Quality Assurance",
-            subTitle:
-                "Worldwide delivery on all. Authorit tively morph next-generation innov tion with extensive models.",
+            title: "Quality",
+            subTitle: "Committed to providing the best quality products.",
         },
         service: {
-            title: "Premium Support",
-            subTitle:
-                "Worldwide delivery on all. Authorit tively morph next-generation innov tion with extensive models.",
+            title: "Dedication",
+            subTitle: "Satisfying customers is our motto",
         },
     },
     dialog: {
@@ -78,10 +72,9 @@ export const en: LangType = {
         home: {
             title: "Home",
             branding: {
-                title: "Welcome to our store",
-                subTitle:
-                    "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.",
-                button: "Shop now",
+                title: "Manga store online",
+                subTitle: "Welcome to our store. A plethora of great books awaits you to explore.",
+                button: "Explore Now",
             },
         },
         shop: {

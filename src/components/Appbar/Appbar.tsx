@@ -193,6 +193,9 @@ const AppBar = () => {
                                                     <TypographyBase
                                                         variant="caption"
                                                         lineHeight={1}
+                                                        sx={{
+                                                            color: "#f44336",
+                                                        }}
                                                     >
                                                         {item.book.current_price.toLocaleString(
                                                             "vi-VN",
@@ -233,7 +236,13 @@ const AppBar = () => {
                                         <TypographyBase variant="body1">
                                             {t("common.totalCart")}
                                         </TypographyBase>
-                                        <TypographyBase variant="body2" lineHeight={1}>
+                                        <TypographyBase
+                                            variant="body2"
+                                            lineHeight={1}
+                                            sx={{
+                                                color: "#f44336",
+                                            }}
+                                        >
                                             {cartTotalValue.toLocaleString("vi-VN", {
                                                 style: "currency",
                                                 currency: "VND",

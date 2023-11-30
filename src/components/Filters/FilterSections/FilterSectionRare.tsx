@@ -6,7 +6,11 @@ import BoxVertical from "src/components/Boxs/BoxVertical";
 import FilterSectionBase from "src/components/Filters/FilterSections/FilterSectionBase";
 import useTranslation from "src/hooks/utils/useTranslation";
 
-const FilterSectionRare = () => {
+export interface FilterSectionRareProps {
+    onChange?: (value: string[]) => void;
+}
+
+const FilterSectionRare = ({ onChange }: FilterSectionRareProps) => {
     const t = useTranslation();
 
     const [rareValue, setRareValue] = useState<BookDataCustom[]>([
@@ -35,13 +39,16 @@ const FilterSectionRare = () => {
     const handleChangeState = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>, idx: number) => {
             const { checked } = event.target;
-            setRareValue((prev) => {
-                const newState = [...prev];
-                newState[idx].checkBoxState = checked ? "checked" : "unchecked";
-                return newState;
-            });
+            const newState = [...rareValue];
+            newState[idx].checkBoxState = checked ? "checked" : "unchecked";
+            setRareValue(newState);
+            onChange?.(
+                newState
+                    .filter((value) => value.checkBoxState === "checked")
+                    .map((value) => value.key)
+            );
         },
-        [setRareValue]
+        [onChange, rareValue]
     );
 
     return (

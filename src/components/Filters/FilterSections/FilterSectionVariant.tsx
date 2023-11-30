@@ -6,7 +6,11 @@ import BoxVertical from "src/components/Boxs/BoxVertical";
 import FilterSectionBase from "src/components/Filters/FilterSections/FilterSectionBase";
 import useTranslation from "src/hooks/utils/useTranslation";
 
-const FilterSectionVariant = () => {
+export interface FilterSectionVariantProps {
+    onChange?: (value: string[]) => void;
+}
+
+const FilterSectionVariant = ({ onChange }: FilterSectionVariantProps) => {
     const t = useTranslation();
 
     const [variantValue, setVariantValue] = useState<BookDataCustom[]>([
@@ -30,13 +34,16 @@ const FilterSectionVariant = () => {
     const handleChangeState = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>, idx: number) => {
             const { checked } = event.target;
-            setVariantValue((prev) => {
-                const newState = [...prev];
-                newState[idx].checkBoxState = checked ? "checked" : "unchecked";
-                return newState;
-            });
+            const newState = [...variantValue];
+            newState[idx].checkBoxState = checked ? "checked" : "unchecked";
+            setVariantValue(newState);
+            onChange?.(
+                newState
+                    .filter((value) => value.checkBoxState === "checked")
+                    .map((value) => value.key)
+            );
         },
-        [setVariantValue]
+        [onChange, variantValue]
     );
 
     return (

@@ -1,8 +1,11 @@
+import { FilterBookParams } from "src/common/types";
 import doQuery from "src/services/services";
 
-export interface UseGetItemTotalProps {}
+export interface UseGetItemTotalProps {
+    filter?: FilterBookParams;
+}
 
-const useGetItemTotal = () => {
+const useGetItemTotal = ({ filter }: UseGetItemTotalProps) => {
     const {
         data = 0,
         isFetched,
@@ -11,7 +14,9 @@ const useGetItemTotal = () => {
     } = doQuery({
         entity: "item",
         action: "getTotal",
-        params: {},
+        params: {
+            filter,
+        },
         option: {
             enable: true,
             select: (data) => data?.data?.total,

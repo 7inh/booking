@@ -5,7 +5,13 @@ import FilterSectionPrice from "src/components/Filters/FilterSections/FilterSect
 import FilterSectionRare from "src/components/Filters/FilterSections/FilterSectionRare";
 import FilterSectionVariant from "src/components/Filters/FilterSections/FilterSectionVariant";
 
-const FilterBook = () => {
+export interface FilterBookProps {
+    onChangeRare?: (value: string[]) => void;
+    onChangeVariant?: (value: string[]) => void;
+    onChangeAvailability?: (value: string[]) => void;
+}
+
+const FilterBook = ({ onChangeRare, onChangeVariant, onChangeAvailability }: FilterBookProps) => {
     return (
         <BoxBase
             width="100%"
@@ -21,19 +27,19 @@ const FilterBook = () => {
                     my: 2,
                 }}
             />
-            <FilterSectionAvailability />
+            <FilterSectionAvailability onChange={onChangeAvailability} />
             <Divider
                 sx={{
                     my: 2,
                 }}
             />
-            <FilterSectionVariant />
+            <FilterSectionVariant onChange={onChangeVariant} />
             <Divider
                 sx={{
                     my: 2,
                 }}
             />
-            <FilterSectionRare />
+            <FilterSectionRare onChange={onChangeRare} />
         </BoxBase>
     );
 };

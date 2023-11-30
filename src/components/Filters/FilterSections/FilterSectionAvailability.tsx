@@ -6,7 +6,11 @@ import BoxVertical from "src/components/Boxs/BoxVertical";
 import FilterSectionBase from "src/components/Filters/FilterSections/FilterSectionBase";
 import useTranslation from "src/hooks/utils/useTranslation";
 
-const FilterSectionAvailability = () => {
+export interface FilterSectionAvailabilityProps {
+    onChange?: (value: string[]) => void;
+}
+
+const FilterSectionAvailability = ({ onChange }: FilterSectionAvailabilityProps) => {
     const t = useTranslation();
 
     const [availabilityValue, setAvailabilityValue] = useState<BookDataCustom[]>([
@@ -25,13 +29,16 @@ const FilterSectionAvailability = () => {
     const handleChangeState = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>, idx: number) => {
             const { checked } = event.target;
-            setAvailabilityValue((prev) => {
-                const newState = [...prev];
-                newState[idx].checkBoxState = checked ? "checked" : "unchecked";
-                return newState;
-            });
+            const newState = [...availabilityValue];
+            newState[idx].checkBoxState = checked ? "checked" : "unchecked";
+            setAvailabilityValue(newState);
+            onChange?.(
+                newState
+                    .filter((value) => value.checkBoxState === "checked")
+                    .map((value) => value.key)
+            );
         },
-        [setAvailabilityValue]
+        [availabilityValue, onChange]
     );
 
     return (

@@ -1,5 +1,7 @@
 import groupBy from "lodash/groupBy";
 import { DateTime } from "luxon";
+import { AvailabilityEnum, RareEnum, VariantEnum } from "src/common/enum";
+import { FilterBookParams, FilterBookType } from "src/common/types";
 import { LocaleType } from "src/locales/types";
 
 export function formatDateTime(date: Date) {
@@ -250,4 +252,23 @@ export const getOperatorSymbol = (value: number) => {
 
 export const addCommas = (value: number) => {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+export const mapFilterToParams = (filter: FilterBookType): FilterBookParams => {
+    const rare = filter?.rare?.map((rare) => RareEnum[rare as keyof typeof RareEnum]);
+    const variant = filter?.variant?.map(
+        (variant) => VariantEnum[variant as keyof typeof VariantEnum]
+    );
+    const availability = filter?.availability?.map(
+        (availability) => AvailabilityEnum[availability as keyof typeof AvailabilityEnum]
+    );
+
+    const params: FilterBookParams = {
+        price: filter?.price,
+        rare,
+        variant,
+        availability,
+    };
+
+    return params;
 };

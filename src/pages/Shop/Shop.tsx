@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { PAGE_MAX_WIDTH } from "src/common/const";
+import { FilterBookType } from "src/common/types";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import Breadcrumb from "src/components/Breadcrumb/Breadcrumb";
@@ -8,6 +10,14 @@ import useTranslation from "src/hooks/utils/useTranslation";
 
 const Shop = () => {
     const t = useTranslation();
+
+    const [filter, setFilter] = useState<FilterBookType>({
+        price: [0, Infinity],
+        availability: [],
+        variant: [],
+        rare: [],
+    });
+
     return (
         <>
             <Breadcrumb
@@ -37,8 +47,27 @@ const Shop = () => {
                         gap: 3,
                     }}
                 >
-                    <FilterBook />
-                    <FilterResult />
+                    <FilterBook
+                        onChangeRare={(value) =>
+                            setFilter((prev) => ({
+                                ...prev,
+                                rare: value,
+                            }))
+                        }
+                        onChangeVariant={(value) =>
+                            setFilter((prev) => ({
+                                ...prev,
+                                variant: value,
+                            }))
+                        }
+                        onChangeAvailability={(value) =>
+                            setFilter((prev) => ({
+                                ...prev,
+                                availability: value,
+                            }))
+                        }
+                    />
+                    <FilterResult filter={filter} />
                 </BoxHorizon>
             </BoxBase>
         </>

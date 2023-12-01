@@ -62,7 +62,7 @@ export interface FilterBookType {
     availability: string[];
     variant: string[];
     rare: string[];
-    orderBy: string;
+    orderBy?: string;
 }
 
 export interface FilterBookParams {

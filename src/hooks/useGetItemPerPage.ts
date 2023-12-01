@@ -1,4 +1,4 @@
-import { FilterBookParams } from "src/common/types";
+import { FilterBookParams, OrderBy } from "src/common/types";
 import doQuery from "src/services/services";
 
 export interface UseGetItemPerPageProps {
@@ -6,10 +6,11 @@ export interface UseGetItemPerPageProps {
     perPage: number;
     filter?: FilterBookParams;
     title?: string;
+    orderBy: OrderBy;
 }
 
 const useGetItemPerPage = (props: UseGetItemPerPageProps) => {
-    const { page, perPage, filter, title } = props;
+    const { page, perPage, filter, title, orderBy } = props;
     const {
         data = [],
         isFetched,
@@ -23,6 +24,7 @@ const useGetItemPerPage = (props: UseGetItemPerPageProps) => {
             perPage,
             filter,
             title,
+            orderBy,
         },
         option: {
             enable: true,

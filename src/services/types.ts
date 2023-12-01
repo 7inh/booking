@@ -1,10 +1,11 @@
-import { FilterBookParams } from "src/common/types";
+import { FilterBookParams, OrderBy } from "src/common/types";
 
 export interface ItemGetPerPage {
     page: number;
     perPage: number;
     filter?: FilterBookParams;
     title?: string;
+    orderBy: OrderBy;
 }
 
 export interface ItemGetTotal {

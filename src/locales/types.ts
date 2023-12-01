@@ -110,8 +110,10 @@ export type LangType = {
             order: {
                 newest: string;
                 oldest: string;
-                priceHighToLow: string;
-                priceLowToHigh: string;
+                priceDesc: string;
+                priceAsc: string;
+                sale: string;
+                discount: string;
             };
         };
         book: {

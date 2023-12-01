@@ -114,8 +114,10 @@ export const vi: LangType = {
             order: {
                 newest: "Mới nhất",
                 oldest: "Cũ nhất",
-                priceHighToLow: "Giá: Cao đến thấp",
-                priceLowToHigh: "Giá: Thấp đến cao",
+                priceDesc: "Giá: Cao đến thấp",
+                priceAsc: "Giá: Thấp đến cao",
+                discount: "Giảm giá nhiều",
+                sale: "Bán chạy",
             },
         },
         book: {

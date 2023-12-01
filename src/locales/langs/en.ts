@@ -112,8 +112,10 @@ export const en: LangType = {
             order: {
                 newest: "Newest",
                 oldest: "Oldest",
-                priceHighToLow: "Price: High to Low",
-                priceLowToHigh: "Price: Low to High",
+                priceDesc: "Price: High to Low",
+                priceAsc: "Price: Low to High",
+                discount: "Discount",
+                sale: "Sale",
             },
         },
         book: {

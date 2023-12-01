@@ -2,7 +2,7 @@ import ViewListIcon from "@mui/icons-material/ViewList";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { FilterBookType } from "src/common/types";
+import { FilterBookType, OrderBy } from "src/common/types";
 import { mapFilterToParams } from "src/common/utils";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxCenter from "src/components/Boxs/BoxCenter";
@@ -28,6 +28,7 @@ const FilterResult = ({ filter }: FilterResultProps) => {
     const q = searchParams.get("q") || "";
     const t = useTranslation();
 
+    const [orderBy, setOrderBy] = useState<OrderBy>("newest");
     const [currentView, setCurrentView] = useState<"grid" | "list">("grid");
     const [page, setPage] = useState(1);
 
@@ -42,6 +43,7 @@ const FilterResult = ({ filter }: FilterResultProps) => {
         perPage,
         filter: params,
         title: q,
+        orderBy,
     });
     const { data: totalItems } = useGetItemTotal({ filter: params, title: q });
 
@@ -56,7 +58,7 @@ const FilterResult = ({ filter }: FilterResultProps) => {
                         mb: 1,
                     }}
                 >
-                    <SelectOrder onChange={() => {}} />
+                    <SelectOrder onChange={(value) => setOrderBy(value)} />
                     <TypographyBase
                         sx={{
                             fontWeight: 300,

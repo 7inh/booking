@@ -10,15 +10,19 @@ import TypographyBase from "src/components/Typographys/TypographyBase";
 import useTranslation from "src/hooks/utils/useTranslation";
 
 const MIN_PRICE = 0;
-const MAX_PRICE = 9000000;
+const MAX_PRICE = 1000000;
 const STEP = 20000;
 
 const MIN_DISTANCE = 20000;
 
-const FilterSectionPrice = () => {
+export interface FilterSectionPriceProps {
+    onChange?: (value: number[]) => void;
+}
+
+const FilterSectionPrice = ({ onChange }: FilterSectionPriceProps) => {
     const t = useTranslation();
 
-    const [priceRange, setRange] = useState<number[]>([0, MAX_PRICE / 1.5]);
+    const [priceRange, setRange] = useState<number[]>([0, MAX_PRICE / 2]);
 
     const handleChangeRange = (_: any, newValue: number | number[], activeThumb: number) => {
         if (!Array.isArray(newValue)) {
@@ -151,6 +155,9 @@ const FilterSectionPrice = () => {
                             "&:hover": {
                                 bgcolor: "primary.light",
                             },
+                        }}
+                        onClick={() => {
+                            onChange?.(priceRange);
                         }}
                     >
                         <NavigateNextIcon />

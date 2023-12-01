@@ -264,7 +264,7 @@ export const mapFilterToParams = (filter: FilterBookType): FilterBookParams => {
     );
 
     const params: FilterBookParams = {
-        price: filter?.price,
+        priceRange: filter?.price?.join(","),
         rare,
         variant,
         availability,

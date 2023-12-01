@@ -9,9 +9,15 @@ export interface FilterBookProps {
     onChangeRare?: (value: string[]) => void;
     onChangeVariant?: (value: string[]) => void;
     onChangeAvailability?: (value: string[]) => void;
+    onChangePrice?: (value: number[]) => void;
 }
 
-const FilterBook = ({ onChangeRare, onChangeVariant, onChangeAvailability }: FilterBookProps) => {
+const FilterBook = ({
+    onChangeRare,
+    onChangeVariant,
+    onChangeAvailability,
+    onChangePrice,
+}: FilterBookProps) => {
     return (
         <BoxBase
             width="100%"
@@ -21,7 +27,7 @@ const FilterBook = ({ onChangeRare, onChangeVariant, onChangeAvailability }: Fil
                 userSelect: "none",
             }}
         >
-            <FilterSectionPrice />
+            <FilterSectionPrice onChange={onChangePrice} />
             <Divider
                 sx={{
                     my: 2,

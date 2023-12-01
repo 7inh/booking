@@ -12,7 +12,6 @@ const Shop = () => {
     const t = useTranslation();
 
     const [filter, setFilter] = useState<FilterBookType>({
-        price: [0, Infinity],
         availability: [],
         variant: [],
         rare: [],
@@ -64,6 +63,12 @@ const Shop = () => {
                             setFilter((prev) => ({
                                 ...prev,
                                 availability: value,
+                            }))
+                        }
+                        onChangePrice={(value) =>
+                            setFilter((prev) => ({
+                                ...prev,
+                                price: [value[0], value[1]],
                             }))
                         }
                     />

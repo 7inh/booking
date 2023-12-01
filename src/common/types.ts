@@ -58,7 +58,7 @@ export interface Coupon {
 }
 
 export interface FilterBookType {
-    price: [number, number];
+    price?: [number, number];
     availability: string[];
     variant: string[];
     rare: string[];
@@ -66,7 +66,7 @@ export interface FilterBookType {
 }
 
 export interface FilterBookParams {
-    price: [number, number];
+    priceRange?: string;
     availability: number[];
     variant: number[];
     rare: number[];

@@ -104,6 +104,7 @@ const CheckOut = () => {
             <BoxHorizon
                 sx={{
                     alignItems: "stretch",
+                    height: "calc(100vh - 70px)",
                 }}
             >
                 <BoxBase flexGrow={1}></BoxBase>

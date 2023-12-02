@@ -99,6 +99,7 @@ export type LangType = {
                     collection: string;
                 };
                 range: string;
+                format: string;
                 formatList: {
                     paperback: string;
                     hardcover: string;
@@ -155,8 +156,10 @@ export type LangType = {
                 email: string;
                 phone: string;
                 address: string;
+                date: string;
                 note: string;
             };
+            asSoonAsPossible: string;
             submit: string;
         };
         about: {

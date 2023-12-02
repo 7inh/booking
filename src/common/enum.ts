@@ -15,3 +15,8 @@ export enum AvailabilityEnum {
     preOrder = 1,
     available = 2,
 }
+
+export enum FormatEnum {
+    paperback = 1,
+    hardcover = 2,
+}

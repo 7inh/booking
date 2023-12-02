@@ -1,6 +1,6 @@
 import groupBy from "lodash/groupBy";
 import { DateTime } from "luxon";
-import { AvailabilityEnum, RareEnum, VariantEnum } from "src/common/enum";
+import { AvailabilityEnum, FormatEnum, RareEnum, VariantEnum } from "src/common/enum";
 import { FilterBookParams, FilterBookType } from "src/common/types";
 import { LocaleType } from "src/locales/types";
 
@@ -262,12 +262,14 @@ export const mapFilterToParams = (filter: FilterBookType): FilterBookParams => {
     const availability = filter?.availability?.map(
         (availability) => AvailabilityEnum[availability as keyof typeof AvailabilityEnum]
     );
+    const format = filter?.format?.map((format) => FormatEnum[format as keyof typeof FormatEnum]);
 
     const params: FilterBookParams = {
         priceRange: filter?.price?.join(","),
         rare,
         variant,
         availability,
+        format,
     };
 
     return params;

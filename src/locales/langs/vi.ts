@@ -103,6 +103,7 @@ export const vi: LangType = {
                     collection: "Sưu tầm",
                 },
                 range: "đến",
+                format: "Kiểu bìa",
                 formatList: {
                     paperback: "Bìa mềm",
                     hardcover: "Bìa cứng",
@@ -159,8 +160,10 @@ export const vi: LangType = {
                 email: "Email",
                 phone: "Số điện thoại",
                 address: "Địa chỉ nhận hàng",
+                date: "Ngày nhận hàng",
                 note: "Ghi chú cho người bán",
             },
+            asSoonAsPossible: "Giao ngay khi có thể",
             submit: "Đặt hàng",
         },
         about: {

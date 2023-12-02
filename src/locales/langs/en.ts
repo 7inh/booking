@@ -101,6 +101,7 @@ export const en: LangType = {
                     collection: "Collection",
                 },
                 range: "to",
+                format: "Format",
                 formatList: {
                     paperback: "Paperback",
                     hardcover: "Hardcover",
@@ -157,8 +158,10 @@ export const en: LangType = {
                 email: "Email",
                 phone: "Phone number",
                 address: "Address",
+                date: "Date",
                 note: "Note",
             },
+            asSoonAsPossible: "As soon as possible",
             submit: "Submit",
         },
         about: {

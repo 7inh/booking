@@ -1,6 +1,7 @@
 import { Divider } from "@mui/material";
 import BoxBase from "src/components/Boxs/BoxBase";
 import FilterSectionAvailability from "src/components/Filters/FilterSections/FilterSectionAvailability";
+import FilterSectionFormat from "src/components/Filters/FilterSections/FilterSectionFormat";
 import FilterSectionPrice from "src/components/Filters/FilterSections/FilterSectionPrice";
 import FilterSectionRare from "src/components/Filters/FilterSections/FilterSectionRare";
 import FilterSectionVariant from "src/components/Filters/FilterSections/FilterSectionVariant";
@@ -10,6 +11,7 @@ export interface FilterBookProps {
     onChangeVariant?: (value: string[]) => void;
     onChangeAvailability?: (value: string[]) => void;
     onChangePrice?: (value: number[]) => void;
+    onChangeFormat?: (value: string[]) => void;
 }
 
 const FilterBook = ({
@@ -17,6 +19,7 @@ const FilterBook = ({
     onChangeVariant,
     onChangeAvailability,
     onChangePrice,
+    onChangeFormat,
 }: FilterBookProps) => {
     return (
         <BoxBase
@@ -46,6 +49,12 @@ const FilterBook = ({
                 }}
             />
             <FilterSectionRare onChange={onChangeRare} />
+            <Divider
+                sx={{
+                    my: 2,
+                }}
+            />
+            <FilterSectionFormat onChange={onChangeFormat} />
         </BoxBase>
     );
 };

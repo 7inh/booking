@@ -62,6 +62,7 @@ export interface FilterBookType {
     availability: string[];
     variant: string[];
     rare: string[];
+    format: string[];
     orderBy?: string;
 }
 
@@ -70,6 +71,7 @@ export interface FilterBookParams {
     availability: number[];
     variant: number[];
     rare: number[];
+    format: number[];
 }
 
 export type OrderBy = "newest" | "oldest" | "priceDesc" | "priceAsc" | "sale" | "discount";

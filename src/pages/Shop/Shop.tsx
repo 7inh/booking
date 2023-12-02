@@ -15,6 +15,7 @@ const Shop = () => {
         availability: [],
         variant: [],
         rare: [],
+        format: [],
     });
 
     return (
@@ -69,6 +70,12 @@ const Shop = () => {
                             setFilter((prev) => ({
                                 ...prev,
                                 price: [value[0], value[1]],
+                            }))
+                        }
+                        onChangeFormat={(value) =>
+                            setFilter((prev) => ({
+                                ...prev,
+                                format: value,
                             }))
                         }
                     />

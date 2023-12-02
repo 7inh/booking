@@ -6,10 +6,12 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 interface Props {
     name: string;
     label: string;
+    size?: "small" | "medium";
+    disabled?: boolean;
 }
 
 const RHFDatePicker = (props: Props) => {
-    const { name, label } = props;
+    const { name, label, size = "medium", disabled } = props;
     const { control } = useFormContext();
 
     return (
@@ -26,6 +28,8 @@ const RHFDatePicker = (props: Props) => {
                         sx={{
                             width: "100%",
                         }}
+                        slotProps={{ textField: { size } }}
+                        disabled={disabled}
                     />
                 </LocalizationProvider>
             )}

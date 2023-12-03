@@ -5,7 +5,11 @@ import LinkBase from "src/components/Links/LinkBase";
 import TypographyBase from "src/components/Typographys/TypographyBase";
 import useTranslation from "src/hooks/utils/useTranslation";
 
-const Navbar = () => {
+export interface NavbarProps {
+    direction?: "row" | "column";
+}
+
+const Navbar = ({ direction }: NavbarProps) => {
     const t = useTranslation();
     const navData = [
         {
@@ -28,8 +32,7 @@ const Navbar = () => {
     return (
         <BoxBase
             sx={{
-                bgcolor: "primary.main",
-                color: "white",
+                bgcolor: direction === "column" ? "transparent" : "primary.main",
             }}
         >
             <BoxBase
@@ -38,23 +41,36 @@ const Navbar = () => {
                     mx: "auto",
                 }}
             >
-                <BoxHorizon ml={1}>
+                <BoxHorizon
+                    sx={{
+                        ml: direction === "column" ? 0 : 1,
+                        flexDirection: direction,
+                    }}
+                >
                     {navData.map((item) => (
-                        <LinkBase to={item.path} key={item.id}>
+                        <LinkBase
+                            to={item.path}
+                            key={item.id}
+                            style={{
+                                width: direction === "column" ? "100%" : "auto",
+                            }}
+                        >
                             <BoxBase
                                 sx={{
                                     p: 1,
                                     px: 2,
                                     cursor: "pointer",
+                                    color:
+                                        direction === "column" ? "text.primary" : "secondary.light",
                                     "&:hover": {
                                         bgcolor: "primary.dark",
+                                        color: "secondary.light",
                                     },
                                 }}
                             >
                                 <TypographyBase
                                     variant="button"
                                     sx={{
-                                        color: "white",
                                         fontWeight: "bold",
                                     }}
                                 >

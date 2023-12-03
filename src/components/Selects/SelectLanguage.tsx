@@ -1,9 +1,14 @@
 import { Box, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 import { flagIcon } from "src/common/utils";
+import TypographyBase from "src/components/Typographys/TypographyBase";
 import { useTranslationContext } from "src/contexts/TranslationContext";
 import { ListLocale, LocaleType } from "src/locales/types";
 
-const SelectLanguage = () => {
+export interface SelectLanguageProps {
+    fullWidth?: boolean;
+}
+
+const SelectLanguage = ({ fullWidth }: SelectLanguageProps) => {
     const { locale, setLocale, extendTranslation } = useTranslationContext();
 
     const handleChange = (event: SelectChangeEvent) => {
@@ -25,6 +30,7 @@ const SelectLanguage = () => {
                     py: 0,
                     px: 1,
                 },
+                width: fullWidth ? "100%" : "auto",
             }}
             renderValue={(selected) => (
                 <Box
@@ -34,6 +40,14 @@ const SelectLanguage = () => {
                         alignItems: "center",
                     }}
                 >
+                    <TypographyBase
+                        sx={{
+                            fontSize: "16px",
+                            fontWeight: 400,
+                        }}
+                    >
+                        {fullWidth ? extendTranslation(selected, "currentLanguage") : null}
+                    </TypographyBase>
                     <Typography fontSize="40px" lineHeight={1}>
                         {flagIcon(selected)}
                     </Typography>

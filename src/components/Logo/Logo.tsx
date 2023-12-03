@@ -6,16 +6,17 @@ import TypographyBase from "src/components/Typographys/TypographyBase";
 
 export interface LogoProps {
     footer?: boolean;
+    size?: "small" | "medium" | "large";
 }
 
-const Logo = ({ footer }: LogoProps) => {
+const Logo = ({ footer, size }: LogoProps) => {
     const navigate = useNavigate();
 
     return (
         <BoxBase
             sx={{
                 height: "100%",
-                py: 1,
+                py: size === "small" ? 0 : 1,
                 boxSizing: "border-box",
                 display: "flex",
                 alignItems: "center",
@@ -28,7 +29,7 @@ const Logo = ({ footer }: LogoProps) => {
                 src={footer ? "/svgs/logo_dark.svg" : "/svgs/logo.svg"}
                 sx={{
                     height: "auto",
-                    width: "35px",
+                    width: size === "small" ? "27px" : "35px",
                     color: "primary.main",
                     mr: 1,
                 }}
@@ -38,7 +39,7 @@ const Logo = ({ footer }: LogoProps) => {
                     sx={{
                         color: footer ? "secondary.light" : "primary.dark",
                         fontWeight: "bold",
-                        fontSize: "1.5rem",
+                        fontSize: size === "small" ? "1.2rem" : "1.5rem",
                     }}
                 >
                     SUM
@@ -47,7 +48,7 @@ const Logo = ({ footer }: LogoProps) => {
                     sx={{
                         color: "primary.main",
                         fontWeight: "bold",
-                        fontSize: "1.5rem",
+                        fontSize: size === "small" ? "1.2rem" : "1.5rem",
                     }}
                 >
                     SUE

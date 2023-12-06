@@ -103,13 +103,24 @@ const RandomBook = () => {
                                     zIndex: 2,
                                 }}
                             >
-                                <TypographyBase variant="h3" fontWeight="bold">
+                                <TypographyBase
+                                    variant="h3"
+                                    fontWeight="bold"
+                                    sx={{
+                                        textShadow:
+                                            "-1px 0px white, 1px 0px white, 0px -1px white, 0px 1px white, -1px -1px white, 1px 1px white, -1px 1px white, 1px -1px white",
+                                    }}
+                                >
                                     {currentSelected.title}
                                 </TypographyBase>
                                 <TypographyBase
                                     fontWeight="400"
                                     fontSize="40px"
                                     color="primary.main"
+                                    sx={{
+                                        textShadow:
+                                            "-1px 0px white, 1px 0px white, 0px -1px white, 0px 1px white, -1px -1px white, 1px 1px white, -1px 1px white, 1px -1px white",
+                                    }}
                                 >
                                     {currentSelected.current_price.toLocaleString("vi-VN", {
                                         style: "currency",
@@ -122,6 +133,7 @@ const RandomBook = () => {
                                     color="text.secondary"
                                     sx={{
                                         textDecoration: "line-through",
+                                        textShadow: "0px 0px 5px white",
                                     }}
                                 >
                                     {currentSelected.old_price.toLocaleString("vi-VN", {
@@ -136,6 +148,7 @@ const RandomBook = () => {
                                     fullWidth
                                     sx={{
                                         mb: 1,
+                                        bgcolor: "white",
                                     }}
                                     onClick={() => {
                                         addToCart({

@@ -55,6 +55,7 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
                 sx={{
                     display: "flex",
                     gap: 3,
+                    flexWrap: "wrap",
                 }}
             >
                 <BoxBase

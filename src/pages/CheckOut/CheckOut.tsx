@@ -11,12 +11,15 @@ import DialogOrderSuccess from "src/components/Dialogs/DialogOrderSuccess";
 import FormCheckOut, { OrderFormValuesProps } from "src/components/Forms/FormCheckOut";
 import TypographyBase from "src/components/Typographys/TypographyBase";
 import useSubmitOrder from "src/hooks/useSubmitOrder";
+import { useResponsive } from "src/hooks/utils/useResponsive";
 import useTranslation from "src/hooks/utils/useTranslation";
 
 const CheckOut = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
     const t = useTranslation();
+
+    const isSmall = useResponsive("down", 1101);
 
     const [openDialogOrderSuccess, setOpenDialogOrderSuccess] = useState(false);
 
@@ -82,7 +85,7 @@ const CheckOut = () => {
                 <TypographyBase
                     sx={{
                         py: 2,
-                        fontSize: "24px",
+                        fontSize: "1.3rem",
                         fontWeight: 600,
                         mx: 1,
                     }}
@@ -91,7 +94,7 @@ const CheckOut = () => {
                 </TypographyBase>
                 <LocalMallIcon
                     sx={{
-                        fontSize: "24px",
+                        fontSize: "1.3rem",
                         fontWeight: 600,
                         mx: 1,
                         color: "#f44336",
@@ -114,12 +117,14 @@ const CheckOut = () => {
                     sx={{
                         gap: 10,
                         alignItems: "stretch",
+                        flexWrap: "wrap",
                     }}
                 >
                     <BoxBase
                         sx={{
                             bgcolor: "rgb(255,255,255)",
                             flexGrow: 1,
+                            mx: 1,
                         }}
                     >
                         <TypographyBase
@@ -147,8 +152,9 @@ const CheckOut = () => {
                     <BoxBase
                         sx={{
                             bgcolor: "rgb(250,250,250)",
-                            width: "500px",
+                            width: isSmall ? "100%" : "500px",
                             borderLeft: "1px solid rgb(224,224,224)",
+                            pb: 10,
                         }}
                     >
                         <br />

@@ -26,6 +26,7 @@ const Cart = () => {
             />
             <BoxBase
                 sx={{
+                    width: "100%",
                     maxWidth: PAGE_MAX_WIDTH,
                     mx: "auto",
                     mt: 2,

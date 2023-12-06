@@ -50,7 +50,7 @@ const SelectOrder = ({ onChange }: SelectOrderProps) => {
                 borderRadius: "1px",
                 "& fieldset": {
                     border: "1px solid",
-                    borderColor: "primary.dark",
+                    borderColor: "divider",
                 },
                 "&.Mui-focused fieldset": {
                     borderColor: "primary.dark",

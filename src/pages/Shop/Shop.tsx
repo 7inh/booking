@@ -2,14 +2,17 @@ import { useState } from "react";
 import { PAGE_MAX_WIDTH } from "src/common/const";
 import { FilterBookType } from "src/common/types";
 import BoxBase from "src/components/Boxs/BoxBase";
-import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import Breadcrumb from "src/components/Breadcrumb/Breadcrumb";
 import FilterBook from "src/components/Filters/FilterBook";
+import FilterBookSmall from "src/components/Filters/FilterBookSmall";
 import FilterResult from "src/components/Filters/FilterResult";
+import { useResponsive } from "src/hooks/utils/useResponsive";
 import useTranslation from "src/hooks/utils/useTranslation";
 
 const Shop = () => {
     const t = useTranslation();
+
+    const isSmall = useResponsive("down", 920);
 
     const [filter, setFilter] = useState<FilterBookType>({
         availability: [],
@@ -40,47 +43,83 @@ const Shop = () => {
                     mb: 5,
                 }}
             >
-                <BoxHorizon
+                <BoxBase
                     mx={1}
                     sx={{
-                        alignItems: "stretch",
                         gap: 3,
+                        display: "grid",
+                        gridTemplateColumns: isSmall ? "1fr" : "265px 1fr",
                     }}
                 >
-                    <FilterBook
-                        onChangeRare={(value) =>
-                            setFilter((prev) => ({
-                                ...prev,
-                                rare: value,
-                            }))
-                        }
-                        onChangeVariant={(value) =>
-                            setFilter((prev) => ({
-                                ...prev,
-                                variant: value,
-                            }))
-                        }
-                        onChangeAvailability={(value) =>
-                            setFilter((prev) => ({
-                                ...prev,
-                                availability: value,
-                            }))
-                        }
-                        onChangePrice={(value) =>
-                            setFilter((prev) => ({
-                                ...prev,
-                                price: [value[0], value[1]],
-                            }))
-                        }
-                        onChangeFormat={(value) =>
-                            setFilter((prev) => ({
-                                ...prev,
-                                format: value,
-                            }))
-                        }
-                    />
+                    {isSmall ? (
+                        <FilterBookSmall
+                            onChangeRare={(value) =>
+                                setFilter((prev) => ({
+                                    ...prev,
+                                    rare: value,
+                                }))
+                            }
+                            onChangeVariant={(value) =>
+                                setFilter((prev) => ({
+                                    ...prev,
+                                    variant: value,
+                                }))
+                            }
+                            onChangeAvailability={(value) =>
+                                setFilter((prev) => ({
+                                    ...prev,
+                                    availability: value,
+                                }))
+                            }
+                            onChangePrice={(value) =>
+                                setFilter((prev) => ({
+                                    ...prev,
+                                    price: [value[0], value[1]],
+                                }))
+                            }
+                            onChangeFormat={(value) =>
+                                setFilter((prev) => ({
+                                    ...prev,
+                                    format: value,
+                                }))
+                            }
+                        />
+                    ) : (
+                        <FilterBook
+                            onChangeRare={(value) =>
+                                setFilter((prev) => ({
+                                    ...prev,
+                                    rare: value,
+                                }))
+                            }
+                            onChangeVariant={(value) =>
+                                setFilter((prev) => ({
+                                    ...prev,
+                                    variant: value,
+                                }))
+                            }
+                            onChangeAvailability={(value) =>
+                                setFilter((prev) => ({
+                                    ...prev,
+                                    availability: value,
+                                }))
+                            }
+                            onChangePrice={(value) =>
+                                setFilter((prev) => ({
+                                    ...prev,
+                                    price: [value[0], value[1]],
+                                }))
+                            }
+                            onChangeFormat={(value) =>
+                                setFilter((prev) => ({
+                                    ...prev,
+                                    format: value,
+                                }))
+                            }
+                        />
+                    )}
                     <FilterResult filter={filter} />
-                </BoxHorizon>
+                </BoxBase>
             </BoxBase>
         </>
     );

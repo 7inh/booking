@@ -57,6 +57,8 @@ const Paging: React.FC<PagingProps> = ({ page, totalItems, itemsPerPage, onPageC
             sx={{
                 marginTop: "16px",
                 display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
                 alignItems: "center",
                 gap: "8px",
                 "& p": {

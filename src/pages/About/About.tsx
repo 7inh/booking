@@ -24,20 +24,36 @@ const About = () => {
             />
             <BoxBase
                 sx={{
-                    width: PAGE_MAX_WIDTH,
+                    width: "100%",
+                    maxWidth: PAGE_MAX_WIDTH,
                     mx: "auto",
                 }}
             >
-                <BoxHorizon py={10}>
+                <BoxHorizon
+                    sx={{
+                        width: "100%",
+                        flexWrap: {
+                            xs: "wrap",
+                            md: "nowrap",
+                        },
+                        py: 10,
+                    }}
+                >
                     <CardMedia
                         component="img"
                         src="/images/about.png"
                         sx={{
-                            width: "450px",
+                            width: "100%",
+                            maxWidth: "450px",
                             height: "auto",
                         }}
                     />
-                    <BoxBase>
+                    <BoxBase
+                        sx={{
+                            px: 2,
+                            py: 4,
+                        }}
+                    >
                         <TypographyBase
                             sx={{
                                 fontSize: "2rem",

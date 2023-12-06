@@ -22,11 +22,12 @@ const Contact = () => {
             />
             <BoxBase
                 sx={{
-                    width: PAGE_MAX_WIDTH,
+                    width: "100%",
+                    maxWidth: PAGE_MAX_WIDTH,
                     mx: "auto",
                 }}
             >
-                <BoxBase py={10} mx="auto" maxWidth="500px">
+                <BoxBase py={10} mx="auto" maxWidth="500px" px={2}>
                     <FormContact />
                 </BoxBase>
             </BoxBase>

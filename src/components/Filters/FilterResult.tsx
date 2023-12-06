@@ -15,6 +15,7 @@ import SelectOrder from "src/components/Selects/SelectOrder";
 import TypographyBase from "src/components/Typographys/TypographyBase";
 import useGetItemPerPage from "src/hooks/useGetItemPerPage";
 import useGetItemTotal from "src/hooks/useGetItemTotal";
+import { useResponsive } from "src/hooks/utils/useResponsive";
 import useTranslation from "src/hooks/utils/useTranslation";
 
 export interface FilterResultProps {
@@ -27,6 +28,8 @@ const FilterResult = ({ filter }: FilterResultProps) => {
     const [searchParams] = useSearchParams();
     const q = searchParams.get("q") || "";
     const t = useTranslation();
+
+    const isSmall = useResponsive("down", 600);
 
     const [orderBy, setOrderBy] = useState<OrderBy>("newest");
     const [currentView, setCurrentView] = useState<"grid" | "list">("grid");
@@ -70,24 +73,26 @@ const FilterResult = ({ filter }: FilterResultProps) => {
                             total: totalItems,
                         })}
                     </TypographyBase>
-                    <BoxBase>
-                        <ViewModuleIcon
-                            sx={{
-                                color: currentView === "grid" ? "primary.main" : "primary.dark",
-                                fontSize: "30px",
-                                cursor: "pointer",
-                            }}
-                            onClick={() => setCurrentView("grid")}
-                        />
-                        <ViewListIcon
-                            sx={{
-                                fontSize: "30px",
-                                color: currentView === "list" ? "primary.main" : "primary.dark",
-                                cursor: "pointer",
-                            }}
-                            onClick={() => setCurrentView("list")}
-                        />
-                    </BoxBase>
+                    {isSmall ? null : (
+                        <BoxBase flexShrink={0}>
+                            <ViewModuleIcon
+                                sx={{
+                                    color: currentView === "grid" ? "primary.main" : "primary.dark",
+                                    fontSize: "30px",
+                                    cursor: "pointer",
+                                }}
+                                onClick={() => setCurrentView("grid")}
+                            />
+                            <ViewListIcon
+                                sx={{
+                                    fontSize: "30px",
+                                    color: currentView === "list" ? "primary.main" : "primary.dark",
+                                    cursor: "pointer",
+                                }}
+                                onClick={() => setCurrentView("list")}
+                            />
+                        </BoxBase>
+                    )}
                 </BoxHorizon>
                 <br />
 
@@ -105,7 +110,7 @@ const FilterResult = ({ filter }: FilterResultProps) => {
                 />
             </>
         );
-    }, [books, currentView, page, t, totalItems]);
+    }, [books, currentView, isSmall, page, t, totalItems]);
 
     return (
         <BoxBase height="100%" flexGrow={1}>

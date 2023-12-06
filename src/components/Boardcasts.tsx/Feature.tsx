@@ -24,7 +24,12 @@ const Feature = () => {
                 },
             }}
         >
-            <BoxHorizon gap={1}>
+            <BoxHorizon
+                gap={1}
+                sx={{
+                    width: "100%",
+                }}
+            >
                 <CardMedia
                     component="img"
                     src="/images/delivery.png"
@@ -41,7 +46,11 @@ const Feature = () => {
                     </TypographyBase>
                 </BoxBase>
             </BoxHorizon>
-            <BoxHorizon>
+            <BoxHorizon
+                sx={{
+                    width: "100%",
+                }}
+            >
                 <CardMedia
                     component="img"
                     src="/images/quality.png"
@@ -53,10 +62,29 @@ const Feature = () => {
                 />
                 <BoxBase mt={1}>
                     <TypographyBase variant="h6">{t("feature.quality.title")}</TypographyBase>
-                    <TypographyBase variant="body2">{t("feature.quality.subTitle")}</TypographyBase>
+                    <TypographyBase
+                        variant="body2"
+                        sx={{
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            display: "-webkit-box",
+                            WebkitLineClamp: "2",
+                            WebkitBoxOrient: "vertical",
+                            wordBreak: "break-word",
+                            color: "text.secondary",
+                            fontSize: "14px",
+                        }}
+                    >
+                        {t("feature.quality.subTitle")}
+                    </TypographyBase>
                 </BoxBase>
             </BoxHorizon>
-            <BoxHorizon gap={1}>
+            <BoxHorizon
+                gap={1}
+                sx={{
+                    width: "100%",
+                }}
+            >
                 <CardMedia
                     component="img"
                     src="/images/rate.png"

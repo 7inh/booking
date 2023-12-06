@@ -69,6 +69,10 @@ const RandomBook = () => {
                                 backgroundPosition: "center",
                                 backgroundRepeat: "no-repeat",
                                 backgroundImage: `url(${currentSelected.cover})`,
+                                flexWrap: {
+                                    xs: "wrap-reverse",
+                                    md: "nowrap",
+                                },
 
                                 "&:before": {
                                     content: "''",
@@ -87,7 +91,6 @@ const RandomBook = () => {
                                     position: "absolute",
                                     top: 0,
                                     left: 0,
-                                    width: "100%",
                                     height: "100%",
                                     zIndex: 1,
                                     opacity: 0.7,
@@ -153,15 +156,20 @@ const RandomBook = () => {
                                     fullWidth
                                 />
                             </BoxVertical>
-                            <BoxCenter width="35%" flexShrink={0} zIndex={2}>
+                            <BoxCenter
+                                sx={{
+                                    zIndex: 2,
+                                    flexShrink: 0,
+                                    width: "100%",
+                                    maxWidth: BOOK_ITEM_HORIZON_WIDTH * 2.5,
+                                }}
+                            >
                                 <CardMedia
                                     component="img"
                                     src={currentSelected.cover.replace("compact", "master")}
                                     sx={{
                                         boxShadow: "0px 0px 10px 0px #3333330d",
-                                        width: BOOK_ITEM_HORIZON_WIDTH,
                                         height: "auto",
-                                        transform: "scale(2.5)",
                                     }}
                                 />
                             </BoxCenter>

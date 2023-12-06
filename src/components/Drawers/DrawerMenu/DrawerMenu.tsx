@@ -21,7 +21,14 @@ export const DrawerMenu = (props: DrawerMenuProps) => {
 
     return (
         <Drawer anchor="left" open={open} onClose={onClose}>
-            <BoxBase p={1}>
+            <BoxBase
+                sx={{
+                    p: 1,
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                }}
+            >
                 <BoxHorizon
                     mb={2}
                     mt={1}
@@ -47,7 +54,7 @@ export const DrawerMenu = (props: DrawerMenuProps) => {
                         setSearchParams({ q: value });
                     }}
                 />
-                <BoxBase my={1}>
+                <BoxBase my={1} flexGrow={1}>
                     <Navbar direction="column" />
                 </BoxBase>
                 <SelectLanguage fullWidth />

@@ -136,11 +136,15 @@ const AppBar = () => {
                             marginTop: "16px",
                             // set min width
                             "& .MuiMenu-paper": {
-                                width: "100%",
+                                width: {
+                                    xs: "calc(100vw - 32px)",
+                                    sm: "100%",
+                                },
                                 maxWidth: "400px",
                                 borderRadius: "0px",
                                 p: 1,
                                 px: 3,
+                                boxSizing: "border-box",
                             },
                         }}
                         anchorOrigin={{

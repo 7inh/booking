@@ -28,8 +28,9 @@ const Branding = () => {
                 component="img"
                 src="/images/bg.jpg"
                 sx={{
-                    objectFit: "scale-down",
+                    objectFit: "cover",
                     position: "absolute",
+                    height: "100%",
                 }}
             />
             <BoxBase

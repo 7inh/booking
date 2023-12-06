@@ -86,7 +86,9 @@ const Footer = () => {
                             </BoxHorizon>
                             <BoxHorizon gap={1}>
                                 <AlternateEmailRoundedIcon />
-                                <TypographyBase variant="caption">example@email.com</TypographyBase>
+                                <TypographyBase variant="caption">
+                                    thanhcong200912@gmail.com
+                                </TypographyBase>
                             </BoxHorizon>
                         </BoxVertical>
                         <BoxBase>
@@ -150,7 +152,7 @@ const Footer = () => {
                         </BoxBase>
                     </BoxBase>
                 </BoxBase>
-                <BoxBase mt={5}>
+                <BoxBase pt={5}>
                     <Divider
                         sx={{
                             bgcolor: "white",

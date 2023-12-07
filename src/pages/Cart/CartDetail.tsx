@@ -81,6 +81,7 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
                                     height: "100px",
                                     objectFit: "scale-down",
                                     p: 0.75,
+                                    flexShrink: 0,
                                 }}
                             />
                             <BoxBase

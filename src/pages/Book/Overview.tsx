@@ -24,20 +24,32 @@ const Overview = ({ book }: OverviewProps) => {
         <BoxBase
             sx={{
                 display: "grid",
-                gridTemplateColumns: "450px 1fr",
+                gridTemplateColumns: {
+                    xs: "1fr",
+                    md: "450px 1fr",
+                },
                 gap: 4,
             }}
         >
             <BoxBase
                 showBorder
-                p={10}
                 sx={{
+                    p: {
+                        xs: 2,
+                        md: 5,
+                        lg: 10,
+                    },
                     position: "relative",
                 }}
             >
                 <CardMedia
                     component="img"
                     image={book.cover.replace("compact", "master")}
+                    sx={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "scale-down",
+                    }}
                     alt={book.title}
                 />
                 {book.discount !== 0 ? (
@@ -116,8 +128,15 @@ const Overview = ({ book }: OverviewProps) => {
                 <br />
 
                 <br />
-                <BoxBase>
-                    <BoxHorizon>
+                <BoxBase sx={{}}>
+                    <BoxHorizon
+                        sx={{
+                            width: {
+                                xs: "100%",
+                                md: "fit-content",
+                            },
+                        }}
+                    >
                         <InputQuantity
                             onAddToCart={(quantity) => {
                                 addToCart({ book, quantity });

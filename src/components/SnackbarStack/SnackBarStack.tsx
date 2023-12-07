@@ -2,6 +2,7 @@ import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import { ComponentProps } from "react";
 import { useSnackbarContext } from "src/contexts/SnackbarContext";
+import { useResponsive } from "src/hooks/utils/useResponsive";
 
 export interface SnackbarData {
     message: string;
@@ -19,12 +20,14 @@ const mapBgColor = {
 function SnackBarStack(): JSX.Element {
     const { snackbars, removeSnackbar } = useSnackbarContext();
 
+    const isSmall = useResponsive("down", 600);
+
     return (
         <>
             {snackbars.map((snackbar, idx) => (
                 <Snackbar
                     anchorOrigin={{
-                        vertical: "bottom",
+                        vertical: isSmall ? "top" : "bottom",
                         horizontal: "left",
                     }}
                     key={snackbar.id}

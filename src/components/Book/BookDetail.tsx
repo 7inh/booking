@@ -68,7 +68,10 @@ const BookDetail = ({ book }: BookDetailProps) => {
             <BoxBase
                 sx={{
                     display: "grid",
-                    gridTemplateColumns: "minmax(200px, 300px) 1fr",
+                    gridTemplateColumns: {
+                        xs: "1fr 1fr",
+                        md: "minmax(200px, 300px) 1fr",
+                    },
                     gap: 1,
                     borderBottom: "1px solid",
                     borderBottomColor: "secondary.light",

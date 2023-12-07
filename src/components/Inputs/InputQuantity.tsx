@@ -23,6 +23,7 @@ const InputQuantity = ({ onAddToCart, onBuyNow }: InputQuantityProps) => {
                 gridAutoRows: "1fr",
                 columnGap: 1,
                 rowGap: 2,
+                width: "100%",
             }}
         >
             <BoxBase

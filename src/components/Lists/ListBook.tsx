@@ -1,6 +1,5 @@
-import { BOOK_ITEM_WIDTH } from "src/common/const";
 import { Book } from "src/common/types";
-import BookItem from "src/components/Book/BookItem";
+import BookItemV2 from "src/components/Book/BookItemV2";
 import BoxBase from "src/components/Boxs/BoxBase";
 
 export interface ListBookProps {
@@ -12,15 +11,22 @@ const ListBook = ({ books }: ListBookProps) => {
         <BoxBase
             sx={{
                 display: "grid",
-                gridTemplateColumns: `repeat(auto-fill, ${BOOK_ITEM_WIDTH}px)`,
+                gridTemplateColumns: {
+                    xs: "1fr 1fr",
+                    lg: "1fr 1fr 1fr",
+                },
+                gap: {
+                    xs: "5px",
+                    sm: "10px",
+                    md: "20px",
+                },
                 justifyContent: "center",
-                gap: "20px",
                 width: "100%",
             }}
         >
             {books.map((book) => {
                 return (
-                    <BookItem
+                    <BookItemV2
                         key={book.id}
                         book={{
                             ...book,

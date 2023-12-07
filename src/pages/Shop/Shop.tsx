@@ -53,6 +53,7 @@ const Shop = () => {
                 >
                     {isSmall ? (
                         <FilterBookSmall
+                            filter={filter}
                             onChangeRare={(value) =>
                                 setFilter((prev) => ({
                                     ...prev,

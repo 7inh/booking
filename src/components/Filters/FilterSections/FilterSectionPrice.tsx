@@ -2,6 +2,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { TextField } from "@mui/material";
 import Slider from "@mui/material/Slider";
 import { useState } from "react";
+import { FilterBookType } from "src/common/types";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxCenter from "src/components/Boxs/BoxCenter";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
@@ -16,13 +17,14 @@ const STEP = 20000;
 const MIN_DISTANCE = 20000;
 
 export interface FilterSectionPriceProps {
+    filter?: FilterBookType["price"];
     onChange?: (value: number[]) => void;
 }
 
-const FilterSectionPrice = ({ onChange }: FilterSectionPriceProps) => {
+const FilterSectionPrice = ({ filter, onChange }: FilterSectionPriceProps) => {
     const t = useTranslation();
 
-    const [priceRange, setRange] = useState<number[]>([0, MAX_PRICE / 2]);
+    const [priceRange, setRange] = useState<number[]>(filter ? filter : [0, MAX_PRICE / 2]);
 
     const handleChangeRange = (_: any, newValue: number | number[], activeThumb: number) => {
         if (!Array.isArray(newValue)) {

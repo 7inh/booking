@@ -43,7 +43,7 @@ export interface BookDetail extends Book {
 export interface BookDataCustom {
     key: string;
     name: string;
-    checkBoxState: "checked" | "unchecked";
+    checkBoxState: string;
 }
 
 export interface CartItem {

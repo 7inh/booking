@@ -1,19 +1,16 @@
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import { useCallback, useState } from "react";
-import { BookDataCustom } from "src/common/types";
-import BoxVertical from "src/components/Boxs/BoxVertical";
-import FilterSectionBase from "src/components/Filters/FilterSections/FilterSectionBase";
+import { FilterBookType } from "src/common/types";
+import FilterSectionCheckBox from "src/components/Filters/FilterSections/FilterSectionCheckBox";
 import useTranslation from "src/hooks/utils/useTranslation";
 
 export interface FilterSectionAvailabilityProps {
+    filter?: FilterBookType["availability"];
     onChange?: (value: string[]) => void;
 }
 
-const FilterSectionAvailability = ({ onChange }: FilterSectionAvailabilityProps) => {
+const FilterSectionAvailability = ({ filter, onChange }: FilterSectionAvailabilityProps) => {
     const t = useTranslation();
 
-    const [availabilityValue, setAvailabilityValue] = useState<BookDataCustom[]>([
+    const initialAvailabilityValue = [
         {
             key: "available",
             name: t("pages.shop.filter.availabilityList.available"),
@@ -24,43 +21,22 @@ const FilterSectionAvailability = ({ onChange }: FilterSectionAvailabilityProps)
             name: t("pages.shop.filter.availabilityList.preOrder"),
             checkBoxState: "unchecked",
         },
-    ]);
-
-    const handleChangeState = useCallback(
-        (event: React.ChangeEvent<HTMLInputElement>, idx: number) => {
-            const { checked } = event.target;
-            const newState = [...availabilityValue];
-            newState[idx].checkBoxState = checked ? "checked" : "unchecked";
-            setAvailabilityValue(newState);
-            onChange?.(
-                newState
-                    .filter((value) => value.checkBoxState === "checked")
-                    .map((value) => value.key)
-            );
-        },
-        [availabilityValue, onChange]
-    );
+    ].map((value) => {
+        if (filter?.includes(value.key)) {
+            return {
+                ...value,
+                checkBoxState: "checked",
+            };
+        }
+        return value;
+    });
 
     return (
-        <FilterSectionBase title={t("pages.shop.filter.availability")}>
-            <BoxVertical>
-                {availabilityValue.map((value, idx) => {
-                    return (
-                        <FormControlLabel
-                            key={value.key}
-                            label={value.name}
-                            control={
-                                <Checkbox
-                                    size="small"
-                                    checked={value.checkBoxState === "checked"}
-                                    onChange={(event) => handleChangeState(event, idx)}
-                                />
-                            }
-                        />
-                    );
-                })}
-            </BoxVertical>
-        </FilterSectionBase>
+        <FilterSectionCheckBox
+            title={t("pages.shop.filter.availability")}
+            initialCheckBoxValue={initialAvailabilityValue}
+            onChange={onChange}
+        />
     );
 };
 

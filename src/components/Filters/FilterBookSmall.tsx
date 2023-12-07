@@ -11,8 +11,10 @@ import FilterSectionPrice from "src/components/Filters/FilterSections/FilterSect
 import FilterSectionRare from "src/components/Filters/FilterSections/FilterSectionRare";
 import FilterSectionVariant from "src/components/Filters/FilterSections/FilterSectionVariant";
 import Menu from "@mui/material/Menu";
+import { FilterBookType } from "src/common/types";
 
-export interface FilterBookProps {
+export interface FilterBookSmallProps {
+    filter: FilterBookType;
     onChangeRare?: (value: string[]) => void;
     onChangeVariant?: (value: string[]) => void;
     onChangeAvailability?: (value: string[]) => void;
@@ -20,9 +22,9 @@ export interface FilterBookProps {
     onChangeFormat?: (value: string[]) => void;
 }
 
-type FilterBookType = "price" | "availability" | "variant" | "rare" | "format";
+type FilterBookMappedType = "price" | "availability" | "variant" | "rare" | "format";
 
-const filter: Record<FilterBookType, any> = {
+const filterComponent: Record<FilterBookMappedType, any> = {
     price: FilterSectionPrice,
     availability: FilterSectionAvailability,
     variant: FilterSectionVariant,
@@ -30,16 +32,17 @@ const filter: Record<FilterBookType, any> = {
     format: FilterSectionFormat,
 };
 
-const FilterBook = ({
+const FilterBookSmall = ({
+    filter,
     onChangeRare,
     onChangeVariant,
     onChangeAvailability,
     onChangePrice,
     onChangeFormat,
-}: FilterBookProps) => {
+}: FilterBookSmallProps) => {
     const t = useTranslation();
 
-    const [currentOpenFilter, setCurrentOpenFilter] = useState<FilterBookType | null>(null);
+    const [currentOpenFilter, setCurrentOpenFilter] = useState<FilterBookMappedType | null>(null);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
@@ -54,7 +57,7 @@ const FilterBook = ({
     }, [onChangeAvailability, onChangeFormat, onChangePrice, onChangeRare, onChangeVariant]);
 
     const renderFilter = useCallback(
-        (key: FilterBookType) => {
+        (key: FilterBookMappedType) => {
             return (
                 <BoxBase
                     sx={{
@@ -86,8 +89,9 @@ const FilterBook = ({
     const renderMenuFilter = useMemo(() => {
         if (!currentOpenFilter) return null;
 
-        const Component = filter[currentOpenFilter];
+        const Component = filterComponent[currentOpenFilter];
         const onChange = mapOnChange[currentOpenFilter];
+        const currentFilter = filter[currentOpenFilter];
 
         return (
             <Menu
@@ -112,10 +116,10 @@ const FilterBook = ({
                     },
                 }}
             >
-                <Component onChange={onChange} />
+                <Component filter={currentFilter} onChange={onChange} />
             </Menu>
         );
-    }, [anchorEl, currentOpenFilter, mapOnChange, open]);
+    }, [anchorEl, currentOpenFilter, filter, mapOnChange, open]);
 
     return (
         <BoxBase>
@@ -141,4 +145,4 @@ const FilterBook = ({
     );
 };
 
-export default FilterBook;
+export default FilterBookSmall;

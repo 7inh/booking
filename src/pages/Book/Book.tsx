@@ -37,7 +37,7 @@ const Book = () => {
                 }}
             >
                 {book ? (
-                    <BoxBase mx={1}>
+                    <BoxBase mx={2}>
                         <Overview book={book} />
                         <br />
                         <br />

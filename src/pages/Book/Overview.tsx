@@ -83,7 +83,7 @@ const Overview = ({ book }: OverviewProps) => {
             <BoxBase>
                 <TypographyBase
                     sx={{
-                        fontSize: "30px",
+                        fontSize: "1.9rem",
                         fontWeight: 500,
                     }}
                 >
@@ -118,7 +118,7 @@ const Overview = ({ book }: OverviewProps) => {
                 </BoxHorizon>
                 <TypographyBase
                     sx={{
-                        fontSize: "18px",
+                        fontSize: "1rem",
                         fontWeight: 300,
                         color: "primary.dark",
                     }}

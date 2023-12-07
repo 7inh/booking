@@ -179,6 +179,7 @@ const CheckOut = () => {
                                             border: "1px solid rgb(224,224,224)",
                                             p: 1.5,
                                             borderRadius: 2,
+                                            flexShrink: 0,
                                         }}
                                     />
                                     <BoxBase

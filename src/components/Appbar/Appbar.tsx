@@ -195,6 +195,7 @@ const AppBar = () => {
                                                     height: "50px",
                                                     objectFit: "scale-down",
                                                     p: 0.5,
+                                                    flexShrink: 0,
                                                 }}
                                             />
                                             <BoxVertical gap={1} flexGrow={1}>

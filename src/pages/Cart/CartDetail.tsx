@@ -53,9 +53,12 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
             <br />
             <BoxBase
                 sx={{
-                    display: "flex",
                     gap: 3,
-                    flexWrap: "wrap",
+                    display: "grid",
+                    gridTemplateColumns: {
+                        xs: "1fr",
+                        md: "1fr 350px",
+                    },
                 }}
             >
                 <BoxBase
@@ -216,7 +219,6 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
                 </BoxBase>
                 <BoxBase
                     sx={{
-                        width: "350px",
                         border: "1px solid #ccc",
                         height: "fit-content",
                         p: 2,

@@ -80,7 +80,7 @@ const BookDetail = ({ book }: BookDetailProps) => {
             >
                 <TypographyBase
                     sx={{
-                        fontSize: "18px",
+                        fontSize: "1rem",
                         fontWeight: 500,
                         color: "primary.main",
                     }}
@@ -89,7 +89,7 @@ const BookDetail = ({ book }: BookDetailProps) => {
                 </TypographyBase>
                 <TypographyBase
                     sx={{
-                        fontSize: "18px",
+                        fontSize: "1rem",
                         fontWeight: 300,
                         color: "primary.dark",
                         flexShrink: 0,
@@ -105,7 +105,7 @@ const BookDetail = ({ book }: BookDetailProps) => {
         <BoxBase>
             <TypographyBase
                 sx={{
-                    fontSize: "30px",
+                    fontSize: "1.7rem",
                     fontWeight: 500,
                     mb: 2,
                 }}

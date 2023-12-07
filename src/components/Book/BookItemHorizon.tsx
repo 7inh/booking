@@ -48,7 +48,14 @@ const BookItemHorizon = (props: BookItemHorizonProps) => {
                         gap: 1,
                     }}
                 >
-                    <TypographyBase variant="h6">{book.title}</TypographyBase>
+                    <TypographyBase
+                        sx={{
+                            fontSize: "1.2rem",
+                            fontWeight: 400,
+                        }}
+                    >
+                        {book.title}
+                    </TypographyBase>
                     <BoxHorizon gap={1}>
                         <TypographyBase variant="h6" color="primary.main">
                             {book.current_price.toLocaleString("vi-VN", {

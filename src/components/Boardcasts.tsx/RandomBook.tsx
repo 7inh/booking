@@ -104,9 +104,9 @@ const RandomBook = () => {
                                 }}
                             >
                                 <TypographyBase
-                                    variant="h3"
-                                    fontWeight="bold"
                                     sx={{
+                                        fontSize: "2rem",
+                                        fontWeight: 500,
                                         textShadow:
                                             "-1px 0px white, 1px 0px white, 0px -1px white, 0px 1px white, -1px -1px white, 1px 1px white, -1px 1px white, 1px -1px white",
                                     }}
@@ -115,7 +115,7 @@ const RandomBook = () => {
                                 </TypographyBase>
                                 <TypographyBase
                                     fontWeight="400"
-                                    fontSize="40px"
+                                    fontSize="2.2rem"
                                     color="primary.main"
                                     sx={{
                                         textShadow:
@@ -129,7 +129,7 @@ const RandomBook = () => {
                                 </TypographyBase>
                                 <TypographyBase
                                     fontWeight="400"
-                                    fontSize="30px"
+                                    fontSize="1.5rem"
                                     color="text.secondary"
                                     sx={{
                                         textDecoration: "line-through",

@@ -49,6 +49,7 @@ const Feature = () => {
             <BoxHorizon
                 sx={{
                     width: "100%",
+                    gap: 1,
                 }}
             >
                 <CardMedia

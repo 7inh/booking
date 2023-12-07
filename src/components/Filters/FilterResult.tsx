@@ -1,6 +1,6 @@
 import ViewListIcon from "@mui/icons-material/ViewList";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { FilterBookType, OrderBy } from "src/common/types";
 import { mapFilterToParams } from "src/common/utils";
@@ -25,15 +25,16 @@ export interface FilterResultProps {
 const perPage = 12;
 
 const FilterResult = ({ filter }: FilterResultProps) => {
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const q = searchParams.get("q") || "";
+    const _page = searchParams.get("page") || "1";
     const t = useTranslation();
 
     const isSmall = useResponsive("down", 600);
 
     const [orderBy, setOrderBy] = useState<OrderBy>("newest");
     const [currentView, setCurrentView] = useState<"grid" | "list">("grid");
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(_page ? parseInt(_page) : 1);
 
     const params = useMemo(() => mapFilterToParams(filter), [filter]);
 
@@ -49,6 +50,14 @@ const FilterResult = ({ filter }: FilterResultProps) => {
         orderBy,
     });
     const { data: totalItems } = useGetItemTotal({ filter: params, title: q });
+
+    const handleChangePage = useCallback(
+        (page: number) => {
+            setSearchParams({ q, page: page.toString() });
+            setPage(page);
+        },
+        [q, setSearchParams]
+    );
 
     const renderBodyWithContent = useMemo(() => {
         return (
@@ -106,11 +115,11 @@ const FilterResult = ({ filter }: FilterResultProps) => {
                     totalItems={totalItems}
                     itemsPerPage={perPage}
                     page={page}
-                    onPageChange={(page) => setPage(page)}
+                    onPageChange={(page) => handleChangePage(page)}
                 />
             </>
         );
-    }, [books, currentView, isSmall, page, t, totalItems]);
+    }, [books, currentView, handleChangePage, isSmall, page, t, totalItems]);
 
     return (
         <BoxBase height="100%" flexGrow={1}>

@@ -28,6 +28,12 @@ export const vi: LangType = {
     },
     error: {
         somethingWentWrong: "Có lỗi xảy ra",
+        cantApplyCoupon: "Không thể áp dụng mã giảm giá",
+        coupon: {
+            expired: "Mã giảm giá đã hết hạn",
+            outOfUses: "Mã giảm giá đã hết lượt sử dụng",
+            minPrice: "Giá trị đơn hàng tối thiểu là %{minPrice}",
+        },
     },
     message: {
         backToHome: "Quay lại trang chủ",

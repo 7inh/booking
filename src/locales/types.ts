@@ -26,6 +26,12 @@ export type LangType = {
     };
     error: {
         somethingWentWrong: string;
+        cantApplyCoupon: string;
+        coupon: {
+            expired: string;
+            outOfUses: string;
+            minPrice: string;
+        };
     };
     message: {
         backToHome: string;

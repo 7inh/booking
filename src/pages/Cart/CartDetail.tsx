@@ -1,16 +1,17 @@
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { CardMedia, Divider, TextField } from "@mui/material";
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartItem, Coupon } from "src/common/types";
+import { validateCoupon } from "src/common/utils";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxCenter from "src/components/Boxs/BoxCenter";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import ButtonBase from "src/components/Buttons/ButtonBase";
-import TypographyBase from "src/components/Typographys/TypographyBase";
-import useTranslation from "src/hooks/utils/useTranslation";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { useNavigate } from "react-router-dom";
 import InputCoupon from "src/components/Inputs/InputCoupon";
 import ListCoupon from "src/components/Lists/ListCoupon";
+import TypographyBase from "src/components/Typographys/TypographyBase";
+import useTranslation from "src/hooks/utils/useTranslation";
 
 export interface CartDetailProps {
     items: CartItem[];
@@ -32,9 +33,15 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
         return 25000;
     }, []);
 
+    const couponMapped = useMemo(
+        () => validateCoupon(cartTotalValue, coupons),
+        [cartTotalValue, coupons]
+    );
+
     const couponValue = useMemo(() => {
-        return coupons.reduce((acc, coupon) => acc + coupon.value, 0);
-    }, [coupons]);
+        const validCoupon = couponMapped.filter((coupon) => !coupon.errorMessage);
+        return validCoupon.reduce((acc, coupon) => acc + coupon.discount, 0);
+    }, [couponMapped]);
 
     const finalFee = useMemo(() => {
         return cartTotalValue + shippingFee - couponValue;
@@ -313,11 +320,12 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
                             {t("pages.cart.coupon")}
                         </TypographyBase>
                         <InputCoupon
+                            coupons={coupons}
                             onSubmit={(coupon) => {
                                 setCoupons([...coupons, coupon]);
                             }}
                         />
-                        <ListCoupon coupons={coupons} />
+                        <ListCoupon coupons={couponMapped} />
                     </BoxBase>
                     <Divider sx={{ my: 1 }} />
                     <BoxBase
@@ -351,6 +359,7 @@ const CartDetail = ({ items, updateCart, removeFromCart }: CartDetailProps) => {
                                 {
                                     state: {
                                         items: items,
+                                        coupons: couponMapped,
                                     },
                                 }
                             );

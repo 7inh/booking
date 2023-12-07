@@ -28,6 +28,12 @@ export const en: LangType = {
     },
     error: {
         somethingWentWrong: "Something went wrong",
+        cantApplyCoupon: "Can't apply coupon",
+        coupon: {
+            expired: "Coupon has expired",
+            outOfUses: "Coupon has run out of uses",
+            minPrice: "Minimum order value is %{minPrice}",
+        },
     },
     message: {
         backToHome: "Back to home page",

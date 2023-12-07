@@ -3,7 +3,7 @@ import { CardMedia, Divider } from "@mui/material";
 import { useCallback, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PAGE_MAX_WIDTH } from "src/common/const";
-import { CartItem } from "src/common/types";
+import { CartItem, Coupon } from "src/common/types";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import ButtonBase from "src/components/Buttons/ButtonBase";
@@ -30,6 +30,7 @@ const CheckOut = () => {
     });
 
     const items: CartItem[] = useMemo(() => state?.items || [], [state]);
+    const coupons: Coupon[] = useMemo(() => state?.coupons || [], [state]);
 
     const cartTotalValue = useMemo(() => {
         return items.reduce((acc, item) => acc + item.book.current_price * item.quantity, 0);
@@ -39,9 +40,13 @@ const CheckOut = () => {
         return 25000;
     }, []);
 
-    const cartTotalValueWithShippingFee = useMemo(() => {
-        return cartTotalValue + shippingFee;
-    }, [cartTotalValue, shippingFee]);
+    const couponValue = useMemo(() => {
+        return coupons.reduce((acc, coupon) => acc + coupon.discount, 0);
+    }, [coupons]);
+
+    const finalFee = useMemo(() => {
+        return cartTotalValue + shippingFee - couponValue;
+    }, [cartTotalValue, couponValue, shippingFee]);
 
     const handleSubmit = useCallback(
         (data: OrderFormValuesProps) => {
@@ -242,6 +247,28 @@ const CheckOut = () => {
                                 })}
                             </TypographyBase>
                         </BoxBase>
+                        <BoxBase
+                            sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                mx: 3,
+                            }}
+                        >
+                            <TypographyBase variant="body2">
+                                {t("pages.cart.coupon")}
+                            </TypographyBase>
+                            <TypographyBase
+                                sx={{
+                                    fontSize: "20px",
+                                }}
+                            >
+                                -
+                                {couponValue.toLocaleString("vi-VN", {
+                                    style: "currency",
+                                    currency: "VND",
+                                })}
+                            </TypographyBase>
+                        </BoxBase>
                         <Divider sx={{ my: 1, mx: 3 }} />
                         <BoxBase
                             sx={{
@@ -263,7 +290,7 @@ const CheckOut = () => {
                                     color: "#f44336",
                                 }}
                             >
-                                {cartTotalValueWithShippingFee.toLocaleString("vi-VN", {
+                                {finalFee.toLocaleString("vi-VN", {
                                     style: "currency",
                                     currency: "VND",
                                 })}

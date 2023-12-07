@@ -54,7 +54,13 @@ export interface CartItem {
 export interface Coupon {
     code: string;
     discount: number;
-    value: number;
+    max_discount: number;
+    min_price: number;
+    used: number;
+    quantity: number;
+    expired_at: string; // format "2024-12-04T17:00:00.000Z"
+    type: 0 | 1; // 0: percent, 1: fixed
+    errorMessage?: string;
 }
 
 export interface FilterBookType {

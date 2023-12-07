@@ -28,3 +28,7 @@ export interface ItemGetPopular {}
 export interface ItemGetNewest {}
 
 export interface ItemGetComingSoon {}
+
+export interface CouponGetByCode {
+    code: string;
+}

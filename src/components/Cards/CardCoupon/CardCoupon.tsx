@@ -12,6 +12,7 @@ export interface CardCouponProps {
 }
 
 const CardCoupon = ({ coupon }: CardCouponProps) => {
+    const { errorMessage } = coupon;
     const t = useTranslation();
 
     return (
@@ -76,7 +77,7 @@ const CardCoupon = ({ coupon }: CardCouponProps) => {
                             >
                                 {t("pages.cart.discountValue")}
                                 {": "}
-                                {coupon.value.toLocaleString("vi-VN", {
+                                {coupon.discount.toLocaleString("vi-VN", {
                                     style: "currency",
                                     currency: "VND",
                                 })}
@@ -98,30 +99,37 @@ const CardCoupon = ({ coupon }: CardCouponProps) => {
                     />
                 </BoxCenter>
             </BoxBase>
-            <BoxBase
-                sx={{
-                    bgcolor: "yellow",
-                    display: "flex",
-                    alignItems: "center",
-                    px: 1,
-                    py: 0.25,
-                    color: "red",
-                    gap: 0.5,
-                }}
-            >
-                <InfoIcon
+            {errorMessage ? (
+                <BoxBase
                     sx={{
-                        fontSize: "14px",
-                    }}
-                />
-                <TypographyBase
-                    sx={{
-                        fontSize: "12px",
+                        bgcolor: "yellow",
+                        display: "flex",
+                        alignItems: "center",
+                        px: 1,
+                        py: 0.25,
+                        color: "red",
+                        gap: 0.5,
                     }}
                 >
-                    Đã hết lượt sử dụng
-                </TypographyBase>
-            </BoxBase>
+                    <InfoIcon
+                        sx={{
+                            fontSize: "14px",
+                        }}
+                    />
+                    <TypographyBase
+                        sx={{
+                            fontSize: "12px",
+                        }}
+                    >
+                        {t(errorMessage, {
+                            minPrice: coupon.min_price.toLocaleString("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                            }),
+                        })}
+                    </TypographyBase>
+                </BoxBase>
+            ) : null}
         </BoxBase>
     );
 };

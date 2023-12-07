@@ -1,7 +1,7 @@
 import groupBy from "lodash/groupBy";
 import { DateTime } from "luxon";
 import { AvailabilityEnum, FormatEnum, RareEnum, VariantEnum } from "src/common/enum";
-import { FilterBookParams, FilterBookType } from "src/common/types";
+import { Coupon, FilterBookParams, FilterBookType } from "src/common/types";
 import { LocaleType } from "src/locales/types";
 
 export function formatDateTime(date: Date) {
@@ -21,12 +21,7 @@ export function clearAllStorage() {
 }
 
 export const isRequestSuccessful = (response: any) => {
-    return (
-        response &&
-        response.status >= 200 &&
-        response.status < 300 &&
-        (!response?.data || response?.data?.success)
-    );
+    return response && response.status >= 200 && response.status < 300;
 };
 
 export const groupAndJoinItemsByKey = <T>(
@@ -273,4 +268,39 @@ export const mapFilterToParams = (filter: FilterBookType): FilterBookParams => {
     };
 
     return params;
+};
+
+export const validateCoupon = (cartTotalValue: number, coupons: Coupon[]) => {
+    const today = DateTime.now();
+    return coupons.map((coupon) => {
+        const errorMessage: string[] = [];
+
+        if (coupon.used >= coupon.quantity) {
+            errorMessage.push("error.coupon.outOfUses");
+        }
+
+        if (errorMessage.length === 0 && coupon.min_price > cartTotalValue) {
+            errorMessage.push("error.coupon.minPrice");
+            console.log({ cartTotalValue, minPrice: coupon.min_price });
+        }
+
+        if (errorMessage.length === 0 && today > DateTime.fromISO(coupon.expired_at)) {
+            errorMessage.push("error.coupon.expired");
+        }
+
+        if (errorMessage.length === 0) {
+            return {
+                ...coupon,
+                discount: Math.min(
+                    coupon.type === 1 ? coupon.discount : (coupon.discount * cartTotalValue) / 100,
+                    coupon.max_discount
+                ),
+            };
+        }
+
+        return {
+            ...coupon,
+            errorMessage: errorMessage[0],
+        };
+    });
 };

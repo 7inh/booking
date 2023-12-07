@@ -17,6 +17,10 @@ export interface ItemGetById {
     id: number;
 }
 
+export interface ItemGetByIds {
+    ids: number[];
+}
+
 export interface ItemGetRadom {}
 
 export interface ItemGetPopular {}

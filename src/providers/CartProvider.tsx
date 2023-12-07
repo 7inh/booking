@@ -1,5 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { CartContext, CartState } from "src/contexts/CartContext";
+import useGetItemByIds from "src/hooks/useGetItemByIds";
+import { Book } from "src/common/types";
 
 interface CartProviderProps {
     children: React.ReactNode;
@@ -8,6 +10,11 @@ interface CartProviderProps {
 const CartProvider = ({ children }: CartProviderProps) => {
     const [state, setState] = useState<CartState>({
         items: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart") || "") : [],
+    });
+
+    useGetItemByIds({
+        ids: state.items.map((item) => parseInt(item.book.id)),
+        onSuccess: (data) => updatePrice(data),
     });
 
     const addToCart = useCallback(
@@ -66,6 +73,24 @@ const CartProvider = ({ children }: CartProviderProps) => {
                 }));
                 localStorage.setItem("cart", JSON.stringify(newItems));
             }
+        },
+        [state.items]
+    );
+
+    const updatePrice = useCallback(
+        (data: Book[]) => {
+            const newItems = state.items.map((item) => {
+                const book = data.find((b) => b.id === item.book.id);
+                return {
+                    ...item,
+                    ...(book && { book }),
+                };
+            });
+            setState((state) => ({
+                ...state,
+                items: newItems,
+            }));
+            localStorage.setItem("cart", JSON.stringify(newItems));
         },
         [state.items]
     );

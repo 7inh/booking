@@ -36,6 +36,7 @@ export type LangType = {
     message: {
         backToHome: string;
         notFoundItem: string;
+        freeShipForOrderOver: string;
     };
     feature: {
         delivery: {
@@ -71,6 +72,7 @@ export type LangType = {
         updating: string;
         detail: string;
         submitCoupon: string;
+        buyMore: string;
     };
     pages: {
         home: {

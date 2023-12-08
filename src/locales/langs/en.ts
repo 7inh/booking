@@ -38,6 +38,7 @@ export const en: LangType = {
     message: {
         backToHome: "Back to home page",
         notFoundItem: "No matching products found",
+        freeShipForOrderOver: "Free shipping for orders over %{price}",
     },
     feature: {
         delivery: {
@@ -73,6 +74,7 @@ export const en: LangType = {
         updating: "Updating",
         detail: "Detail",
         submitCoupon: "Submit",
+        buyMore: "Buy more",
     },
     pages: {
         home: {

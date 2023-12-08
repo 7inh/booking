@@ -1,14 +1,15 @@
 import { Button, ButtonProps } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-export interface CreateButtonProps extends ButtonProps {
+export interface CreateButtonProps extends Omit<ButtonProps, "color"> {
     onClick?: (event?: any) => void;
     label: string;
     rounded?: boolean;
+    color?: string;
 }
 
 const ButtonBase = (props: CreateButtonProps) => {
-    const { label, onClick, rounded, sx, ...rest } = props;
+    const { label, onClick, rounded, color, sx, ...rest } = props;
     const theme = useTheme();
 
     return (
@@ -21,6 +22,8 @@ const ButtonBase = (props: CreateButtonProps) => {
                 boxShadow: "none",
                 py: 1,
                 bgcolor: rest.variant === "outlined" ? "" : "primary.main",
+                borderColor: color,
+                color,
                 "&:hover": {
                     backgroundColor:
                         rest.variant === "outlined" ? theme.palette.primary.main : "primary.light",

@@ -1,6 +1,7 @@
 import { CartItem } from "src/common/types";
 import BoxBase from "src/components/Boxs/BoxBase";
 import CardBillInfo from "src/components/Cards/CardBillInfo/CardBillInfo";
+import CartFreeShip from "src/components/Cards/CardFreeShip/CardFreeShip";
 import ListItemCart from "src/components/Lists/ListItemCart";
 import TypographyBase from "src/components/Typographys/TypographyBase";
 import useTranslation from "src/hooks/utils/useTranslation";
@@ -34,7 +35,11 @@ const CartDetail = ({ items }: CartDetailProps) => {
                 }}
             >
                 <ListItemCart items={items} />
-                <CardBillInfo items={items} />
+                <BoxBase>
+                    <CartFreeShip items={items} />
+                    <br />
+                    <CardBillInfo items={items} />
+                </BoxBase>
             </BoxBase>
         </BoxBase>
     );

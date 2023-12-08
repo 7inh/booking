@@ -38,6 +38,7 @@ export const vi: LangType = {
     message: {
         backToHome: "Quay lại trang chủ",
         notFoundItem: "Không tìm thấy sản phẩm phù hợp",
+        freeShipForOrderOver: "Miễn phí vận chuyển cho đơn hàng trên %{price}",
     },
     feature: {
         delivery: {
@@ -74,6 +75,7 @@ export const vi: LangType = {
         updating: "Đang cập nhật",
         detail: "Chi tiết",
         submitCoupon: "Áp dụng",
+        buyMore: "Mua thêm",
     },
     pages: {
         home: {

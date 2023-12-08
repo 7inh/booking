@@ -14,11 +14,35 @@ import AlternateEmailRoundedIcon from "@mui/icons-material/AlternateEmailRounded
 import { PAGE_MAX_WIDTH } from "src/common/const";
 import { useResponsive } from "src/hooks/utils/useResponsive";
 import Logo from "src/components/Logo/Logo";
+import useSubscribe from "src/hooks/useSubscribe";
+import useSnackBar from "src/hooks/utils/useSnackBar";
+import { useCallback, useState } from "react";
+import IconLoadingBackdrop from "src/components/Icons/IconLoadingBackdrop";
 
 const Footer = () => {
     const t = useTranslation();
+    const snackbar = useSnackBar();
 
     const mdDown = useResponsive("down", "md");
+
+    const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const { subscribe } = useSubscribe({
+        onSubscribeSuccess: () => {
+            snackbar({
+                message: t("success.sendEmailSubscribe"),
+                severity: "success",
+            });
+            setEmail("");
+            setLoading(false);
+        },
+    });
+
+    const handleSubscribe = useCallback(async () => {
+        setLoading(true);
+        await subscribe(email);
+    }, [email, subscribe]);
 
     return (
         <BoxBase
@@ -28,6 +52,7 @@ const Footer = () => {
                 bgcolor: "primary.dark",
             }}
         >
+            <IconLoadingBackdrop open={loading} />
             <StarsNight />
             <BoxBase
                 sx={{
@@ -129,6 +154,8 @@ const Footer = () => {
                                     },
                                     overflow: "hidden",
                                 }}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 InputProps={{
                                     sx: {
                                         color: "white",
@@ -144,6 +171,7 @@ const Footer = () => {
                                                     bgcolor: "secondary.main",
                                                     color: "primary.dark",
                                                 }}
+                                                onClick={handleSubscribe}
                                             />
                                         </InputAdornment>
                                     ),

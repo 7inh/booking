@@ -25,6 +25,7 @@ export const vi: LangType = {
     success: {
         addToCart: "Thêm vào giỏ hàng thành công",
         sendMessage: "Gửi tin nhắn thành công",
+        sendEmailSubscribe: "Đăng ký thành công",
     },
     error: {
         somethingWentWrong: "Có lỗi xảy ra",
@@ -34,6 +35,7 @@ export const vi: LangType = {
             outOfUses: "Mã giảm giá đã hết lượt sử dụng",
             minPrice: "Giá trị đơn hàng tối thiểu là %{minPrice}",
         },
+        sendEmailSubscribe: "Không thể đăng ký, vui lòng thử lại sau",
     },
     message: {
         backToHome: "Quay lại trang chủ",

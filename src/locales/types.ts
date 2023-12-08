@@ -23,6 +23,7 @@ export type LangType = {
     success: {
         addToCart: string;
         sendMessage: string;
+        sendEmailSubscribe: string;
     };
     error: {
         somethingWentWrong: string;
@@ -32,6 +33,7 @@ export type LangType = {
             outOfUses: string;
             minPrice: string;
         };
+        sendEmailSubscribe: string;
     };
     message: {
         backToHome: string;

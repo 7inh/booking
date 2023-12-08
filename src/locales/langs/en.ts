@@ -25,6 +25,7 @@ export const en: LangType = {
     success: {
         addToCart: "Add to cart successfully",
         sendMessage: "Send message successfully",
+        sendEmailSubscribe: "Subscribe successfully",
     },
     error: {
         somethingWentWrong: "Something went wrong",
@@ -34,6 +35,7 @@ export const en: LangType = {
             outOfUses: "Coupon has run out of uses",
             minPrice: "Minimum order value is %{minPrice}",
         },
+        sendEmailSubscribe: "Can't subscribe, please try again later",
     },
     message: {
         backToHome: "Back to home page",

@@ -41,12 +41,12 @@ const InputCoupon = ({ coupons, sx, onSubmit }: InputCouponProps) => {
             console.log(error);
             snackbar({
                 severity: "error",
-                message: "error.cantApplyCoupon",
+                message: t("error.cantApplyCoupon"),
             });
         } finally {
             setIsLoading(false);
         }
-    }, [applyCoupon, code, coupons, onSubmit, snackbar]);
+    }, [applyCoupon, code, coupons, onSubmit, snackbar, t]);
 
     return (
         <>

@@ -35,9 +35,14 @@ const CartDetail = ({ items }: CartDetailProps) => {
                 }}
             >
                 <ListItemCart items={items} />
-                <BoxBase>
+                <BoxBase
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 2,
+                    }}
+                >
                     <CartFreeShip items={items} />
-                    <br />
                     <CardBillInfo items={items} />
                 </BoxBase>
             </BoxBase>

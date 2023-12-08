@@ -7,7 +7,7 @@ import CartDetail from "src/pages/Cart/CartDetail";
 import CartEmpty from "src/pages/Cart/CartEmpty";
 
 const Cart = () => {
-    const { items, updateCart, removeFromCart } = useCartContext();
+    const { items } = useCartContext();
     const t = useTranslation();
 
     return (
@@ -34,15 +34,7 @@ const Cart = () => {
                 }}
             >
                 <BoxBase mx={1}>
-                    {items.length ? (
-                        <CartDetail
-                            items={items}
-                            updateCart={updateCart}
-                            removeFromCart={removeFromCart}
-                        />
-                    ) : (
-                        <CartEmpty />
-                    )}
+                    {items.length ? <CartDetail items={items} /> : <CartEmpty />}
                 </BoxBase>
             </BoxBase>
         </>

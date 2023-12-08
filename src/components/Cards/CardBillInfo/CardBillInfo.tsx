@@ -35,7 +35,7 @@ const CardBillInfo = ({ items }: CartDetailProps) => {
 
     const couponValue = useMemo(() => {
         const validCoupon = couponMapped.filter((coupon) => !coupon.errorMessage);
-        return validCoupon.reduce((acc, coupon) => acc + coupon.discount, 0);
+        return validCoupon.reduce((acc, coupon) => acc + (coupon.discountValue || 0), 0);
     }, [couponMapped]);
 
     const finalFee = useMemo(() => {

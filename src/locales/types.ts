@@ -159,6 +159,7 @@ export type LangType = {
             discountValue: string;
             temporary: string;
             shippingFeeCanBeChanged: string;
+            couponDescription: string;
         };
         checkout: {
             title: string;
@@ -173,6 +174,10 @@ export type LangType = {
                 address: string;
                 date: string;
                 note: string;
+            };
+            rules: {
+                required: string;
+                phone: string;
             };
             asSoonAsPossible: string;
             submit: string;

@@ -53,7 +53,7 @@ const CheckOut = () => {
     }, [items]);
 
     const couponValue = useMemo(() => {
-        return coupons.reduce((acc, coupon) => acc + coupon.discount, 0);
+        return coupons.reduce((acc, coupon) => acc + (coupon.discountValue || 0), 0);
     }, [coupons]);
 
     const finalFee = useMemo(() => {
@@ -64,6 +64,7 @@ const CheckOut = () => {
         (data: OrderFormValuesProps) => {
             submitOrder({
                 ...data,
+                address: `${data.address}, ${data.ward?.WARDS_NAME}, ${data.district?.DISTRICT_NAME}, ${data.province?.PROVINCE_NAME}`,
                 items: items
                     .map((item) =>
                         JSON.stringify({
@@ -74,9 +75,13 @@ const CheckOut = () => {
                         })
                     )
                     .join("|"),
+                date: data.shipNow ? "now" : data.date,
+                coupon: coupons.map((coupon) => coupon.code),
+                shippingFee: shippingFee.value,
+                total: finalFee,
             });
         },
-        [items, submitOrder]
+        [coupons, finalFee, items, shippingFee.value, submitOrder]
     );
 
     useEffect(() => {
@@ -172,6 +177,12 @@ const CheckOut = () => {
                                 setShippingFee({
                                     fetched: true,
                                     value,
+                                });
+                            }}
+                            onClear={() => {
+                                setShippingFee({
+                                    fetched: false,
+                                    value: 0,
                                 });
                             }}
                             onSubmit={handleSubmit}

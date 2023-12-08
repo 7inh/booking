@@ -9,6 +9,9 @@ export interface UseSubmitOrderProps {
 
 export interface SubmitOrderParams extends OrderFormValuesProps {
     items: string;
+    coupon?: string[];
+    shippingFee?: number;
+    total?: number;
 }
 
 const useSubmitOrder = ({ onSubmitOrderSuccess }: UseSubmitOrderProps) => {
@@ -21,8 +24,12 @@ const useSubmitOrder = ({ onSubmitOrderSuccess }: UseSubmitOrderProps) => {
             "entry.1983796691": data.email,
             "entry.1303480121": data.phone,
             "entry.1340620684": data.address,
+            "entry.354818500": data.date,
             "entry.26560222": data.note,
             "entry.439999531": data.items,
+            "entry.1516049135": data.coupon?.join(",") || "",
+            "entry.1238688360": data.shippingFee?.toString() || "",
+            "entry.265817064": data.total?.toString() || "",
         };
     }, []);
 

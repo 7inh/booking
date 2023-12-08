@@ -52,17 +52,24 @@ const CardCoupon = ({ coupon }: CardCouponProps) => {
                     <BoxBase
                         sx={{
                             marginLeft: "5px",
+                            height: "100%",
                         }}
                     >
                         <BoxBase
                             sx={{
+                                height: "100%",
                                 py: 0.5,
                                 px: 1,
+                                display: "flex",
+                                alignItems: "start",
+                                justifyContent: "center",
+                                flexDirection: "column",
                             }}
                         >
                             <TypographyBase
                                 sx={{
-                                    fontSize: "20px",
+                                    fontSize: "1.2rem",
+                                    lineHeight: 1,
                                     fontWeight: 500,
                                     color: "rgb(244, 67, 54)",
                                 }}
@@ -71,13 +78,14 @@ const CardCoupon = ({ coupon }: CardCouponProps) => {
                             </TypographyBase>
                             <TypographyBase
                                 sx={{
-                                    fontSize: "14px",
+                                    fontSize: "0.9rem",
                                     color: "grey.600",
+                                    lineHeight: 1.5,
                                 }}
                             >
                                 {t("pages.cart.discountValue")}
                                 {": "}
-                                {coupon.discount.toLocaleString("vi-VN", {
+                                {coupon.discountValue?.toLocaleString("vi-VN", {
                                     style: "currency",
                                     currency: "VND",
                                 })}
@@ -118,7 +126,7 @@ const CardCoupon = ({ coupon }: CardCouponProps) => {
                     />
                     <TypographyBase
                         sx={{
-                            fontSize: "12px",
+                            fontSize: "0.8rem",
                         }}
                     >
                         {t(errorMessage, {
@@ -129,7 +137,48 @@ const CardCoupon = ({ coupon }: CardCouponProps) => {
                         })}
                     </TypographyBase>
                 </BoxBase>
-            ) : null}
+            ) : (
+                <BoxBase
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        px: 1,
+                        py: 0.25,
+                        gap: 0.5,
+                        bgcolor: "#ff9800",
+                        color: "white",
+                    }}
+                >
+                    <InfoIcon
+                        sx={{
+                            fontSize: "14px",
+                        }}
+                    />
+                    <TypographyBase
+                        sx={{
+                            fontSize: "0.8rem",
+                        }}
+                    >
+                        {t("pages.cart.couponDescription", {
+                            discount:
+                                coupon.type === 0
+                                    ? coupon.discount + "%"
+                                    : coupon.discount.toLocaleString("vi-VN", {
+                                          style: "currency",
+                                          currency: "VND",
+                                      }),
+                            maxDiscount: coupon.max_discount.toLocaleString("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                            }),
+                            minPrice: coupon.min_price.toLocaleString("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                            }),
+                        })}
+                    </TypographyBase>
+                </BoxBase>
+            )}
         </BoxBase>
     );
 };

@@ -291,7 +291,7 @@ export const validateCoupon = (cartTotalValue: number, coupons: Coupon[]) => {
         if (errorMessage.length === 0) {
             return {
                 ...coupon,
-                discount: Math.min(
+                discountValue: Math.min(
                     coupon.type === 1 ? coupon.discount : (coupon.discount * cartTotalValue) / 100,
                     coupon.max_discount
                 ),

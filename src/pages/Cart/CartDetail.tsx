@@ -30,7 +30,7 @@ const CartDetail = ({ items }: CartDetailProps) => {
                     display: "grid",
                     gridTemplateColumns: {
                         xs: "1fr",
-                        md: "1fr 350px",
+                        md: "1fr 400px",
                     },
                 }}
             >

@@ -211,6 +211,8 @@ const BookItemV2 = (props: BookItemV2Props) => {
                                     },
                                 }}
                                 onClick={(event) => {
+                                    event.stopPropagation();
+                                    event.preventDefault();
                                     snackbar({
                                         message: t("success.addToCart"),
                                         severity: "success",
@@ -219,7 +221,6 @@ const BookItemV2 = (props: BookItemV2Props) => {
                                         book,
                                         quantity: 1,
                                     });
-                                    event.stopPropagation();
                                 }}
                             />
                         ) : null}

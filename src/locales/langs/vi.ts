@@ -163,6 +163,8 @@ export const vi: LangType = {
             discountValue: "Giảm",
             temporary: "Tạm tính",
             shippingFeeCanBeChanged: "Phí vận chuyển có thể thay đổi tùy vào địa chỉ của bạn",
+            couponDescription:
+                "Giảm %{discount} tối đa %{maxDiscount} cho đơn hàng trên %{minPrice}",
         },
         checkout: {
             title: "Thanh toán",
@@ -177,6 +179,10 @@ export const vi: LangType = {
                 address: "Địa chỉ nhận hàng",
                 date: "Ngày nhận hàng",
                 note: "Ghi chú cho người bán",
+            },
+            rules: {
+                required: "Vui lòng nhập thông tin",
+                phone: "Số điện thoại không hợp lệ",
             },
             asSoonAsPossible: "Giao ngay khi có thể",
             submit: "Đặt hàng",

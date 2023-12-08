@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import BoxBase from "src/components/Boxs/BoxBase";
 import IconLoadingBackdrop from "src/components/Icons/IconLoadingBackdrop";
@@ -31,6 +31,7 @@ export interface FormCheckOutProps {
     currentShippingFee?: number;
     shouldRefetchShippingFee?: boolean;
     refetchShippingFee: (shippingFee: number) => void;
+    onClear?: () => void;
     onSubmit: (data: OrderFormValuesProps) => void;
 }
 
@@ -39,6 +40,7 @@ const FormCheckOut = ({
     currentShippingFee,
     shouldRefetchShippingFee = false,
     refetchShippingFee,
+    onClear,
     onSubmit,
 }: FormCheckOutProps) => {
     const t = useTranslation();
@@ -83,6 +85,11 @@ const FormCheckOut = ({
         },
     });
 
+    const handleClear = useCallback(() => {
+        if (!shouldRefetchShippingFee) return;
+        onClear?.();
+    }, [onClear, shouldRefetchShippingFee]);
+
     useEffect(() => {
         if (selectedProvince?.PROVINCE_ID === 2 && currentShippingFee !== 18000) {
             refetchShippingFee(18000);
@@ -103,6 +110,13 @@ const FormCheckOut = ({
             >
                 <RHFTextField size="small" name="email" label={t("pages.checkout.form.email")} />
                 <RHFTextField
+                    rules={{
+                        required: t("pages.checkout.rules.required"),
+                        pattern: {
+                            value: /^0[0-9]{9}$/,
+                            message: t("pages.checkout.rules.phone"),
+                        },
+                    }}
                     size="small"
                     name="phone"
                     label={t("pages.checkout.form.phone")}
@@ -118,6 +132,9 @@ const FormCheckOut = ({
                 }}
             >
                 <RHFAutocomplete
+                    rules={{
+                        required: t("pages.checkout.rules.required"),
+                    }}
                     loading={isFetchingProvince}
                     size="small"
                     name={"province"}
@@ -127,8 +144,16 @@ const FormCheckOut = ({
                         option.PROVINCE_ID === value.PROVINCE_ID
                     }
                     label={t("pages.checkout.form.province")}
+                    onChange={() => {
+                        methods.setValue("district", null);
+                        methods.setValue("ward", null);
+                        handleClear();
+                    }}
                 />
                 <RHFAutocomplete
+                    rules={{
+                        required: t("pages.checkout.rules.required"),
+                    }}
                     loading={isFetchingDistrict}
                     size="small"
                     name={"district"}
@@ -138,6 +163,10 @@ const FormCheckOut = ({
                         option.DISTRICT_ID === value.DISTRICT_ID
                     }
                     label={t("pages.checkout.form.district")}
+                    onChange={() => {
+                        methods.setValue("ward", null);
+                        handleClear();
+                    }}
                 />
                 <RHFAutocomplete
                     loading={isFetchingWard}

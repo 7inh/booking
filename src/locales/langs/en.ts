@@ -161,6 +161,7 @@ export const en: LangType = {
             discountValue: "Discount",
             temporary: "Temporary",
             shippingFeeCanBeChanged: "Shipping fee can be changed depending on your location",
+            couponDescription: "Discount %{discount} max %{maxDiscount} for order over %{minPrice}",
         },
         checkout: {
             title: "Checkout",
@@ -175,6 +176,10 @@ export const en: LangType = {
                 address: "Address",
                 date: "Date",
                 note: "Note",
+            },
+            rules: {
+                required: "Please fill in this field",
+                phone: "Invalid phone number",
             },
             asSoonAsPossible: "As soon as possible",
             submit: "Submit",

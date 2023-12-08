@@ -55,6 +55,7 @@ export interface CartItem {
 export interface Coupon {
     code: string;
     discount: number;
+    discountValue?: number;
     max_discount: number;
     min_price: number;
     used: number;

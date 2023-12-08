@@ -157,6 +157,8 @@ export type LangType = {
             processToCheckout: string;
             coupon: string;
             discountValue: string;
+            temporary: string;
+            shippingFeeCanBeChanged: string;
         };
         checkout: {
             title: string;

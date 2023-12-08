@@ -159,6 +159,8 @@ export const en: LangType = {
             processToCheckout: "Process to checkout",
             coupon: "Coupon",
             discountValue: "Discount",
+            temporary: "Temporary",
+            shippingFeeCanBeChanged: "Shipping fee can be changed depending on your location",
         },
         checkout: {
             title: "Checkout",

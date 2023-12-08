@@ -25,7 +25,7 @@ const CardBillInfo = ({ items }: CartDetailProps) => {
     }, [items]);
 
     const shippingFee = useMemo(() => {
-        return 25000;
+        return 18000;
     }, []);
 
     const couponMapped = useMemo(
@@ -89,7 +89,9 @@ const CardBillInfo = ({ items }: CartDetailProps) => {
                         justifyContent: "space-between",
                     }}
                 >
-                    <TypographyBase variant="body1">{t("pages.cart.shipping")}</TypographyBase>
+                    <TypographyBase variant="body1">
+                        {t("pages.cart.shipping")} ({t("pages.cart.temporary")})
+                    </TypographyBase>
                     <TypographyBase
                         sx={{
                             fontSize: "20px",
@@ -125,7 +127,7 @@ const CardBillInfo = ({ items }: CartDetailProps) => {
             <BoxBase my={2}>
                 <TypographyBase
                     sx={{
-                        fontSize: "18px",
+                        fontSize: "1rem",
                         fontWeight: 500,
                         mb: 1,
                     }}
@@ -145,9 +147,17 @@ const CardBillInfo = ({ items }: CartDetailProps) => {
                 sx={{
                     display: "flex",
                     justifyContent: "space-between",
+                    alignItems: "center",
                 }}
             >
-                <TypographyBase variant="body1">{t("pages.cart.total")}</TypographyBase>
+                <TypographyBase
+                    sx={{
+                        fontSize: "1rem",
+                        fontWeight: 500,
+                    }}
+                >
+                    {t("pages.cart.total")}
+                </TypographyBase>
                 <TypographyBase
                     sx={{
                         fontSize: "20px",
@@ -178,6 +188,16 @@ const CardBillInfo = ({ items }: CartDetailProps) => {
                     );
                 }}
             ></ButtonBase>
+            <TypographyBase
+                sx={{
+                    textAlign: "center",
+                    fontSize: "12px",
+                    fontWeight: 400,
+                    mt: 1,
+                }}
+            >
+                {t("pages.cart.shippingFeeCanBeChanged")}
+            </TypographyBase>
         </BoxBase>
     );
 };

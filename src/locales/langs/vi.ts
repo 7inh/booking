@@ -161,6 +161,8 @@ export const vi: LangType = {
             processToCheckout: "Tiến hành thanh toán",
             coupon: "Mã giảm giá",
             discountValue: "Giảm",
+            temporary: "Tạm tính",
+            shippingFeeCanBeChanged: "Phí vận chuyển có thể thay đổi tùy vào địa chỉ của bạn",
         },
         checkout: {
             title: "Thanh toán",

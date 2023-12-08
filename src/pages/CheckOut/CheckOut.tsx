@@ -37,8 +37,8 @@ const CheckOut = () => {
     }, [items]);
 
     const shippingFee = useMemo(() => {
-        return 25000;
-    }, []);
+        return cartTotalValue >= 350000 ? 0 : 18000;
+    }, [cartTotalValue]);
 
     const couponValue = useMemo(() => {
         return coupons.reduce((acc, coupon) => acc + coupon.discount, 0);

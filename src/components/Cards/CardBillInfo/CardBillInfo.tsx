@@ -25,8 +25,8 @@ const CardBillInfo = ({ items }: CartDetailProps) => {
     }, [items]);
 
     const shippingFee = useMemo(() => {
-        return 18000;
-    }, []);
+        return cartTotalValue >= 350000 ? 0 : 18000;
+    }, [cartTotalValue]);
 
     const couponMapped = useMemo(
         () => validateCoupon(cartTotalValue, coupons),

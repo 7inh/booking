@@ -21,6 +21,7 @@ export interface Book {
     old_price: number;
     discount: number;
     description?: string;
+    weight?: string;
 }
 
 export interface BookDetail extends Book {
@@ -29,7 +30,7 @@ export interface BookDetail extends Book {
     publishDate: string;
     author: string;
     size: string;
-    weight: number;
+    weight: string;
     quantity: number;
     sold: number;
     pages: number;

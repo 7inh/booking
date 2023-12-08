@@ -1,6 +1,6 @@
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { CardMedia, Divider } from "@mui/material";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PAGE_MAX_WIDTH } from "src/common/const";
 import { CartItem, Coupon } from "src/common/types";
@@ -22,6 +22,13 @@ const CheckOut = () => {
     const isSmall = useResponsive("down", 1101);
 
     const [openDialogOrderSuccess, setOpenDialogOrderSuccess] = useState(false);
+    const [shippingFee, setShippingFee] = useState<{
+        fetched: boolean;
+        value: number;
+    }>({
+        fetched: false,
+        value: 0,
+    });
 
     const { submitOrder } = useSubmitOrder({
         onSubmitOrderSuccess: () => {
@@ -32,20 +39,25 @@ const CheckOut = () => {
     const items: CartItem[] = useMemo(() => state?.items || [], [state]);
     const coupons: Coupon[] = useMemo(() => state?.coupons || [], [state]);
 
+    const cartWeight = useMemo(() => {
+        return items.reduce((acc, item) => {
+            if (!item.book.weight) return acc;
+            const weightNumeric = parseFloat(item.book.weight);
+            const totalWeight = acc + (isNaN(weightNumeric) ? 0 : weightNumeric) * item.quantity;
+            return totalWeight;
+        }, 0);
+    }, [items]);
+
     const cartTotalValue = useMemo(() => {
         return items.reduce((acc, item) => acc + item.book.current_price * item.quantity, 0);
     }, [items]);
-
-    const shippingFee = useMemo(() => {
-        return cartTotalValue >= 350000 ? 0 : 18000;
-    }, [cartTotalValue]);
 
     const couponValue = useMemo(() => {
         return coupons.reduce((acc, coupon) => acc + coupon.discount, 0);
     }, [coupons]);
 
     const finalFee = useMemo(() => {
-        return cartTotalValue + shippingFee - couponValue;
+        return cartTotalValue + shippingFee.value - couponValue;
     }, [cartTotalValue, couponValue, shippingFee]);
 
     const handleSubmit = useCallback(
@@ -66,6 +78,16 @@ const CheckOut = () => {
         },
         [items, submitOrder]
     );
+
+    useEffect(() => {
+        if (cartTotalValue >= 350000) {
+            setShippingFee({
+                fetched: true,
+                value: 0,
+            });
+            console.log("Free shipping");
+        }
+    }, [cartTotalValue]);
 
     return (
         <>
@@ -142,7 +164,18 @@ const CheckOut = () => {
                         >
                             {t("pages.checkout.checkoutInfo")}
                         </TypographyBase>
-                        <FormCheckOut onSubmit={handleSubmit} />
+                        <FormCheckOut
+                            weight={cartWeight}
+                            currentShippingFee={shippingFee.value}
+                            shouldRefetchShippingFee={cartTotalValue < 350000}
+                            refetchShippingFee={(value) => {
+                                setShippingFee({
+                                    fetched: true,
+                                    value,
+                                });
+                            }}
+                            onSubmit={handleSubmit}
+                        />
                         <ButtonBase
                             fullWidth
                             label={t("pages.checkout.submit")}
@@ -236,16 +269,20 @@ const CheckOut = () => {
                             <TypographyBase variant="body2">
                                 {t("pages.cart.shipping")}
                             </TypographyBase>
-                            <TypographyBase
-                                sx={{
-                                    fontSize: "20px",
-                                }}
-                            >
-                                {shippingFee.toLocaleString("vi-VN", {
-                                    style: "currency",
-                                    currency: "VND",
-                                })}
-                            </TypographyBase>
+                            {shippingFee.fetched ? (
+                                <TypographyBase
+                                    sx={{
+                                        fontSize: "20px",
+                                    }}
+                                >
+                                    {shippingFee.value.toLocaleString("vi-VN", {
+                                        style: "currency",
+                                        currency: "VND",
+                                    })}
+                                </TypographyBase>
+                            ) : (
+                                "..."
+                            )}
                         </BoxBase>
                         <BoxBase
                             sx={{

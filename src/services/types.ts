@@ -32,3 +32,19 @@ export interface ItemGetComingSoon {}
 export interface CouponGetByCode {
     code: string;
 }
+
+export interface AddressProvince {}
+
+export interface AddressDistrict {
+    provinceId: number;
+}
+
+export interface AddressWard {
+    districtId: number;
+}
+
+export interface AddressPrice {
+    receiverProvince: number;
+    receiverDistrict: number;
+    productWeight: number;
+}

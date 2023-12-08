@@ -167,6 +167,9 @@ export type LangType = {
                 name: string;
                 email: string;
                 phone: string;
+                province: string;
+                district: string;
+                ward: string;
                 address: string;
                 date: string;
                 note: string;

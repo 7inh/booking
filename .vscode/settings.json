@@ -13,6 +13,7 @@
         "testid",
         "Trendings",
         "uuidv",
+        "viettel",
         "vite"
     ],
     "typescript.tsdk": "node_modules/typescript/lib",

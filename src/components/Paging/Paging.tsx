@@ -19,12 +19,10 @@ const Paging: React.FC<PagingProps> = ({ page, totalItems, itemsPerPage, onPageC
     const t = useTranslation();
 
     const totalPages = Math.ceil(totalItems / itemsPerPage);
-    const [currentPage, setCurrentPage] = useState(page);
-    const [goToPage, setGoToPage] = useState(currentPage);
+    const [goToPage, setGoToPage] = useState(page);
 
     const handlePageChange = (newPage: number) => {
         if (newPage >= 1 && newPage <= totalPages) {
-            setCurrentPage(newPage);
             onPageChange(newPage);
         }
     };
@@ -38,7 +36,6 @@ const Paging: React.FC<PagingProps> = ({ page, totalItems, itemsPerPage, onPageC
 
     const goToSpecificPage = () => {
         if (goToPage >= 1 && goToPage <= totalPages) {
-            setCurrentPage(goToPage);
             onPageChange(goToPage);
         }
     };
@@ -46,10 +43,10 @@ const Paging: React.FC<PagingProps> = ({ page, totalItems, itemsPerPage, onPageC
     const pageNumber = useMemo(
         () =>
             getListPage({
-                currentPage,
+                currentPage: page,
                 totalPages,
             }),
-        [currentPage, totalPages]
+        [page, totalPages]
     );
 
     return (
@@ -75,10 +72,10 @@ const Paging: React.FC<PagingProps> = ({ page, totalItems, itemsPerPage, onPageC
             >
                 <Typography>{t("common.page")}:</Typography>
                 <TextField
-                    key={currentPage}
+                    key={page}
                     type="number"
                     size="small"
-                    defaultValue={currentPage}
+                    defaultValue={page}
                     onChange={handleGoToPageChange}
                     InputProps={{
                         inputProps: {
@@ -107,22 +104,19 @@ const Paging: React.FC<PagingProps> = ({ page, totalItems, itemsPerPage, onPageC
                 <Typography flexShrink={0}>/ {totalPages}</Typography>
             </Box>
             <Stack direction="row" alignItems="center" spacing={1}>
-                <IconButton
-                    onClick={() => handlePageChange(currentPage - 1)}
-                    disabled={currentPage === 1}
-                >
+                <IconButton onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
                     <ArrowBackIosNewRoundedIcon fontSize="small" />
                 </IconButton>
                 <Stack direction="row" spacing={1} pt={0.25}>
-                    {pageNumber.map((page) => (
+                    {pageNumber.map((crrPage) => (
                         <Typography
                             key={uuidv4()}
                             sx={{
                                 fontSize: "16px !important",
                                 border: "0.5px solid",
-                                borderColor: currentPage === page ? "primary.main" : "grey.400",
-                                bgcolor: currentPage === page ? "primary.main" : "inherit",
-                                color: currentPage === page ? "white" : "primary.dark",
+                                borderColor: page === crrPage ? "primary.main" : "grey.400",
+                                bgcolor: page === crrPage ? "primary.main" : "inherit",
+                                color: page === crrPage ? "white" : "primary.dark",
                                 minWidth: "32px",
                                 minHeight: "32px",
                                 borderRadius: "32px",
@@ -131,7 +125,7 @@ const Paging: React.FC<PagingProps> = ({ page, totalItems, itemsPerPage, onPageC
                                 alignItems: "center",
                                 justifyContent: "center",
                                 "&:hover":
-                                    typeof page === "number"
+                                    typeof crrPage === "number"
                                         ? {
                                               bgcolor: "primary.light",
                                               cursor: "pointer",
@@ -139,15 +133,15 @@ const Paging: React.FC<PagingProps> = ({ page, totalItems, itemsPerPage, onPageC
                                           }
                                         : {},
                             }}
-                            onClick={() => typeof page === "number" && handlePageChange(page)}
+                            onClick={() => typeof crrPage === "number" && handlePageChange(crrPage)}
                         >
-                            {page}
+                            {crrPage}
                         </Typography>
                     ))}
                 </Stack>
                 <IconButton
-                    onClick={() => handlePageChange(currentPage + 1)}
-                    disabled={currentPage === totalPages}
+                    onClick={() => handlePageChange(page + 1)}
+                    disabled={page === totalPages}
                 >
                     <ArrowBackIosNewRoundedIcon
                         fontSize="small"

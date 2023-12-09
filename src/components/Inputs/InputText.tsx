@@ -7,9 +7,10 @@ import ClearIcon from "@mui/icons-material/Clear";
 export interface InputTextProps {
     sx?: TextFieldProps["sx"];
     onSearch?: (text: string) => void;
+    onClear?: () => void;
 }
 
-const InputText = ({ sx, onSearch, ...props }: InputTextProps) => {
+const InputText = ({ sx, onSearch, onClear, ...props }: InputTextProps) => {
     const location = useLocation();
     const [searchParams] = useSearchParams();
     const q = searchParams.get("q") || "";
@@ -26,7 +27,7 @@ const InputText = ({ sx, onSearch, ...props }: InputTextProps) => {
         if (!path.includes("/shop")) {
             setSearch("");
         }
-    }, [location]);
+    }, [location, onClear]);
 
     useEffect(() => {
         if (search && !enableClear) {
@@ -73,7 +74,7 @@ const InputText = ({ sx, onSearch, ...props }: InputTextProps) => {
                             }}
                             onClick={() => {
                                 setSearch("");
-                                onSearch?.("");
+                                onClear?.();
                             }}
                         />
                         <Button

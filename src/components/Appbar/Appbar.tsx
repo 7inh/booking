@@ -24,7 +24,7 @@ export interface AppBarProps {
 }
 
 const AppBar = () => {
-    const [, setSearchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const { items, removeFromCart } = useCartContext();
     const t = useTranslation();
     const navigate = useNavigate();
@@ -98,8 +98,15 @@ const AppBar = () => {
                         mx: 2,
                     }}
                     onSearch={(value) => {
+                        window.dispatchEvent(new CustomEvent("clear-page"));
                         navigate("/shop");
                         setSearchParams({ q: value });
+                    }}
+                    onClear={() => {
+                        window.dispatchEvent(new CustomEvent("clear-page"));
+                        searchParams.delete("q");
+                        searchParams.delete("page");
+                        setSearchParams(searchParams);
                     }}
                 />
                 <BoxHorizon gap={1} flexShrink={0}>
@@ -134,7 +141,6 @@ const AppBar = () => {
                         onClose={handleClose}
                         sx={{
                             marginTop: "16px",
-                            // set min width
                             "& .MuiMenu-paper": {
                                 width: {
                                     xs: "calc(100vw - 32px)",

@@ -1,6 +1,6 @@
 import ViewListIcon from "@mui/icons-material/ViewList";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { FilterBookType, OrderBy } from "src/common/types";
 import { mapFilterToParams } from "src/common/utils";
@@ -120,6 +120,16 @@ const FilterResult = ({ filter }: FilterResultProps) => {
             </>
         );
     }, [books, currentView, handleChangePage, isSmall, page, t, totalItems]);
+
+    useEffect(() => {
+        window.addEventListener("clear-page", () => {
+            handleChangePage(1);
+        });
+
+        return () => {
+            window.removeEventListener("clear-page", () => {});
+        };
+    }, [handleChangePage]);
 
     return (
         <BoxBase height="100%" flexGrow={1}>

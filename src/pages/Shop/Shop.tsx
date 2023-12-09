@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PAGE_MAX_WIDTH } from "src/common/const";
 import { FilterBookType } from "src/common/types";
 import BoxBase from "src/components/Boxs/BoxBase";
@@ -20,6 +20,10 @@ const Shop = () => {
         rare: [],
         format: [],
     });
+
+    useEffect(() => {
+        window.dispatchEvent(new CustomEvent("clear-page"));
+    }, [filter]);
 
     return (
         <>

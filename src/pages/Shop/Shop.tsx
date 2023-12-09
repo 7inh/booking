@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PAGE_MAX_WIDTH } from "src/common/const";
 import { FilterBookType } from "src/common/types";
 import BoxBase from "src/components/Boxs/BoxBase";
@@ -8,6 +8,7 @@ import FilterBookSmall from "src/components/Filters/FilterBookSmall";
 import FilterResult from "src/components/Filters/FilterResult";
 import { useResponsive } from "src/hooks/utils/useResponsive";
 import useTranslation from "src/hooks/utils/useTranslation";
+import { useUpdateEffect } from "src/hooks/utils/useUpdateEffect";
 
 const Shop = () => {
     const t = useTranslation();
@@ -21,7 +22,7 @@ const Shop = () => {
         format: [],
     });
 
-    useEffect(() => {
+    useUpdateEffect(() => {
         window.dispatchEvent(new CustomEvent("clear-page"));
     }, [filter]);
 

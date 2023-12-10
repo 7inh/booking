@@ -206,6 +206,7 @@ const FormCheckOut = ({
                     name="date"
                     label={t("pages.checkout.form.date")}
                     disabled={shipNow}
+                    disablePast
                 />
             </BoxBase>
             {deliveryServiceValue ? (

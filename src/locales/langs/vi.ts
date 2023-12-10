@@ -107,10 +107,10 @@ export const vi: LangType = {
                 },
                 rare: "Độ hiếm",
                 rareList: {
-                    normal: "Bình thường",
+                    normal: "Bản thường",
                     special: "Đặc biệt",
                     limited: "Giới hạn",
-                    collection: "Sưu tầm",
+                    collection: "Sưu tầm/Hiếm",
                 },
                 range: "đến",
                 format: "Kiểu bìa",
@@ -150,6 +150,7 @@ export const vi: LangType = {
             weight: "Cân nặng",
             width: "Chiều rộng",
             author: "Tác giả",
+            soldOut: "Hết hàng",
         },
         cart: {
             title: "Giỏ hàng",
@@ -179,6 +180,7 @@ export const vi: LangType = {
                 address: "Địa chỉ nhận hàng",
                 date: "Ngày nhận hàng",
                 note: "Ghi chú cho người bán",
+                deliveryService: "Dịch vụ giao hàng",
             },
             rules: {
                 required: "Vui lòng nhập thông tin",
@@ -186,6 +188,10 @@ export const vi: LangType = {
             },
             asSoonAsPossible: "Giao ngay khi có thể",
             submit: "Đặt hàng",
+            deliveryService: {
+                vcn: "Nhanh",
+                vtk: "Tiết kiệm",
+            },
         },
         about: {
             title: "Giới thiệu",

@@ -146,6 +146,7 @@ export type LangType = {
             quantity: string;
             sold: string;
             author: string;
+            soldOut: string;
         };
         cart: {
             title: string;
@@ -174,6 +175,7 @@ export type LangType = {
                 address: string;
                 date: string;
                 note: string;
+                deliveryService: string;
             };
             rules: {
                 required: string;
@@ -181,6 +183,10 @@ export type LangType = {
             };
             asSoonAsPossible: string;
             submit: string;
+            deliveryService: {
+                vcn: string;
+                vtk: string;
+            };
         };
         about: {
             title: string;

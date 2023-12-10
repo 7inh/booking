@@ -6,6 +6,7 @@ import RHFAutocomplete from "src/components/RHFs/RHFAutocomplete";
 import { RHFCheckbox } from "src/components/RHFs/RHFCheckBox";
 import RHFDatePicker from "src/components/RHFs/RHFDatePicker";
 import RHFTextField from "src/components/RHFs/RHFTextField";
+import TypographyBase from "src/components/Typographys/TypographyBase";
 import useGetDistrict from "src/hooks/useGetDistrict";
 import useGetPrice from "src/hooks/useGetPrice";
 import useGetProvince from "src/hooks/useGetProvince";
@@ -24,6 +25,7 @@ export type OrderFormValuesProps = {
     shipNow: boolean;
     date: string;
     note: string;
+    deliveryService?: string;
 };
 
 export interface FormCheckOutProps {
@@ -34,6 +36,11 @@ export interface FormCheckOutProps {
     onClear?: () => void;
     onSubmit: (data: OrderFormValuesProps) => void;
 }
+
+const allowDeliveryService = {
+    VCN: "pages.checkout.deliveryService.vcn",
+    VTK: "pages.checkout.deliveryService.vtk",
+};
 
 const FormCheckOut = ({
     weight,
@@ -55,14 +62,16 @@ const FormCheckOut = ({
             ward: null,
             address: "",
             note: "",
+            deliveryService: "",
         },
     });
 
-    const { handleSubmit, watch } = methods;
+    const { handleSubmit, watch, setValue } = methods;
 
     const shipNow = watch("shipNow");
     const selectedProvince = watch("province");
     const selectedDistrict = watch("district");
+    const deliveryServiceValue = watch("deliveryService");
 
     const { data: province, isFetching: isFetchingProvince } = useGetProvince({});
     const { data: district, isFetching: isFetchingDistrict } = useGetDistrict({
@@ -72,7 +81,7 @@ const FormCheckOut = ({
         districtId: selectedDistrict?.DISTRICT_ID,
     });
 
-    const { isFetching } = useGetPrice({
+    const { data: deliveryService, isFetching } = useGetPrice({
         enable: shouldRefetchShippingFee && selectedProvince?.PROVINCE_ID !== 2,
         productWeight: weight || 0,
         receiverProvince: selectedProvince?.PROVINCE_ID,
@@ -80,6 +89,7 @@ const FormCheckOut = ({
         onSuccess: (data) => {
             const VTK = data?.find((item: any) => item.MA_DV_CHINH === "VTK");
             if (VTK) {
+                setValue("deliveryService", VTK.MA_DV_CHINH);
                 refetchShippingFee(VTK.GIA_CUOC);
             }
         },
@@ -198,6 +208,73 @@ const FormCheckOut = ({
                     disabled={shipNow}
                 />
             </BoxBase>
+            {deliveryServiceValue ? (
+                <BoxBase
+                    sx={{
+                        my: 3,
+                    }}
+                >
+                    <TypographyBase
+                        sx={{
+                            fontSize: "1.2rem",
+                            fontWeight: 500,
+                            mb: 1,
+                        }}
+                    >
+                        {t("pages.checkout.form.deliveryService")}
+                    </TypographyBase>
+                    <BoxBase
+                        sx={{
+                            display: "grid",
+                            gridTemplateColumns: "1fr 1fr",
+                            gap: 2,
+                        }}
+                    >
+                        {deliveryService?.map((item: any) => {
+                            if (!(item.MA_DV_CHINH in allowDeliveryService)) return null;
+                            return (
+                                <BoxBase
+                                    key={item.MA_DV_CHINH}
+                                    sx={{
+                                        border: "1px solid",
+                                        bgcolor:
+                                            deliveryServiceValue === item.MA_DV_CHINH
+                                                ? "primary.main"
+                                                : "secondary.main",
+                                        color:
+                                            deliveryServiceValue === item.MA_DV_CHINH
+                                                ? "white"
+                                                : "black",
+                                        py: 2,
+                                        px: 1,
+                                        userSelect: "none",
+                                        cursor: "pointer",
+                                    }}
+                                    onClick={() => {
+                                        setValue("deliveryService", item.MA_DV_CHINH);
+                                        refetchShippingFee(item.GIA_CUOC);
+                                    }}
+                                >
+                                    <TypographyBase
+                                        sx={{
+                                            textAlign: "center",
+                                            fontSize: "1rem",
+                                        }}
+                                    >
+                                        {t(
+                                            `${
+                                                allowDeliveryService[
+                                                    item.MA_DV_CHINH as keyof typeof allowDeliveryService
+                                                ]
+                                            }`
+                                        )}
+                                    </TypographyBase>
+                                </BoxBase>
+                            );
+                        })}
+                    </BoxBase>
+                </BoxBase>
+            ) : null}
             <BoxBase my={2}>
                 <RHFTextField
                     multiline

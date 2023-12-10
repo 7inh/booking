@@ -148,6 +148,7 @@ export const en: LangType = {
             weight: "Weight",
             width: "Width",
             author: "Author",
+            soldOut: "Sold Out",
         },
         cart: {
             title: "Cart",
@@ -176,6 +177,7 @@ export const en: LangType = {
                 address: "Address",
                 date: "Date",
                 note: "Note",
+                deliveryService: "Delivery service",
             },
             rules: {
                 required: "Please fill in this field",
@@ -183,6 +185,10 @@ export const en: LangType = {
             },
             asSoonAsPossible: "As soon as possible",
             submit: "Submit",
+            deliveryService: {
+                vcn: "Fast delivery",
+                vtk: "Saving delivery",
+            },
         },
         about: {
             title: "About",

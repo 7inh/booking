@@ -1,4 +1,5 @@
 import { CardMedia } from "@mui/material";
+import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookDetail } from "src/common/types";
 import BoxBase from "src/components/Boxs/BoxBase";
@@ -19,6 +20,10 @@ const Overview = ({ book }: OverviewProps) => {
     const snackbar = useSnackBar();
     const t = useTranslation();
     const navigate = useNavigate();
+
+    const isSoldOut = useMemo(() => {
+        return book.availability === 3 || book.quantity ? book.quantity - book.sold <= 0 : false;
+    }, [book.availability, book.quantity, book.sold]);
 
     return (
         <BoxBase
@@ -137,19 +142,41 @@ const Overview = ({ book }: OverviewProps) => {
                             },
                         }}
                     >
-                        <InputQuantity
-                            onAddToCart={(quantity) => {
-                                addToCart({ book, quantity });
-                                snackbar({
-                                    message: t("success.addToCart"),
-                                    severity: "success",
-                                });
-                            }}
-                            onBuyNow={(quantity) => {
-                                addToCart({ book, quantity });
-                                navigate("/cart");
-                            }}
-                        />
+                        {!isSoldOut ? (
+                            <InputQuantity
+                                onAddToCart={(quantity) => {
+                                    addToCart({ book, quantity });
+                                    snackbar({
+                                        message: t("success.addToCart"),
+                                        severity: "success",
+                                    });
+                                }}
+                                onBuyNow={(quantity) => {
+                                    addToCart({ book, quantity });
+                                    navigate("/cart");
+                                }}
+                            />
+                        ) : (
+                            <BoxBase
+                                showBorder
+                                sx={{
+                                    px: 3,
+                                    py: 2,
+                                    width: "100%",
+                                }}
+                            >
+                                <TypographyBase
+                                    sx={{
+                                        fontSize: "1rem",
+                                        fontWeight: 400,
+                                        color: "primary.main",
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    {t("pages.book.soldOut")}
+                                </TypographyBase>
+                            </BoxBase>
+                        )}
                     </BoxHorizon>
                 </BoxBase>
             </BoxBase>

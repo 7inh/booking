@@ -90,7 +90,6 @@ const CheckOut = () => {
                 fetched: true,
                 value: 0,
             });
-            console.log("Free shipping");
         }
     }, [cartTotalValue]);
 

@@ -281,7 +281,6 @@ export const validateCoupon = (cartTotalValue: number, coupons: Coupon[]) => {
 
         if (errorMessage.length === 0 && coupon.min_price > cartTotalValue) {
             errorMessage.push("error.coupon.minPrice");
-            console.log({ cartTotalValue, minPrice: coupon.min_price });
         }
 
         if (errorMessage.length === 0 && today > DateTime.fromISO(coupon.expired_at)) {

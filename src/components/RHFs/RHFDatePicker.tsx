@@ -8,11 +8,11 @@ interface Props {
     label: string;
     size?: "small" | "medium";
     disabled?: boolean;
-    disablePast?: boolean;
+    minDate?: any;
 }
 
 const RHFDatePicker = (props: Props) => {
-    const { name, label, size = "medium", disabled, disablePast } = props;
+    const { name, label, size = "medium", disabled, minDate } = props;
     const { control } = useFormContext();
 
     return (
@@ -31,7 +31,7 @@ const RHFDatePicker = (props: Props) => {
                         }}
                         slotProps={{ textField: { size } }}
                         disabled={disabled}
-                        disablePast={disablePast}
+                        minDate={minDate}
                     />
                 </LocalizationProvider>
             )}

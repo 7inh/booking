@@ -3,6 +3,7 @@ import { DateTime } from "luxon";
 import { AvailabilityEnum, FormatEnum, RareEnum, VariantEnum } from "src/common/enum";
 import { Coupon, FilterBookParams, FilterBookType } from "src/common/types";
 import { LocaleType } from "src/locales/types";
+import dayjs from "dayjs";
 
 export function formatDateTime(date: Date) {
     const hours = String(date.getHours()).padStart(2, "0");
@@ -302,4 +303,11 @@ export const validateCoupon = (cartTotalValue: number, coupons: Coupon[]) => {
             errorMessage: errorMessage[0],
         };
     });
+};
+
+export const getMinDateDelivery = () => {
+    const dateX = dayjs();
+
+    if (dateX.hour() >= 12) return dateX.add(2, "day");
+    return dateX.add(1, "day");
 };

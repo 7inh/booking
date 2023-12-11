@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { getMinDateDelivery } from "src/common/utils";
 import BoxBase from "src/components/Boxs/BoxBase";
 import IconLoadingBackdrop from "src/components/Icons/IconLoadingBackdrop";
 import RHFAutocomplete from "src/components/RHFs/RHFAutocomplete";
@@ -206,7 +207,7 @@ const FormCheckOut = ({
                     name="date"
                     label={t("pages.checkout.form.date")}
                     disabled={shipNow}
-                    disablePast
+                    minDate={getMinDateDelivery()}
                 />
             </BoxBase>
             {deliveryServiceValue ? (

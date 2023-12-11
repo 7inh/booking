@@ -53,10 +53,11 @@ const FilterResult = ({ filter }: FilterResultProps) => {
 
     const handleChangePage = useCallback(
         (page: number) => {
-            setSearchParams({ q, page: page.toString() });
+            searchParams.set("page", page.toString());
+            setSearchParams(searchParams);
             setPage(page);
         },
-        [q, setSearchParams]
+        [searchParams, setSearchParams]
     );
 
     const renderBodyWithContent = useMemo(() => {

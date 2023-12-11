@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { PAGE_MAX_WIDTH } from "src/common/const";
 import { FilterBookType } from "src/common/types";
 import BoxBase from "src/components/Boxs/BoxBase";
@@ -11,16 +12,78 @@ import useTranslation from "src/hooks/utils/useTranslation";
 import { useUpdateEffect } from "src/hooks/utils/useUpdateEffect";
 
 const Shop = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
+
     const t = useTranslation();
 
     const isSmall = useResponsive("down", 920);
 
     const [filter, setFilter] = useState<FilterBookType>({
-        availability: [],
+        availability: searchParams.get("availability")?.split(",") || [],
         variant: [],
         rare: [],
         format: [],
     });
+
+    const handleChangeRare = useCallback(
+        (value: string[]) => {
+            setFilter((prev) => ({
+                ...prev,
+                rare: value,
+            }));
+            searchParams.set("rare", value.join(","));
+            setSearchParams(searchParams);
+        },
+        [searchParams, setSearchParams]
+    );
+
+    const handleChangeVariant = useCallback(
+        (value: string[]) => {
+            setFilter((prev) => ({
+                ...prev,
+                variant: value,
+            }));
+            searchParams.set("variant", value.join(","));
+            setSearchParams(searchParams);
+        },
+        [searchParams, setSearchParams]
+    );
+
+    const handleChangeFormat = useCallback(
+        (value: string[]) => {
+            setFilter((prev) => ({
+                ...prev,
+                format: value,
+            }));
+            searchParams.set("format", value.join(","));
+            setSearchParams(searchParams);
+        },
+        [searchParams, setSearchParams]
+    );
+
+    const handleChangeAvailability = useCallback(
+        (value: string[]) => {
+            setFilter((prev) => ({
+                ...prev,
+                availability: value,
+            }));
+            searchParams.set("availability", value.join(","));
+            setSearchParams(searchParams);
+        },
+        [searchParams, setSearchParams]
+    );
+
+    const handleChangePrice = useCallback(
+        (value: number[]) => {
+            setFilter((prev) => ({
+                ...prev,
+                price: [value[0], value[1]],
+            }));
+            searchParams.set("price", value.join(","));
+            setSearchParams(searchParams);
+        },
+        [searchParams, setSearchParams]
+    );
 
     useUpdateEffect(() => {
         window.dispatchEvent(new CustomEvent("clear-page"));
@@ -59,69 +122,20 @@ const Shop = () => {
                     {isSmall ? (
                         <FilterBookSmall
                             filter={filter}
-                            onChangeRare={(value) =>
-                                setFilter((prev) => ({
-                                    ...prev,
-                                    rare: value,
-                                }))
-                            }
-                            onChangeVariant={(value) =>
-                                setFilter((prev) => ({
-                                    ...prev,
-                                    variant: value,
-                                }))
-                            }
-                            onChangeAvailability={(value) =>
-                                setFilter((prev) => ({
-                                    ...prev,
-                                    availability: value,
-                                }))
-                            }
-                            onChangePrice={(value) =>
-                                setFilter((prev) => ({
-                                    ...prev,
-                                    price: [value[0], value[1]],
-                                }))
-                            }
-                            onChangeFormat={(value) =>
-                                setFilter((prev) => ({
-                                    ...prev,
-                                    format: value,
-                                }))
-                            }
+                            onChangeRare={handleChangeRare}
+                            onChangeVariant={handleChangeVariant}
+                            onChangeAvailability={handleChangeAvailability}
+                            onChangePrice={handleChangePrice}
+                            onChangeFormat={handleChangeFormat}
                         />
                     ) : (
                         <FilterBook
-                            onChangeRare={(value) =>
-                                setFilter((prev) => ({
-                                    ...prev,
-                                    rare: value,
-                                }))
-                            }
-                            onChangeVariant={(value) =>
-                                setFilter((prev) => ({
-                                    ...prev,
-                                    variant: value,
-                                }))
-                            }
-                            onChangeAvailability={(value) =>
-                                setFilter((prev) => ({
-                                    ...prev,
-                                    availability: value,
-                                }))
-                            }
-                            onChangePrice={(value) =>
-                                setFilter((prev) => ({
-                                    ...prev,
-                                    price: [value[0], value[1]],
-                                }))
-                            }
-                            onChangeFormat={(value) =>
-                                setFilter((prev) => ({
-                                    ...prev,
-                                    format: value,
-                                }))
-                            }
+                            filter={filter}
+                            onChangeRare={handleChangeRare}
+                            onChangeVariant={handleChangeVariant}
+                            onChangeAvailability={handleChangeAvailability}
+                            onChangePrice={handleChangePrice}
+                            onChangeFormat={handleChangeFormat}
                         />
                     )}
                     <FilterResult filter={filter} />

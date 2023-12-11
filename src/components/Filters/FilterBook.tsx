@@ -1,4 +1,5 @@
 import { Divider } from "@mui/material";
+import { FilterBookType } from "src/common/types";
 import BoxBase from "src/components/Boxs/BoxBase";
 import FilterSectionAvailability from "src/components/Filters/FilterSections/FilterSectionAvailability";
 import FilterSectionFormat from "src/components/Filters/FilterSections/FilterSectionFormat";
@@ -7,6 +8,7 @@ import FilterSectionRare from "src/components/Filters/FilterSections/FilterSecti
 import FilterSectionVariant from "src/components/Filters/FilterSections/FilterSectionVariant";
 
 export interface FilterBookProps {
+    filter: FilterBookType;
     onChangeRare?: (value: string[]) => void;
     onChangeVariant?: (value: string[]) => void;
     onChangeAvailability?: (value: string[]) => void;
@@ -15,6 +17,7 @@ export interface FilterBookProps {
 }
 
 const FilterBook = ({
+    filter,
     onChangeRare,
     onChangeVariant,
     onChangeAvailability,
@@ -30,31 +33,34 @@ const FilterBook = ({
                 userSelect: "none",
             }}
         >
-            <FilterSectionPrice onChange={onChangePrice} />
+            <FilterSectionPrice filter={filter["price"]} onChange={onChangePrice} />
             <Divider
                 sx={{
                     my: 2,
                 }}
             />
-            <FilterSectionAvailability onChange={onChangeAvailability} />
+            <FilterSectionAvailability
+                filter={filter["availability"]}
+                onChange={onChangeAvailability}
+            />
             <Divider
                 sx={{
                     my: 2,
                 }}
             />
-            <FilterSectionVariant onChange={onChangeVariant} />
+            <FilterSectionVariant filter={filter["variant"]} onChange={onChangeVariant} />
             <Divider
                 sx={{
                     my: 2,
                 }}
             />
-            <FilterSectionRare onChange={onChangeRare} />
+            <FilterSectionRare filter={filter["rare"]} onChange={onChangeRare} />
             <Divider
                 sx={{
                     my: 2,
                 }}
             />
-            <FilterSectionFormat onChange={onChangeFormat} />
+            <FilterSectionFormat filter={filter["format"]} onChange={onChangeFormat} />
         </BoxBase>
     );
 };

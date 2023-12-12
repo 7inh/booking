@@ -177,7 +177,7 @@ export const vi: LangType = {
                 province: "Tỉnh/Thành phố",
                 district: "Quận/Huyện",
                 ward: "Phường/Xã",
-                address: "Địa chỉ nhận hàng",
+                address: "Địa chỉ",
                 date: "Ngày nhận hàng",
                 note: "Ghi chú cho người bán",
                 deliveryService: "Dịch vụ giao hàng",

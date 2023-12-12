@@ -248,7 +248,6 @@ const FormCheckOut = ({
                                                 ? "white"
                                                 : "black",
                                         py: 2,
-                                        px: 1,
                                         userSelect: "none",
                                         cursor: "pointer",
                                     }}
@@ -261,6 +260,8 @@ const FormCheckOut = ({
                                         sx={{
                                             textAlign: "center",
                                             fontSize: "1rem",
+                                            textTransform: "uppercase",
+                                            fontWeight: 500,
                                         }}
                                     >
                                         {t(

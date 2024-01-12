@@ -12,7 +12,7 @@ const Book = () => {
 
     const { id } = useParams<{ id: string }>();
 
-    const { data: book } = useGetItemById({ id: parseInt(id || "0") });
+    const { data: book, isFetching } = useGetItemById({ id: parseInt(id || "0") });
 
     return (
         <>
@@ -36,15 +36,13 @@ const Book = () => {
                     mb: 5,
                 }}
             >
-                {book ? (
-                    <BoxBase mx={2}>
-                        <Overview book={book} />
-                        <br />
-                        <br />
-                        <br />
-                        <BookDetail book={book} />
-                    </BoxBase>
-                ) : null}
+                <BoxBase mx={2}>
+                    <Overview book={book} isFetching={isFetching} />
+                    <br />
+                    <br />
+                    <br />
+                    {!isFetching ? <BookDetail book={book} /> : null}
+                </BoxBase>
             </BoxBase>
         </>
     );

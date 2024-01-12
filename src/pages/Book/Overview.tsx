@@ -1,4 +1,4 @@
-import { CardMedia } from "@mui/material";
+import { CardMedia, Skeleton } from "@mui/material";
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookDetail } from "src/common/types";
@@ -13,9 +13,10 @@ import useTranslation from "src/hooks/utils/useTranslation";
 
 export interface OverviewProps {
     book: BookDetail;
+    isFetching?: boolean;
 }
 
-const Overview = ({ book }: OverviewProps) => {
+const Overview = ({ book, isFetching }: OverviewProps) => {
     const { addToCart } = useCartContext();
     const snackbar = useSnackBar();
     const t = useTranslation();
@@ -45,19 +46,31 @@ const Overview = ({ book }: OverviewProps) => {
                         lg: 10,
                     },
                     position: "relative",
+                    height: "fit-content",
                 }}
             >
-                <CardMedia
-                    component="img"
-                    image={book.cover.replace("compact", "master")}
-                    sx={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "scale-down",
-                    }}
-                    alt={book.title}
-                />
-                {book.discount !== 0 ? (
+                {!isFetching ? (
+                    <CardMedia
+                        component="img"
+                        image={book.cover.replace("compact", "master")}
+                        sx={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "scale-down",
+                        }}
+                        alt={book.title}
+                    />
+                ) : (
+                    <Skeleton
+                        variant="rectangular"
+                        sx={{
+                            width: "100%",
+                            height: "100%",
+                            minHeight: "450px",
+                        }}
+                    />
+                )}
+                {book.discount !== 0 && !isFetching ? (
                     <BoxCenter
                         sx={{
                             bgcolor: "primary.main",
@@ -86,50 +99,83 @@ const Overview = ({ book }: OverviewProps) => {
                 ) : null}
             </BoxBase>
             <BoxBase>
-                <TypographyBase
-                    sx={{
-                        fontSize: "1.9rem",
-                        fontWeight: 500,
-                    }}
-                >
-                    {book.title}
-                </TypographyBase>
-                <BoxHorizon gap={1} my={1}>
+                {!isFetching ? (
                     <TypographyBase
                         sx={{
-                            fontSize: "24px",
+                            fontSize: "1.9rem",
                             fontWeight: 500,
-                            color: "primary.main",
                         }}
                     >
-                        {book.current_price.toLocaleString("vi-VN", {
-                            style: "currency",
-                            currency: "VND",
-                        })}
+                        {book.title}
                     </TypographyBase>
+                ) : (
+                    <Skeleton
+                        variant="text"
+                        sx={{
+                            width: "100%",
+                            height: "45px",
+                        }}
+                    />
+                )}
+                {!isFetching ? (
+                    <BoxHorizon gap={1} my={1}>
+                        <TypographyBase
+                            sx={{
+                                fontSize: "24px",
+                                fontWeight: 500,
+                                color: "primary.main",
+                            }}
+                        >
+                            {book.current_price.toLocaleString("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                            })}
+                        </TypographyBase>
+                        <TypographyBase
+                            sx={{
+                                fontSize: "18px",
+                                fontWeight: 300,
+                                color: "primary.dark",
+                                textDecoration: "line-through",
+                            }}
+                        >
+                            {book.old_price.toLocaleString("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                            })}
+                        </TypographyBase>
+                    </BoxHorizon>
+                ) : (
+                    <Skeleton
+                        variant="text"
+                        sx={{
+                            width: "100%",
+                            height: "40px",
+                            maxWidth: "200px",
+                            mb: 1,
+                            mt: 1,
+                        }}
+                    />
+                )}
+                {!isFetching ? (
                     <TypographyBase
                         sx={{
-                            fontSize: "18px",
+                            fontSize: "1rem",
                             fontWeight: 300,
                             color: "primary.dark",
-                            textDecoration: "line-through",
                         }}
                     >
-                        {book.old_price.toLocaleString("vi-VN", {
-                            style: "currency",
-                            currency: "VND",
-                        })}
+                        {book.description}
                     </TypographyBase>
-                </BoxHorizon>
-                <TypographyBase
-                    sx={{
-                        fontSize: "1rem",
-                        fontWeight: 300,
-                        color: "primary.dark",
-                    }}
-                >
-                    {book.description}
-                </TypographyBase>
+                ) : (
+                    <Skeleton
+                        variant="text"
+                        sx={{
+                            width: "100%",
+                            height: "300px",
+                        }}
+                    />
+                )}
                 <br />
 
                 <br />

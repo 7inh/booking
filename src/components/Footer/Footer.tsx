@@ -107,12 +107,12 @@ const Footer = () => {
                             </BoxHorizon>
                             <BoxHorizon gap={1}>
                                 <PhoneIphoneRoundedIcon />
-                                <TypographyBase variant="caption">(+84) 946781412</TypographyBase>
+                                <TypographyBase variant="caption">(+84) 943493916</TypographyBase>
                             </BoxHorizon>
                             <BoxHorizon gap={1}>
                                 <AlternateEmailRoundedIcon />
                                 <TypographyBase variant="caption">
-                                    thanhcong200912@gmail.com
+                                    tranquoclinh247@gmail.com
                                 </TypographyBase>
                             </BoxHorizon>
                         </BoxVertical>

@@ -4,6 +4,7 @@ import BookDetail from "src/components/Book/BookDetail";
 import BoxBase from "src/components/Boxs/BoxBase";
 import Breadcrumb from "src/components/Breadcrumb/Breadcrumb";
 import useGetItemById from "src/hooks/useGetItemById";
+import { useEffectOnce } from "src/hooks/utils/useEffectOnce";
 import useTranslation from "src/hooks/utils/useTranslation";
 import Overview from "src/pages/Book/Overview";
 
@@ -13,6 +14,10 @@ const Book = () => {
     const { id } = useParams<{ id: string }>();
 
     const { data: book, isFetching } = useGetItemById({ id: parseInt(id || "0") });
+
+    useEffectOnce(() => {
+        window.scrollTo(0, 0);
+    });
 
     return (
         <>

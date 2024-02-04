@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React from "react";
 import { Box, BoxProps } from "@mui/material";
 import { scrollbarSx } from "src/common/sxs";
 
@@ -7,7 +7,7 @@ export interface BoxBaseProps extends BoxProps {
     showBorder?: boolean;
 }
 
-const BoxBase = forwardRef<HTMLDivElement, BoxBaseProps>(
+const BoxBase = React.forwardRef<HTMLDivElement | null | undefined | unknown, BoxBaseProps>(
     ({ children, sx, showBorder, ...rest }, ref) => {
         return (
             <Box

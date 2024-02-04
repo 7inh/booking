@@ -7,9 +7,10 @@ import useTranslation from "src/hooks/utils/useTranslation";
 
 export interface NavbarProps {
     direction?: "row" | "column";
+    onNavigate?: () => void;
 }
 
-const Navbar = ({ direction }: NavbarProps) => {
+const Navbar = ({ direction, onNavigate }: NavbarProps) => {
     const t = useTranslation();
     const navData = [
         {
@@ -54,6 +55,7 @@ const Navbar = ({ direction }: NavbarProps) => {
                             style={{
                                 width: direction === "column" ? "100%" : "auto",
                             }}
+                            onClick={onNavigate}
                         >
                             <BoxBase
                                 sx={{

@@ -1,6 +1,6 @@
 import CardMedia from "@mui/material/CardMedia";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BOOK_ITEM_HORIZON_WIDTH, PAGE_MAX_WIDTH } from "src/common/const";
 import { Book } from "src/common/types";
@@ -27,6 +27,7 @@ const RandomBook = () => {
     const lgDown = useResponsive("down", "lg");
 
     const [currentSelected, setCurrentSelected] = useState<Book | null>(null);
+    const currentViewRef = useRef<HTMLDivElement | null>(null);
 
     const { data: books } = useGetRandom({
         onSuccess: (data) => {
@@ -54,6 +55,7 @@ const RandomBook = () => {
                         border: "1px solid #3333330d",
                         minHeight: "400px",
                     }}
+                    ref={currentViewRef}
                 >
                     {currentSelected ? (
                         <BoxHorizon
@@ -205,6 +207,12 @@ const RandomBook = () => {
                                 book={book}
                                 onClick={() => {
                                     setCurrentSelected(book);
+                                    if (currentViewRef.current) {
+                                        currentViewRef.current.scrollIntoView({
+                                            behavior: "smooth",
+                                            block: "center",
+                                        });
+                                    }
                                 }}
                             />
                         );

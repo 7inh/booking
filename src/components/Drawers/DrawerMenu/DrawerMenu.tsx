@@ -55,7 +55,7 @@ export const DrawerMenu = (props: DrawerMenuProps) => {
                     }}
                 />
                 <BoxBase my={1} flexGrow={1}>
-                    <Navbar direction="column" />
+                    <Navbar direction="column" onNavigate={onClose} />
                 </BoxBase>
                 <SelectLanguage fullWidth />
             </BoxBase>

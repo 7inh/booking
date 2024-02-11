@@ -34,8 +34,8 @@ const Branding = () => {
                     width: "100vw",
                     height: "100vh",
                     maxHeight: "inherit",
-                    bgcolor: "white",
-                    zIndex: 1000,
+                    bgcolor: "primary.main",
+                    zIndex: 1,
                     opacity: isBigImageLoaded.value ? 0 : 1,
                     pointerEvents: "none",
                     transition: "opacity 0.5s",
@@ -100,7 +100,7 @@ const Branding = () => {
                             height: "5px",
                             width: "100%",
                             maxWidth: "200px",
-                            bgcolor: "primary.main",
+                            bgcolor: !isBigImageLoaded.value ? "secondary.main" : "primary.main",
                             my: "24px",
                             mx: "auto",
                         }}
@@ -122,6 +122,7 @@ const Branding = () => {
                                 color: "secondary.main",
                                 boxShadow: "none",
                             },
+                            border: !isBigImageLoaded.value ? "1px solid" : "none",
                         }}
                         onClick={() => {
                             navigate("/shop");

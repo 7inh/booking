@@ -4,6 +4,7 @@ import { PAGE_MAX_WIDTH } from "src/common/const";
 import BoxBase from "src/components/Boxs/BoxBase";
 import ButtonBase from "src/components/Buttons/ButtonBase";
 import TypographyBase from "src/components/Typographys/TypographyBase";
+import { useBoolean } from "src/hooks/utils/useBoolean";
 import { useResponsive } from "src/hooks/utils/useResponsive";
 import useTranslation from "src/hooks/utils/useTranslation";
 
@@ -12,6 +13,7 @@ const Branding = () => {
     const navigate = useNavigate();
 
     const mdDown = useResponsive("down", "md");
+    const isBigImageLoaded = useBoolean(false);
 
     return (
         <BoxBase
@@ -24,6 +26,21 @@ const Branding = () => {
             }}
         >
             {/* <Particles /> */}
+            <BoxBase
+                sx={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100vw",
+                    height: "100vh",
+                    maxHeight: "inherit",
+                    bgcolor: "white",
+                    zIndex: 1000,
+                    opacity: isBigImageLoaded.value ? 0 : 1,
+                    pointerEvents: "none",
+                    transition: "opacity 0.5s",
+                }}
+            ></BoxBase>
             <CardMedia
                 component="img"
                 src="/images/bg.jpg"
@@ -32,6 +49,7 @@ const Branding = () => {
                     position: "absolute",
                     height: "100%",
                 }}
+                onLoad={isBigImageLoaded.onTrue}
             />
             <BoxBase
                 sx={{

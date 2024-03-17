@@ -1,11 +1,11 @@
 import { CardMedia, Skeleton } from "@mui/material";
-import { useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useMemo, useState } from "react";
 import { BookDetail } from "src/common/types";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxCenter from "src/components/Boxs/BoxCenter";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
-import InputQuantity from "src/components/Inputs/InputQuantity";
+import ButtonBase from "src/components/Buttons/ButtonBase";
+import DialogSelectEps from "src/components/Dialogs/DialogSelectEps";
 import TypographyBase from "src/components/Typographys/TypographyBase";
 import { useCartContext } from "src/contexts/CartContext";
 import useSnackBar from "src/hooks/utils/useSnackBar";
@@ -20,11 +20,34 @@ const Overview = ({ book, isFetching }: OverviewProps) => {
     const { addToCart } = useCartContext();
     const snackbar = useSnackBar();
     const t = useTranslation();
-    const navigate = useNavigate();
+    const [confirmText, setConfirmText] = useState<string>("");
 
     const isSoldOut = useMemo(() => {
         return book.availability === 3 || book.quantity ? book.quantity - book.sold <= 0 : false;
     }, [book.availability, book.quantity, book.sold]);
+
+    const renderDialogSelectEps = useMemo(() => {
+        if (!confirmText) return null;
+
+        return (
+            <DialogSelectEps
+                open={true}
+                onClose={() => setConfirmText("")}
+                confirmText={confirmText}
+                itemId={book.id}
+                onConfirm={(selectedListItemEps) => {
+                    addToCart({
+                        book,
+                        eps: selectedListItemEps,
+                    });
+                    snackbar({
+                        message: t("success.addToCart"),
+                        severity: "success",
+                    });
+                }}
+            />
+        );
+    }, [addToCart, book, confirmText, snackbar, t]);
 
     return (
         <BoxBase
@@ -37,13 +60,14 @@ const Overview = ({ book, isFetching }: OverviewProps) => {
                 gap: 4,
             }}
         >
+            {renderDialogSelectEps}
             <BoxBase
                 showBorder
                 sx={{
                     p: {
                         xs: 2,
-                        md: 5,
-                        lg: 10,
+                        md: 3,
+                        lg: 7,
                     },
                     position: "relative",
                     height: "fit-content",
@@ -106,7 +130,7 @@ const Overview = ({ book, isFetching }: OverviewProps) => {
                             fontWeight: 500,
                         }}
                     >
-                        {book.title}
+                        {book.title.toUpperCase()}
                     </TypographyBase>
                 ) : (
                     <Skeleton
@@ -179,7 +203,11 @@ const Overview = ({ book, isFetching }: OverviewProps) => {
                 <br />
 
                 <br />
-                <BoxBase sx={{}}>
+                <BoxBase
+                    sx={{
+                        display: isFetching ? "none" : "block",
+                    }}
+                >
                     <BoxHorizon
                         sx={{
                             width: {
@@ -189,19 +217,15 @@ const Overview = ({ book, isFetching }: OverviewProps) => {
                         }}
                     >
                         {!isSoldOut ? (
-                            <InputQuantity
-                                onAddToCart={(quantity) => {
-                                    addToCart({ book, quantity });
-                                    snackbar({
-                                        message: t("success.addToCart"),
-                                        severity: "success",
-                                    });
+                            <ButtonBase
+                                label={t("common.buyNow")}
+                                sx={{
+                                    gridColumn: "1 / 3",
+                                    fontSize: "1.2rem",
+                                    px: 10,
                                 }}
-                                onBuyNow={(quantity) => {
-                                    addToCart({ book, quantity });
-                                    navigate("/cart");
-                                }}
-                            />
+                                onClick={() => setConfirmText(t("common.buyNow"))}
+                            ></ButtonBase>
                         ) : (
                             <BoxBase
                                 showBorder

@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { Book } from "src/common/types";
 import BookItemHorizonV2 from "src/components/Book/BookItemHorizonV2";
 import BoxBase from "src/components/Boxs/BoxBase";
@@ -8,7 +7,6 @@ export interface ListBookHorizonProps {
 }
 
 const ListBookHorizon = ({ books }: ListBookHorizonProps) => {
-    const navigate = useNavigate();
     return (
         <BoxBase
             sx={{
@@ -26,9 +24,6 @@ const ListBookHorizon = ({ books }: ListBookHorizonProps) => {
                         book={{
                             ...book,
                             cover: book.cover.replace("compact", "large"),
-                        }}
-                        onClick={() => {
-                            navigate(`/book/${book.id}`);
                         }}
                     />
                 );

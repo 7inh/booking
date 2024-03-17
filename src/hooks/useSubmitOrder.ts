@@ -48,8 +48,6 @@ const useSubmitOrder = ({ onSubmitOrderSuccess }: UseSubmitOrderProps) => {
                 }
             );
 
-            console.log(response);
-
             onSubmitOrderSuccess?.();
             return response;
         } catch (error) {

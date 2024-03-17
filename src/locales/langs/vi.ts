@@ -26,6 +26,7 @@ export const vi: LangType = {
         addToCart: "Thêm vào giỏ hàng thành công",
         sendMessage: "Gửi tin nhắn thành công",
         sendEmailSubscribe: "Đăng ký thành công",
+        updateCart: "Cập nhật giỏ hàng thành công",
     },
     error: {
         somethingWentWrong: "Có lỗi xảy ra",
@@ -36,11 +37,14 @@ export const vi: LangType = {
             minPrice: "Giá trị đơn hàng tối thiểu là %{minPrice}",
         },
         sendEmailSubscribe: "Không thể đăng ký, vui lòng thử lại sau",
+        netWorkError: "Không thể kết nối đến máy chủ, vui lòng thử lại sau",
     },
     message: {
         backToHome: "Quay lại trang chủ",
         notFoundItem: "Không tìm thấy sản phẩm phù hợp",
         freeShipForOrderOver: "Miễn phí vận chuyển cho đơn hàng trên %{price}",
+        shippingFeeIsCalculatingPleaseInputYourAddress:
+            "Phí vận chuyển đang được tính, vui lòng nhập địa chỉ của bạn",
     },
     feature: {
         delivery: {
@@ -57,6 +61,12 @@ export const vi: LangType = {
         },
     },
     dialog: {
+        dialogSelectEps: {
+            selectEps: "Chọn tập",
+            selectEpsNote: "Đã chọn (%{count})",
+            cancelText: "Hủy",
+            confirmText: "Xác nhận",
+        },
         orderSuccess: {
             title: "Đặt hàng thành công",
             content:
@@ -78,6 +88,9 @@ export const vi: LangType = {
         detail: "Chi tiết",
         submitCoupon: "Áp dụng",
         buyMore: "Mua thêm",
+        eps: "Tập",
+        edit: "Chỉnh sửa",
+        update: "Cập nhật",
     },
     pages: {
         home: {
@@ -93,6 +106,8 @@ export const vi: LangType = {
             title: "Cửa hàng",
             filter: {
                 price: "Giá",
+                filterByPrice: "Lọc theo giá",
+                clearFilterPrice: "Xóa bộ lọc giá",
                 availability: "Tình trạng",
                 availabilityList: {
                     available: "Còn hàng",
@@ -151,6 +166,7 @@ export const vi: LangType = {
             width: "Chiều rộng",
             author: "Tác giả",
             soldOut: "Hết hàng",
+            epsNum: "Số tập",
         },
         cart: {
             title: "Giỏ hàng",
@@ -166,6 +182,7 @@ export const vi: LangType = {
             shippingFeeCanBeChanged: "Phí vận chuyển có thể thay đổi tùy vào địa chỉ của bạn",
             couponDescription:
                 "Giảm %{discount} tối đa %{maxDiscount} cho đơn hàng trên %{minPrice}",
+            selectedEps: "Đã chọn %{count} tập",
         },
         checkout: {
             title: "Thanh toán",

@@ -26,6 +26,7 @@ export const en: LangType = {
         addToCart: "Add to cart successfully",
         sendMessage: "Send message successfully",
         sendEmailSubscribe: "Subscribe successfully",
+        updateCart: "Update cart successfully",
     },
     error: {
         somethingWentWrong: "Something went wrong",
@@ -36,11 +37,14 @@ export const en: LangType = {
             minPrice: "Minimum order value is %{minPrice}",
         },
         sendEmailSubscribe: "Can't subscribe, please try again later",
+        netWorkError: "Can't connect to server, please try again later",
     },
     message: {
         backToHome: "Back to home page",
         notFoundItem: "No matching products found",
         freeShipForOrderOver: "Free shipping for orders over %{price}",
+        shippingFeeIsCalculatingPleaseInputYourAddress:
+            "Shipping fee is being calculated, please input your address",
     },
     feature: {
         delivery: {
@@ -57,6 +61,12 @@ export const en: LangType = {
         },
     },
     dialog: {
+        dialogSelectEps: {
+            selectEps: "Select episodes",
+            selectEpsNote: "Selected (%{count})",
+            cancelText: "Cancel",
+            confirmText: "Confirm",
+        },
         orderSuccess: {
             title: "Order success",
             content: "We will contact you as soon as possible",
@@ -77,6 +87,9 @@ export const en: LangType = {
         detail: "Detail",
         submitCoupon: "Submit",
         buyMore: "Buy more",
+        eps: "Episodes",
+        edit: "Edit",
+        update: "Update",
     },
     pages: {
         home: {
@@ -91,6 +104,8 @@ export const en: LangType = {
             title: "Shop",
             filter: {
                 price: "Price",
+                filterByPrice: "Filter by price",
+                clearFilterPrice: "Clear price filter",
                 availability: "Availability",
                 availabilityList: {
                     available: "Available",
@@ -149,6 +164,7 @@ export const en: LangType = {
             width: "Width",
             author: "Author",
             soldOut: "Sold Out",
+            epsNum: "Episodes",
         },
         cart: {
             title: "Cart",
@@ -163,6 +179,7 @@ export const en: LangType = {
             temporary: "Temporary",
             shippingFeeCanBeChanged: "Shipping fee can be changed depending on your location",
             couponDescription: "Discount %{discount} max %{maxDiscount} for order over %{minPrice}",
+            selectedEps: "Selected %{count} episodes",
         },
         checkout: {
             title: "Checkout",

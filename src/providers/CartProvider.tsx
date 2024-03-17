@@ -1,7 +1,9 @@
 import { useCallback, useMemo, useState } from "react";
+import { CartItem, ItemEpsType } from "src/common/types";
+import { getCartItemPriceChange, getItemEpsIds } from "src/common/utils";
 import { CartContext, CartState } from "src/contexts/CartContext";
-import useGetItemByIds from "src/hooks/useGetItemByIds";
-import { Book } from "src/common/types";
+import useCheckPrice from "src/hooks/useCheckPrice";
+import { v4 as uuidv4 } from "uuid";
 
 interface CartProviderProps {
     children: React.ReactNode;
@@ -12,88 +14,78 @@ const CartProvider = ({ children }: CartProviderProps) => {
         items: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart") || "") : [],
     });
 
-    useGetItemByIds({
-        ids: state.items.map((item) => parseInt(item.book.id)),
-        onSuccess: (data) => updatePrice(data),
-    });
+    const { mutateAsync: getPriceByItemEpsIds } = useCheckPrice();
 
     const addToCart = useCallback(
-        (item: any) => {
-            const index = state.items.findIndex((i) => i.book.id === item.book.id);
-            if (index !== -1) {
-                const newItems = [...state.items];
-                newItems[index].quantity += item.quantity;
-                setState((state) => ({
-                    ...state,
-                    items: newItems,
-                }));
-                localStorage.setItem("cart", JSON.stringify(newItems));
-                return;
-            }
-            setState((state) => ({
+        (item: CartItem) => {
+            const newItems = { ...state.items, [uuidv4()]: item };
+            setState({
                 ...state,
-                items: [...state.items, item],
-            }));
-            localStorage.setItem("cart", JSON.stringify([...state.items, item]));
+                items: newItems,
+            });
+            localStorage.setItem("cart", JSON.stringify(newItems));
         },
-        [state.items]
+        [state]
     );
 
     const removeFromCart = useCallback(
-        (id: string) => {
-            setState((state) => ({
+        (cartId: string) => {
+            const newItems = { ...state.items };
+            delete newItems[cartId];
+            setState({
                 ...state,
-                items: state.items.filter((item) => item.book.id !== id),
-            }));
-            localStorage.setItem(
-                "cart",
-                JSON.stringify(state.items.filter((item) => item.book.id !== id))
-            );
+                items: newItems,
+            });
+            localStorage.setItem("cart", JSON.stringify(newItems));
         },
-        [state.items]
+        [state]
     );
 
     const clearCart = useCallback(() => {
         setState((state) => ({
             ...state,
-            items: [],
+            items: {},
         }));
         localStorage.removeItem("cart");
     }, [setState]);
 
     const updateCart = useCallback(
-        (id: string, quantity: number) => {
-            const index = state.items.findIndex((i) => i.book.id === id);
-            if (index !== -1) {
-                const newItems = [...state.items];
-                newItems[index].quantity = quantity;
-                setState((state) => ({
-                    ...state,
-                    items: newItems,
-                }));
-                localStorage.setItem("cart", JSON.stringify(newItems));
-            }
-        },
-        [state.items]
-    );
-
-    const updatePrice = useCallback(
-        (data: Book[]) => {
-            const newItems = state.items.map((item) => {
-                const book = data.find((b) => b.id === item.book.id);
-                return {
-                    ...item,
-                    ...(book && { book }),
-                };
-            });
-            setState((state) => ({
+        ({ cartId, eps }: { cartId: string; eps: ItemEpsType[] }) => {
+            const newItems = { ...state.items };
+            newItems[cartId].eps = eps;
+            setState({
                 ...state,
                 items: newItems,
-            }));
+            });
             localStorage.setItem("cart", JSON.stringify(newItems));
         },
-        [state.items]
+        [state]
     );
+
+    const refetchPrice = useCallback(async () => {
+        try {
+            const epsIds = getItemEpsIds(state.items);
+            if (!epsIds.length) return;
+            const response: any = await getPriceByItemEpsIds({
+                item_eps_ids: epsIds,
+            });
+            const cartDataChange = getCartItemPriceChange({
+                cartItems: state.items,
+                itemEpsIdWithPrice: response.data,
+            });
+
+            if (Object.keys(cartDataChange).length > 0) {
+                const newItems = { ...state.items, ...cartDataChange };
+                setState({
+                    ...state,
+                    items: newItems,
+                });
+                localStorage.setItem("cart", JSON.stringify(newItems));
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }, [getPriceByItemEpsIds, state]);
 
     const value = useMemo(
         () => ({
@@ -102,8 +94,9 @@ const CartProvider = ({ children }: CartProviderProps) => {
             removeFromCart,
             clearCart,
             updateCart,
+            refetchPrice,
         }),
-        [state, addToCart, removeFromCart, clearCart, updateCart]
+        [state, addToCart, removeFromCart, clearCart, updateCart, refetchPrice]
     );
 
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

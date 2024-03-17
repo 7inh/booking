@@ -1,6 +1,7 @@
+import { Skeleton } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BOOK_ITEM_HORIZON_WIDTH, PAGE_MAX_WIDTH } from "src/common/const";
 import { Book } from "src/common/types";
@@ -10,6 +11,7 @@ import BoxCenter from "src/components/Boxs/BoxCenter";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import BoxVertical from "src/components/Boxs/BoxVertical";
 import ButtonBase from "src/components/Buttons/ButtonBase";
+import DialogSelectEps from "src/components/Dialogs/DialogSelectEps";
 import TypographyBase from "src/components/Typographys/TypographyBase";
 import { useCartContext } from "src/contexts/CartContext";
 import useGetRandom from "src/hooks/useGetRandom";
@@ -26,14 +28,38 @@ const RandomBook = () => {
 
     const lgDown = useResponsive("down", "lg");
 
+    const [confirmText, setConfirmText] = useState<string>("");
     const [currentSelected, setCurrentSelected] = useState<Book | null>(null);
     const currentViewRef = useRef<HTMLDivElement | null>(null);
 
-    const { data: books } = useGetRandom({
+    const { data: books, isFetching } = useGetRandom({
         onSuccess: (data) => {
             if (data.length > 0) setCurrentSelected(data[0]);
         },
     });
+
+    const renderDialogSelectEps = useMemo(() => {
+        if (!confirmText || !currentSelected) return null;
+
+        return (
+            <DialogSelectEps
+                open={true}
+                onClose={() => setConfirmText("")}
+                confirmText={confirmText}
+                itemId={currentSelected.id}
+                onConfirm={(selectedListItemEps) => {
+                    addToCart({
+                        book: currentSelected,
+                        eps: selectedListItemEps,
+                    });
+                    snackbar({
+                        message: t("success.addToCart"),
+                        severity: "success",
+                    });
+                }}
+            />
+        );
+    }, [addToCart, confirmText, currentSelected, snackbar, t]);
 
     return (
         <BoxBase
@@ -42,6 +68,7 @@ const RandomBook = () => {
                 mx: "auto",
             }}
         >
+            {renderDialogSelectEps}
             <BoxBase
                 sx={{
                     display: "grid",
@@ -83,6 +110,7 @@ const RandomBook = () => {
                                     left: 0,
                                     width: "100%",
                                     height: "100%",
+                                    bgcolor: "rgba(255, 255, 255, 0.5)",
                                     backdropFilter: "blur(20px)",
                                 },
                             }}
@@ -108,7 +136,8 @@ const RandomBook = () => {
                                 <TypographyBase
                                     sx={{
                                         fontSize: "2rem",
-                                        fontWeight: 500,
+                                        fontWeight: 600,
+                                        textTransform: "uppercase",
                                         textShadow:
                                             "-1px 0px white, 1px 0px white, 0px -1px white, 0px 1px white, -1px -1px white, 1px 1px white, -1px 1px white, 1px -1px white",
                                     }}
@@ -152,16 +181,7 @@ const RandomBook = () => {
                                         mb: 1,
                                         bgcolor: "white",
                                     }}
-                                    onClick={() => {
-                                        addToCart({
-                                            quantity: 1,
-                                            book: currentSelected,
-                                        });
-                                        snackbar({
-                                            message: t("success.addToCart"),
-                                            severity: "success",
-                                        });
-                                    }}
+                                    onClick={() => setConfirmText(t("common.addToCart"))}
                                 />
                                 <ButtonBase
                                     label={t("common.detail")}
@@ -200,23 +220,46 @@ const RandomBook = () => {
                         gap: 2,
                     }}
                 >
-                    {books.map((book) => {
-                        return (
-                            <BookItemHorizon
-                                key={book.id}
-                                book={book}
-                                onClick={() => {
-                                    setCurrentSelected(book);
-                                    if (currentViewRef.current) {
-                                        currentViewRef.current.scrollIntoView({
-                                            behavior: "smooth",
-                                            block: "center",
-                                        });
-                                    }
-                                }}
-                            />
-                        );
-                    })}
+                    {!isFetching
+                        ? books.map((book) => {
+                              return (
+                                  <BookItemHorizon
+                                      key={book.id}
+                                      book={book}
+                                      onClick={() => {
+                                          setCurrentSelected(book);
+                                          if (currentViewRef.current) {
+                                              currentViewRef.current.scrollIntoView({
+                                                  behavior: "smooth",
+                                                  block: "center",
+                                              });
+                                          }
+                                      }}
+                                  />
+                              );
+                          })
+                        : null}
+                    {isFetching || books.length === 0 ? (
+                        <BoxBase
+                            sx={{
+                                display: "grid",
+                                gridTemplateColumns: "1fr",
+                                gap: 1,
+                                height: "100%",
+                            }}
+                        >
+                            {Array.from({ length: 3 }).map((_, index) => (
+                                <Skeleton
+                                    key={index}
+                                    variant="rectangular"
+                                    sx={{
+                                        flexGrow: 1,
+                                        height: "100%",
+                                    }}
+                                />
+                            ))}
+                        </BoxBase>
+                    ) : null}
                 </BoxVertical>
             </BoxBase>
         </BoxBase>

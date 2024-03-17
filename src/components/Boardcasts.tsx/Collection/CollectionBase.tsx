@@ -8,15 +8,17 @@ export interface CollectionBaseProps {
     title: string;
     subTitle: string;
     books: Book[];
+    hidden?: boolean;
 }
 
-const CollectionBase = ({ title, subTitle, books }: CollectionBaseProps) => {
+const CollectionBase = ({ title, subTitle, books, hidden }: CollectionBaseProps) => {
     return (
         <BoxBase
             sx={{
                 maxWidth: PAGE_MAX_WIDTH,
                 mx: "auto",
                 my: 10,
+                display: hidden ? "none" : "block",
             }}
         >
             <BoxBase textAlign="center">

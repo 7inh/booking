@@ -5,13 +5,14 @@ import useTranslation from "src/hooks/utils/useTranslation";
 const UpcomingCollection = () => {
     const t = useTranslation();
 
-    const { data: books } = useGetComingSoon({});
+    const { data: books, isFetched } = useGetComingSoon({});
 
     return (
         <CollectionBase
             books={books}
             title={t("broadcast.upcomingCollection.title")}
             subTitle={t("broadcast.upcomingCollection.subTitle")}
+            hidden={!isFetched || !books.length}
         />
     );
 };

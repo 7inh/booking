@@ -8,7 +8,7 @@ import Branding from "src/pages/Landing/Branding";
 
 const Landing = () => {
     return (
-        <BoxBase>
+        <BoxBase mb={10}>
             <Branding />
             <Feature />
             <RandomBook />

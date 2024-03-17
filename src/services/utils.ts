@@ -79,6 +79,7 @@ export function createQueryService<S extends ServiceMap>(service: S) {
                         }, 2000);
                     }
                 } else {
+                    window.dispatchEvent(new Event("net-work-err"));
                     option?.onError?.(error);
                 }
             },

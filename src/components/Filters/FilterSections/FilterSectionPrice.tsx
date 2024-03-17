@@ -1,5 +1,5 @@
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { TextField } from "@mui/material";
+import { TextField, Tooltip } from "@mui/material";
 import Slider from "@mui/material/Slider";
 import { useState } from "react";
 import { FilterBookType } from "src/common/types";
@@ -7,24 +7,26 @@ import BoxBase from "src/components/Boxs/BoxBase";
 import BoxCenter from "src/components/Boxs/BoxCenter";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import FilterSectionBase from "src/components/Filters/FilterSections/FilterSectionBase";
+import Icon from "src/components/Icons/Icon";
 import TypographyBase from "src/components/Typographys/TypographyBase";
 import useTranslation from "src/hooks/utils/useTranslation";
 
 const MIN_PRICE = 0;
-const MAX_PRICE = 1000000;
-const STEP = 20000;
+const MAX_PRICE = 10000000;
+const STEP = 50000;
 
-const MIN_DISTANCE = 20000;
+const MIN_DISTANCE = STEP;
 
 export interface FilterSectionPriceProps {
     filter?: FilterBookType["price"];
-    onChange?: (value: number[]) => void;
+    onChange?: (value?: number[]) => void;
 }
 
 const FilterSectionPrice = ({ filter, onChange }: FilterSectionPriceProps) => {
     const t = useTranslation();
 
-    const [priceRange, setRange] = useState<number[]>(filter ? filter : [0, MAX_PRICE / 2]);
+    const [priceRange, setRange] = useState<number[]>(filter ? filter : [0, MAX_PRICE]);
+    const isFilterApplied = filter && filter[0] === priceRange[0] && filter[1] === priceRange[1];
 
     const handleChangeRange = (_: any, newValue: number | number[], activeThumb: number) => {
         if (!Array.isArray(newValue)) {
@@ -148,22 +150,47 @@ const FilterSectionPrice = ({ filter, onChange }: FilterSectionPriceProps) => {
                     >
                         {priceRange[1]}
                     </TextField>
-                    <BoxCenter
-                        sx={{
-                            bgcolor: "primary.main",
-                            color: "secondary.main",
-                            px: 0.5,
-                            cursor: "pointer",
-                            "&:hover": {
-                                bgcolor: "primary.light",
-                            },
-                        }}
-                        onClick={() => {
-                            onChange?.(priceRange);
-                        }}
+                    <Tooltip
+                        title={
+                            isFilterApplied
+                                ? t("pages.shop.filter.clearFilterPrice")
+                                : t("pages.shop.filter.filterByPrice")
+                        }
                     >
-                        <NavigateNextIcon />
-                    </BoxCenter>
+                        <BoxBase
+                            sx={{
+                                bgcolor: "primary.main",
+                                color: "secondary.main",
+                                px: 0.5,
+                                cursor: "pointer",
+                                "&:hover": {
+                                    bgcolor: "primary.light",
+                                },
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                            onClick={() => {
+                                if (isFilterApplied) {
+                                    setRange([0, MAX_PRICE]);
+                                    onChange?.();
+                                } else {
+                                    onChange?.(priceRange);
+                                }
+                            }}
+                        >
+                            {isFilterApplied ? (
+                                <Icon
+                                    icon="mdi:reload"
+                                    sx={{
+                                        px: 0.25,
+                                    }}
+                                />
+                            ) : (
+                                <NavigateNextIcon />
+                            )}
+                        </BoxBase>
+                    </Tooltip>
                 </BoxHorizon>
             </BoxBase>
         </FilterSectionBase>

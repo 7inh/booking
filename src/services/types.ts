@@ -14,16 +14,24 @@ export interface ItemGetTotal {
 }
 
 export interface ItemGetById {
-    id: number;
+    id: string;
 }
 
 export interface ItemGetByIds {
-    ids: number[];
+    ids: string[];
 }
 
 export interface ItemGetRadom {}
 
 export interface ItemGetPopular {}
+
+export interface ItemEpsGetByItemId {
+    itemId: string;
+}
+
+export interface ItemEpsGetPriceByItemEpsIds {
+    item_eps_ids: string[];
+}
 
 export interface ItemGetNewest {}
 

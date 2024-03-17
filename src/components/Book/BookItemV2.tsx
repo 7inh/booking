@@ -3,12 +3,10 @@ import { Book } from "src/common/types";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxCenter from "src/components/Boxs/BoxCenter";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
+import ButtonAddToCart from "src/components/Buttons/ButtonAddToCart";
 import LinkBase from "src/components/Links/LinkBase";
 import TypographyBase from "src/components/Typographys/TypographyBase";
-import { useCartContext } from "src/contexts/CartContext";
 import { useResponsive } from "src/hooks/utils/useResponsive";
-import useSnackBar from "src/hooks/utils/useSnackBar";
-import useTranslation from "src/hooks/utils/useTranslation";
 
 export interface BookItemV2Props {
     book: Book;
@@ -18,11 +16,6 @@ const BookItemV2 = (props: BookItemV2Props) => {
     const { book } = props;
 
     const isSmall = useResponsive("down", "sm");
-
-    const t = useTranslation();
-    const snackbar = useSnackBar();
-
-    const { addToCart } = useCartContext();
 
     return (
         <LinkBase to={`/book/${book.id}`}>
@@ -178,6 +171,26 @@ const BookItemV2 = (props: BookItemV2Props) => {
                                     </TypographyBase>
                                 </BoxHorizon>
                                 {isSmall ? (
+                                    <ButtonAddToCart
+                                        trigger={
+                                            <AddBoxSharpIcon
+                                                fontSize="large"
+                                                sx={{
+                                                    "&:hover": {
+                                                        color: "primary.main",
+                                                        transition: "all 0.3s ease 0s",
+                                                    },
+                                                }}
+                                            />
+                                        }
+                                        book={book}
+                                    />
+                                ) : null}
+                            </BoxBase>
+                        </BoxBase>
+                        {!isSmall ? (
+                            <ButtonAddToCart
+                                trigger={
                                     <AddBoxSharpIcon
                                         fontSize="large"
                                         sx={{
@@ -186,43 +199,9 @@ const BookItemV2 = (props: BookItemV2Props) => {
                                                 transition: "all 0.3s ease 0s",
                                             },
                                         }}
-                                        onClick={(event) => {
-                                            event.stopPropagation();
-                                            event.preventDefault();
-                                            snackbar({
-                                                message: t("success.addToCart"),
-                                                severity: "success",
-                                            });
-                                            addToCart({
-                                                book,
-                                                quantity: 1,
-                                            });
-                                        }}
                                     />
-                                ) : null}
-                            </BoxBase>
-                        </BoxBase>
-                        {!isSmall ? (
-                            <AddBoxSharpIcon
-                                fontSize="large"
-                                sx={{
-                                    "&:hover": {
-                                        color: "primary.main",
-                                        transition: "all 0.3s ease 0s",
-                                    },
-                                }}
-                                onClick={(event) => {
-                                    event.stopPropagation();
-                                    event.preventDefault();
-                                    snackbar({
-                                        message: t("success.addToCart"),
-                                        severity: "success",
-                                    });
-                                    addToCart({
-                                        book,
-                                        quantity: 1,
-                                    });
-                                }}
+                                }
+                                book={book}
                             />
                         ) : null}
                     </BoxHorizon>

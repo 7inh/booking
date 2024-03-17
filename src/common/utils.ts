@@ -1,9 +1,9 @@
+import dayjs from "dayjs";
 import groupBy from "lodash/groupBy";
 import { DateTime } from "luxon";
 import { AvailabilityEnum, FormatEnum, RareEnum, VariantEnum } from "src/common/enum";
-import { Coupon, FilterBookParams, FilterBookType } from "src/common/types";
+import { CartData, Coupon, FilterBookParams, FilterBookType, ItemEpsType } from "src/common/types";
 import { LocaleType } from "src/locales/types";
-import dayjs from "dayjs";
 
 export function formatDateTime(date: Date) {
     const hours = String(date.getHours()).padStart(2, "0");
@@ -310,4 +310,108 @@ export const getMinDateDelivery = () => {
 
     if (dateX.hour() >= 12) return dateX.add(2, "day");
     return dateX.add(1, "day");
+};
+
+export const getTotalPrice = (listItemEps: ItemEpsType[]) => {
+    let totalPrice = 0;
+    listItemEps.forEach((item) => {
+        totalPrice += item.current_price;
+    });
+    return totalPrice;
+};
+
+export const getTotalCartValue = (cartItems: CartData) => {
+    let total = 0;
+    for (const book_id in cartItems) {
+        const { eps } = cartItems[book_id];
+        total += getTotalPrice(eps);
+    }
+    return total;
+};
+
+export const getItemEpsIds = (cartItems: CartData) => {
+    const itemEpsIds = Object.values(cartItems).flatMap((item) => item.eps.map((eps) => eps.id));
+    return Array.from(new Set(itemEpsIds));
+};
+
+export const listToMap = <T extends { id: number }>(list: T[]): Record<string, T> => {
+    return list.reduce((acc, item) => {
+        acc[item.id] = item;
+        return acc;
+    }, {} as Record<string, T>);
+};
+
+export const getCartItemPriceChange = (props: {
+    cartItems: CartData;
+    itemEpsIdWithPrice: {
+        current_price: number;
+        id: number;
+    }[];
+}): CartData => {
+    const { cartItems, itemEpsIdWithPrice } = props;
+    const changedPriceCartItems: CartData = {};
+    const mapItemEpsIdWithPrice = listToMap(itemEpsIdWithPrice);
+
+    for (const cartId in cartItems) {
+        const { eps } = cartItems[cartId];
+        let isPriceChanged = false;
+        const changedPriceEps = eps.map((eps) => {
+            const newPrice = mapItemEpsIdWithPrice[eps.id]?.current_price;
+            if (newPrice && newPrice !== eps.current_price) {
+                isPriceChanged = true;
+                return { ...eps, current_price: newPrice };
+            }
+            return eps;
+        });
+
+        if (isPriceChanged) {
+            changedPriceCartItems[cartId] = { ...cartItems[cartId], eps: changedPriceEps };
+        }
+    }
+
+    return changedPriceCartItems;
+};
+
+export const getCartItemWeight = (itemEps: ItemEpsType[]) => {
+    let weight = 0;
+    itemEps.forEach((item) => {
+        weight += item.weight;
+    });
+    return weight;
+};
+
+export const getCartWeight = (cartItems: CartData) => {
+    let weight = 0;
+    for (const book_id in cartItems) {
+        const { book, eps } = cartItems[book_id];
+        if (book.weight) weight += parseInt(book.weight) * eps.length;
+    }
+    return weight;
+};
+
+export const getCartMainInfo = (cartItems: CartData) => {
+    const cartMainInfo: any = {};
+
+    for (const cartId in cartItems) {
+        const { book, eps } = cartItems[cartId];
+        cartMainInfo[cartId] = {
+            book_id: book.id,
+            title: book.title,
+            eps: eps.map((eps) => ({
+                id: eps.id,
+                eps_no: eps.eps_no,
+                price: eps.current_price,
+            })),
+        };
+    }
+
+    return cartMainInfo;
+};
+
+export const getPriceFilterFromParams = (
+    priceRange: string | null
+): [number, number] | undefined => {
+    if (!priceRange) return undefined;
+    const [min, max] = priceRange.split(",");
+    return [parseInt(min), parseInt(max)];
 };

@@ -31,8 +31,6 @@ const useSubscribe = ({ onSubscribeSuccess }: UseSubmitContactProps) => {
                 }
             );
 
-            console.log(response);
-
             onSubscribeSuccess?.();
             return response;
         } catch (error) {

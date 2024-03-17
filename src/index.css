@@ -5,6 +5,10 @@ body {
     font-family: "Public Sans", sans-serif !important;
 }
 
+#kami-mind-chat-widget {
+    z-index: 10 !important;
+}
+
 .MuiAvatar-root {
     text-transform: uppercase;
 }

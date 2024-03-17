@@ -1,9 +1,9 @@
-import { Book } from "src/common/types";
+import { CartData } from "src/common/types";
 import doQuery from "src/services/services";
 
 export interface UseGetItemByIdsProps {
-    ids?: number[];
-    onSuccess?: (data: Book[]) => void;
+    ids?: string[];
+    onSuccess?: (data: CartData) => void;
 }
 
 const useGetItemByIds = (props: UseGetItemByIdsProps) => {

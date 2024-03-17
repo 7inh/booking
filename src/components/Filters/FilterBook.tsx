@@ -12,7 +12,7 @@ export interface FilterBookProps {
     onChangeRare?: (value: string[]) => void;
     onChangeVariant?: (value: string[]) => void;
     onChangeAvailability?: (value: string[]) => void;
-    onChangePrice?: (value: number[]) => void;
+    onChangePrice?: (value?: number[]) => void;
     onChangeFormat?: (value: string[]) => void;
 }
 

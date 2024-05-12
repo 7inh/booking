@@ -1,13 +1,14 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { CartItem } from "src/common/types";
+import { CartData } from "src/common/types";
+import { getTotalCartValue } from "src/common/utils";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import ButtonBase from "src/components/Buttons/ButtonBase";
 import TypographyBase from "src/components/Typographys/TypographyBase";
 import useTranslation from "src/hooks/utils/useTranslation";
 
 export interface CartFreeShipProps {
-    items: CartItem[];
+    items: CartData;
 }
 
 const FREE_SHIP_PRICE = 350000;
@@ -17,7 +18,7 @@ const CartFreeShip = ({ items }: CartFreeShipProps) => {
     const navigate = useNavigate();
 
     const cartTotalValue = useMemo(() => {
-        return items.reduce((acc, item) => acc + item.book.current_price * item.quantity, 0);
+        return getTotalCartValue(items);
     }, [items]);
 
     if (cartTotalValue >= FREE_SHIP_PRICE) return null;
@@ -52,6 +53,10 @@ const CartFreeShip = ({ items }: CartFreeShipProps) => {
                 color="white"
                 sx={{
                     flexShrink: 0,
+                    "&:hover": {
+                        bgcolor: "rgba(255, 255, 255, 0.2)",
+                        borderColor: "white",
+                    },
                 }}
                 onClick={() => navigate("/shop")}
             />

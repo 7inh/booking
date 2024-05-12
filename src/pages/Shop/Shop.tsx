@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { PAGE_MAX_WIDTH } from "src/common/const";
 import { FilterBookType } from "src/common/types";
+import { getPriceFilterFromParams } from "src/common/utils";
 import BoxBase from "src/components/Boxs/BoxBase";
 import Breadcrumb from "src/components/Breadcrumb/Breadcrumb";
 import FilterBook from "src/components/Filters/FilterBook";
@@ -23,6 +24,7 @@ const Shop = () => {
         variant: [],
         rare: [],
         format: [],
+        price: getPriceFilterFromParams(searchParams.get("price")),
     });
 
     const handleChangeRare = useCallback(
@@ -74,12 +76,13 @@ const Shop = () => {
     );
 
     const handleChangePrice = useCallback(
-        (value: number[]) => {
+        (value: number[] | undefined) => {
             setFilter((prev) => ({
                 ...prev,
-                price: [value[0], value[1]],
+                price: value ? [value[0], value[1]] : undefined,
             }));
-            searchParams.set("price", value.join(","));
+            if (value) searchParams.set("price", value.join(","));
+            else searchParams.delete("price");
             setSearchParams(searchParams);
         },
         [searchParams, setSearchParams]

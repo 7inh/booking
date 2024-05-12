@@ -1,7 +1,8 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import SnackBarStack from "src/components/SnackbarStack/SnackBarStack";
 import { SnackbarContext } from "src/contexts/SnackbarContext";
 import { SnackbarData } from "src/contexts/SnackbarContext";
+import useTranslation from "src/hooks/utils/useTranslation";
 
 interface SnackbarProviderProps {
     children: React.ReactNode;
@@ -12,6 +13,7 @@ interface SnackbarState {
 }
 
 const SnackBarProvider = ({ children }: SnackbarProviderProps) => {
+    const t = useTranslation();
     const [state, setState] = useState<SnackbarState>({
         snackbars: [],
     });
@@ -46,6 +48,22 @@ const SnackBarProvider = ({ children }: SnackbarProviderProps) => {
         }),
         [state, setSnackbars, addSnackbar, removeSnackbar]
     );
+
+    useEffect(() => {
+        const handler = () => {
+            addSnackbar({
+                message: t("error.netWorkError"),
+                severity: "error",
+                id: "network-err",
+            });
+        };
+
+        window.addEventListener("net-work-err", handler);
+
+        return () => {
+            window.removeEventListener("net-work-err", handler);
+        };
+    }, [addSnackbar, t]);
 
     return (
         <SnackbarContext.Provider value={value}>

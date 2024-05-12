@@ -1,6 +1,8 @@
 import { Alert } from "@mui/material";
 import { ComponentProps } from "react";
 
+type ANY = any;
+
 export interface Message {
     key?: string;
     role: "user" | "assistant";
@@ -25,6 +27,7 @@ export interface Book {
 }
 
 export interface BookDetail extends Book {
+    cover: string;
     description: string;
     publisher: number;
     publishDate: string;
@@ -33,12 +36,13 @@ export interface BookDetail extends Book {
     weight: string;
     quantity: number;
     sold: number;
-    pages: number;
+    page: number;
     format: number;
     language: string;
     availability: number;
     variant: "once" | "combo" | "full-set";
     rare: number;
+    eps_num: number;
 }
 
 export interface BookDataCustom {
@@ -49,7 +53,11 @@ export interface BookDataCustom {
 
 export interface CartItem {
     book: Book;
-    quantity: number;
+    eps: ItemEpsType[];
+}
+
+export interface CartData {
+    [key: string]: CartItem;
 }
 
 export interface Coupon {
@@ -83,3 +91,5 @@ export interface FilterBookParams {
 }
 
 export type OrderBy = "newest" | "oldest" | "priceDesc" | "priceAsc" | "sale" | "discount";
+
+export interface ItemEpsType extends ANY {}

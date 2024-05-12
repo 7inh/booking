@@ -1,23 +1,25 @@
 import { createContext, useContext } from "react";
-import { CartItem } from "src/common/types";
+import { CartData, CartItem } from "src/common/types";
 
 export interface CartState {
-    items: CartItem[];
+    items: CartData;
 }
 
 interface CartContextType extends CartState {
-    addToCart: (book: CartItem) => void;
-    removeFromCart: (bookId: string) => void;
+    addToCart: (cartItem: CartItem) => void;
+    removeFromCart: (cartId: string) => void;
     clearCart: () => void;
-    updateCart: (bookId: string, quantity: number) => void;
+    updateCart: (props: { cartId: string; eps: CartItem["eps"] }) => void;
+    refetchPrice: () => void;
 }
 
 const CartContext = createContext<CartContextType>({
-    items: [],
+    items: {},
     addToCart: () => {},
     removeFromCart: () => {},
     clearCart: () => {},
     updateCart: () => {},
+    refetchPrice: () => {},
 });
 
 CartContext.displayName = "CartContext";

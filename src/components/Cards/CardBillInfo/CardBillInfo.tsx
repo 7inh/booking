@@ -1,8 +1,8 @@
 import { Divider } from "@mui/material";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CartItem, Coupon } from "src/common/types";
-import { validateCoupon } from "src/common/utils";
+import { CartData, Coupon } from "src/common/types";
+import { getTotalCartValue, validateCoupon } from "src/common/utils";
 import BoxBase from "src/components/Boxs/BoxBase";
 import ButtonBase from "src/components/Buttons/ButtonBase";
 import InputCoupon from "src/components/Inputs/InputCoupon";
@@ -11,7 +11,7 @@ import TypographyBase from "src/components/Typographys/TypographyBase";
 import useTranslation from "src/hooks/utils/useTranslation";
 
 export interface CartDetailProps {
-    items: CartItem[];
+    items: CartData;
 }
 
 const CardBillInfo = ({ items }: CartDetailProps) => {
@@ -21,7 +21,7 @@ const CardBillInfo = ({ items }: CartDetailProps) => {
     const [coupons, setCoupons] = useState<Coupon[]>([]);
 
     const cartTotalValue = useMemo(() => {
-        return items.reduce((acc, item) => acc + item.book.current_price * item.quantity, 0);
+        return getTotalCartValue(items);
     }, [items]);
 
     const shippingFee = useMemo(() => {

@@ -1,14 +1,16 @@
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import { CardMedia, Divider } from "@mui/material";
+import { Divider, Tooltip } from "@mui/material";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PAGE_MAX_WIDTH } from "src/common/const";
-import { CartItem, Coupon } from "src/common/types";
+import { CartData, Coupon } from "src/common/types";
+import { getCartMainInfo, getCartWeight, getTotalCartValue } from "src/common/utils";
 import BoxBase from "src/components/Boxs/BoxBase";
 import BoxHorizon from "src/components/Boxs/BoxHorizon";
 import ButtonBase from "src/components/Buttons/ButtonBase";
 import DialogOrderSuccess from "src/components/Dialogs/DialogOrderSuccess";
 import FormCheckOut, { OrderFormValuesProps } from "src/components/Forms/FormCheckOut";
+import ItemCartInCheckout from "src/components/Items/ItemCartInCheckout";
 import TypographyBase from "src/components/Typographys/TypographyBase";
 import useSubmitOrder from "src/hooks/useSubmitOrder";
 import { useResponsive } from "src/hooks/utils/useResponsive";
@@ -36,20 +38,15 @@ const CheckOut = () => {
         },
     });
 
-    const items: CartItem[] = useMemo(() => state?.items || [], [state]);
+    const items: CartData = useMemo(() => state?.items || [], [state]);
     const coupons: Coupon[] = useMemo(() => state?.coupons || [], [state]);
 
     const cartWeight = useMemo(() => {
-        return items.reduce((acc, item) => {
-            if (!item.book.weight) return acc;
-            const weightNumeric = parseFloat(item.book.weight);
-            const totalWeight = acc + (isNaN(weightNumeric) ? 0 : weightNumeric) * item.quantity;
-            return totalWeight;
-        }, 0);
+        return getCartWeight(items);
     }, [items]);
 
     const cartTotalValue = useMemo(() => {
-        return items.reduce((acc, item) => acc + item.book.current_price * item.quantity, 0);
+        return getTotalCartValue(items);
     }, [items]);
 
     const couponValue = useMemo(() => {
@@ -65,16 +62,7 @@ const CheckOut = () => {
             submitOrder({
                 ...data,
                 address: `${data.address}, ${data.ward?.WARDS_NAME}, ${data.district?.DISTRICT_NAME}, ${data.province?.PROVINCE_NAME}`,
-                items: items
-                    .map((item) =>
-                        JSON.stringify({
-                            book_id: item.book.id,
-                            title: item.book.title,
-                            price: item.book.current_price,
-                            quantity: item.quantity,
-                        })
-                    )
-                    .join("|"),
+                items: JSON.stringify(getCartMainInfo(items)),
                 date: data.shipNow ? "now" : data.date,
                 coupon: coupons.map((coupon) => coupon.code),
                 shippingFee: shippingFee.value,
@@ -205,67 +193,9 @@ const CheckOut = () => {
                         }}
                     >
                         <br />
-                        {items.map((item) => {
-                            return (
-                                <BoxHorizon
-                                    key={item.book.id}
-                                    sx={{
-                                        gap: 2,
-                                        py: 2,
-                                        px: 3,
-                                    }}
-                                >
-                                    <CardMedia
-                                        component="img"
-                                        src={item.book.cover}
-                                        alt={item.book.title}
-                                        sx={{
-                                            width: "40px",
-                                            height: "40px",
-                                            objectFit: "scale-down",
-                                            border: "1px solid rgb(224,224,224)",
-                                            p: 1.5,
-                                            borderRadius: 2,
-                                            flexShrink: 0,
-                                        }}
-                                    />
-                                    <BoxBase
-                                        sx={{
-                                            flexGrow: 1,
-                                        }}
-                                    >
-                                        <TypographyBase
-                                            sx={{
-                                                fontSize: "16px",
-                                                fontWeight: 600,
-                                            }}
-                                        >
-                                            {item.book.title}
-                                        </TypographyBase>
-                                        <TypographyBase
-                                            sx={{
-                                                fontSize: "14px",
-                                                color: "rgb(117,117,117)",
-                                            }}
-                                        >
-                                            {item.book.current_price.toLocaleString("vi-VN", {
-                                                style: "currency",
-                                                currency: "VND",
-                                            })}{" "}
-                                            x {item.quantity}
-                                        </TypographyBase>
-                                    </BoxBase>
-                                    <TypographyBase variant="body2">
-                                        {(item.book.current_price * item.quantity).toLocaleString(
-                                            "vi-VN",
-                                            {
-                                                style: "currency",
-                                                currency: "VND",
-                                            }
-                                        )}
-                                    </TypographyBase>
-                                </BoxHorizon>
-                            );
+                        {Object.keys(items).map((cartId) => {
+                            const { book, eps } = items[cartId];
+                            return <ItemCartInCheckout key={cartId} book={book} eps={eps} />;
                         })}
                         <BoxBase
                             sx={{
@@ -290,7 +220,15 @@ const CheckOut = () => {
                                     })}
                                 </TypographyBase>
                             ) : (
-                                "..."
+                                <Tooltip
+                                    title={t(
+                                        "message.shippingFeeIsCalculatingPleaseInputYourAddress"
+                                    )}
+                                    placement="top"
+                                    arrow
+                                >
+                                    <BoxBase>...</BoxBase>
+                                </Tooltip>
                             )}
                         </BoxBase>
                         <BoxBase

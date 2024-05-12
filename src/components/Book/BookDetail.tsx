@@ -123,7 +123,7 @@ const BookDetail = ({ book }: BookDetailProps) => {
                 t("pages.book.format"),
                 t("pages.shop.filter.formatList." + mapFormat(book.format))
             )}
-            {renderDetail(t("pages.book.pages"), book.pages.toString())}
+            {renderDetail(t("pages.book.pages"), book.page.toString())}
             {renderDetail(t("pages.book.size"), `${book.size}`)}
             {renderDetail(t("pages.book.weight"), `${book.weight}`)}
             {renderDetail(
@@ -132,6 +132,7 @@ const BookDetail = ({ book }: BookDetailProps) => {
                     ? t(`pages.shop.filter.rareList.${mapRare(book.rare)}`)
                     : updatingTranslate
             )}
+            {renderDetail(t("pages.book.epsNum"), `${book.eps_num}`)}
         </BoxBase>
     );
 };

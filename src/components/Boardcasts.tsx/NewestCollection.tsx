@@ -5,13 +5,14 @@ import useTranslation from "src/hooks/utils/useTranslation";
 const NewestCollection = () => {
     const t = useTranslation();
 
-    const { data: books } = useGetNewest({});
+    const { data: books, isFetched } = useGetNewest({});
 
     return (
         <CollectionBase
             books={books}
             title={t("broadcast.newestCollection.title")}
             subTitle={t("broadcast.newestCollection.subTitle")}
+            hidden={!isFetched || !books.length}
         />
     );
 };

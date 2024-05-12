@@ -37,8 +37,6 @@ const useSendMessage = ({ onSendMessageSuccess }: UseSubmitContactProps) => {
                 }
             );
 
-            console.log(response);
-
             onSendMessageSuccess?.();
             return response;
         } catch (error) {

@@ -2,24 +2,27 @@ import { BookDetail } from "src/common/types";
 import doQuery from "src/services/services";
 
 export interface UseGetItemByIdProps {
-    id?: number;
+    id?: string;
 }
 
 export interface UseGetItemByIdReturn {
     data: BookDetail;
     isFetched: boolean;
     isFetching: boolean;
+    isSuccess: boolean;
     refetch: () => void;
 }
 
 const useGetItemById = (props: UseGetItemByIdProps): UseGetItemByIdReturn => {
-    const { id = 0 } = props;
+    const { id = "" } = props;
 
     const {
         data = {
+            id: "",
             description: "",
             publisher: 0,
             publishDate: "",
+            cover: "",
             author: "",
             size: "",
             weight: "",
@@ -33,9 +36,11 @@ const useGetItemById = (props: UseGetItemByIdProps): UseGetItemByIdReturn => {
             availability: 0,
             variant: "once",
             rare: 0,
+            eps_num: 0,
         },
         isFetched,
         isFetching,
+        isSuccess,
         refetch,
     } = doQuery({
         entity: "item",
@@ -53,6 +58,7 @@ const useGetItemById = (props: UseGetItemByIdProps): UseGetItemByIdReturn => {
         data,
         isFetched,
         isFetching,
+        isSuccess,
         refetch,
     };
 };

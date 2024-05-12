@@ -1,6 +1,7 @@
 import { Box, Button } from "@mui/material";
 import React, { ReactNode, ErrorInfo } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import { clearAllStorage } from "src/common/utils";
 import useTranslation from "src/hooks/utils/useTranslation";
 
 interface ErrorBoundaryProps {
@@ -33,6 +34,7 @@ const ErrorBoundary = ({ error, errorInfo }: Pick<ErrorBoundaryState, "error" | 
             <Button
                 variant="outlined"
                 onClick={() => {
+                    clearAllStorage();
                     navigate("/");
                     navigate(0);
                 }}

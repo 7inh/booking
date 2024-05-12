@@ -34,7 +34,7 @@ const Cart = () => {
                 }}
             >
                 <BoxBase mx={1}>
-                    {items.length ? <CartDetail items={items} /> : <CartEmpty />}
+                    {Object.keys(items).length ? <CartDetail items={items} /> : <CartEmpty />}
                 </BoxBase>
             </BoxBase>
         </>

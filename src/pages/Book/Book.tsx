@@ -13,7 +13,7 @@ const Book = () => {
 
     const { id } = useParams<{ id: string }>();
 
-    const { data: book, isFetching } = useGetItemById({ id: parseInt(id || "0") });
+    const { data: book, isFetching, isSuccess } = useGetItemById({ id });
 
     useEffectOnce(() => {
         window.scrollTo(0, 0);
@@ -42,11 +42,11 @@ const Book = () => {
                 }}
             >
                 <BoxBase mx={2}>
-                    <Overview book={book} isFetching={isFetching} />
+                    <Overview book={book} isFetching={isFetching || !isSuccess} />
                     <br />
                     <br />
                     <br />
-                    {!isFetching ? <BookDetail book={book} /> : null}
+                    {!isFetching && isSuccess ? <BookDetail book={book} /> : null}
                 </BoxBase>
             </BoxBase>
         </>

@@ -1,4 +1,4 @@
-import { CartItem } from "src/common/types";
+import { CartData } from "src/common/types";
 import BoxBase from "src/components/Boxs/BoxBase";
 import CardBillInfo from "src/components/Cards/CardBillInfo/CardBillInfo";
 import CartFreeShip from "src/components/Cards/CardFreeShip/CardFreeShip";
@@ -7,7 +7,7 @@ import TypographyBase from "src/components/Typographys/TypographyBase";
 import useTranslation from "src/hooks/utils/useTranslation";
 
 export interface CartDetailProps {
-    items: CartItem[];
+    items: CartData;
 }
 
 const CartDetail = ({ items }: CartDetailProps) => {

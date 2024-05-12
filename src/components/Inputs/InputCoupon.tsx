@@ -27,7 +27,6 @@ const InputCoupon = ({ coupons, sx, onSubmit }: InputCouponProps) => {
         setIsLoading(true);
         try {
             const response: any = await applyCoupon({ code });
-            console.log(response);
             if (isRequestSuccessful(response)) {
                 const coupon = response.data;
                 if (coupons?.find((coupon) => coupon.code === code)) {
@@ -38,7 +37,6 @@ const InputCoupon = ({ coupons, sx, onSubmit }: InputCouponProps) => {
                 }
             }
         } catch (error) {
-            console.log(error);
             snackbar({
                 severity: "error",
                 message: t("error.cantApplyCoupon"),

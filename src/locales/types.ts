@@ -24,6 +24,7 @@ export type LangType = {
         addToCart: string;
         sendMessage: string;
         sendEmailSubscribe: string;
+        updateCart: string;
     };
     error: {
         somethingWentWrong: string;
@@ -34,11 +35,13 @@ export type LangType = {
             minPrice: string;
         };
         sendEmailSubscribe: string;
+        netWorkError: string;
     };
     message: {
         backToHome: string;
         notFoundItem: string;
         freeShipForOrderOver: string;
+        shippingFeeIsCalculatingPleaseInputYourAddress: string;
     };
     feature: {
         delivery: {
@@ -55,6 +58,12 @@ export type LangType = {
         };
     };
     dialog: {
+        dialogSelectEps: {
+            selectEps: string;
+            selectEpsNote: string;
+            cancelText: string;
+            confirmText: string;
+        };
         orderSuccess: {
             title: string;
             content: string;
@@ -75,6 +84,9 @@ export type LangType = {
         detail: string;
         submitCoupon: string;
         buyMore: string;
+        eps: string;
+        edit: string;
+        update: string;
     };
     pages: {
         home: {
@@ -89,6 +101,8 @@ export type LangType = {
             title: string;
             filter: {
                 price: string;
+                filterByPrice: string;
+                clearFilterPrice: string;
                 availability: string;
                 availabilityList: {
                     available: string;
@@ -147,6 +161,7 @@ export type LangType = {
             sold: string;
             author: string;
             soldOut: string;
+            epsNum: string;
         };
         cart: {
             title: string;
@@ -161,6 +176,7 @@ export type LangType = {
             temporary: string;
             shippingFeeCanBeChanged: string;
             couponDescription: string;
+            selectedEps: string;
         };
         checkout: {
             title: string;

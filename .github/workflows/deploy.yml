@@ -29,6 +29,6 @@ jobs:
       - name: Deploy- name
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: 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
+          personal_token: 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
           external_repository: 7inh/7inh.github.io
           publish_dir: ./dist

@@ -9,7 +9,7 @@ const hosts = {
         FIREBASE: FIREBASE_CONFIG.dev,
     },
     prod: {
-        API_HOST: "https://tam-van-be.onrender.com",
+        API_HOST: "https://tam-van-be.onrender.com/api",
         FIREBASE: FIREBASE_CONFIG.prod,
     },
 };

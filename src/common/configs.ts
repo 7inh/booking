@@ -9,7 +9,7 @@ const hosts = {
         FIREBASE: FIREBASE_CONFIG.dev,
     },
     prod: {
-        API_HOST: "https://tam-van-be-production.up.railway.app/api",
+        API_HOST: "https://tam-van-be.onrender.com",
         FIREBASE: FIREBASE_CONFIG.prod,
     },
 };
